@@ -1,12 +1,14 @@
 import {$CardSchema, $UserSchema, $WalletSchema} from '@gecut/kartbook-types';
 import mongoose from 'mongoose';
+import {GecutLogger} from '@gecut/logger';
 
 import type {CardInterface, UserInterface, WalletInterface} from '@gecut/kartbook-types';
 
 export class KartbookDbConnector {
-  constructor(uri: string, options?: mongoose.ConnectOptions) {
+  constructor(uri: string, logger?: GecutLogger, options?: mongoose.ConnectOptions) {
     this.uri = uri;
     this.options = options;
+    this.logger = logger ?? new GecutLogger('db-connector');
   }
 
   $User = mongoose.model<UserInterface>('User', $UserSchema);
@@ -17,12 +19,22 @@ export class KartbookDbConnector {
 
   protected uri: string;
   protected options?: mongoose.ConnectOptions;
+  protected logger: GecutLogger;
 
   async connect() {
-    await mongoose.connect(this.uri, this.options);
+    if (this.uri.startsWith('mongodb://') || this.uri.startsWith('mongodb+srv://')) {
+      this.logger.method?.('connect');
+      return (this.connector = await mongoose.connect(this.uri, this.options));
+    }
+
+    this.logger.error('connect', 'uri_not_valid', {uri: this.uri, options: this.options});
+
+    return null;
   }
 
   async init() {
+    if (this.connector == null) return;
+
     const userCount = await this.$User.countDocuments();
     const cardCount = await this.$Card.countDocuments();
 

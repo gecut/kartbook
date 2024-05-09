@@ -12,7 +12,7 @@ import type {CardInterface} from '@gecut/kartbook-types';
 
 export const logger = new GecutLogger('card-server');
 export const app = new Hono();
-export const db = new KartbookDbConnector(config.DATABASE.URI);
+export const db = new KartbookDbConnector(config.DATABASE.URI, logger.sub('db-connector'));
 export const cardsInMemoryCache = new InMemorySimpleCache<CardInterface>(512);
 
 export const getCardBySlug = async (slug: string) => {
@@ -63,9 +63,10 @@ if (logger.devMode) {
       status: `${context.res.status} ${context.res.ok ? 'Ok' : 'Error'}`,
     });
   });
-}
-else {
+} else {
   app.use(compress());
 }
 
 app.use(etag());
+
+logger.property?.('config', config);

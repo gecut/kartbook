@@ -283,6 +283,7 @@ __metadata:
   resolution: "@gecut/kartbook-db-connector@workspace:packages/db-connector"
   dependencies:
     "@gecut/kartbook-types": "workspace:^"
+    "@gecut/logger": "npm:^1.4.1"
     "@types/node": "npm:^20.12.7"
     mongoose: "npm:^8.3.2"
   languageName: unknown
