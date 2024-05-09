@@ -270,7 +270,7 @@ __metadata:
     "@hono/zod-validator": "npm:^0.2.1"
     "@types/node": "npm:^20.12.7"
     esbuild: "npm:^0.21.0"
-    hono: "npm:^4.2.9"
+    hono: "npm:^4.3.3"
     mongoose: "npm:^8.3.2"
     nodemon: "npm:^3.1.0"
     npm-run-all: "npm:^4.1.5"
@@ -3209,10 +3209,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.2.9":
-  version: 4.2.9
-  resolution: "hono@npm:4.2.9"
-  checksum: 10c0/e651344f65083564f87b50a631d2a06929cdcdded07cc0a3a78efd1034725acde8c8b57b69189a1ff32448cb1dd711463260f4bf8d0c937f0f489805a974fa56
+"hono@npm:^4.3.3":
+  version: 4.3.3
+  resolution: "hono@npm:4.3.3"
+  checksum: 10c0/2e02a563ab8461a56a97b59b1c31fd002179999a0323b3a44cbf8b69b92ad35cc8f38ba26a88b64caa71e2c1c39a1454d84473ed0c69f4e9573e7b3b064e0f58
   languageName: node
   linkType: hard
 
