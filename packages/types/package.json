@@ -33,6 +33,6 @@
   ],
   "dependencies": {
     "@types/node": "^20.12.7",
-    "mongoose": "^8.3.2"
+    "mongoose": "^8.3.4"
   }
 }
