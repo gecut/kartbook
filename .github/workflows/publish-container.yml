@@ -119,7 +119,6 @@ jobs:
     container: hamravesh/darkube-cli:v1.1
     needs: build
     runs-on: ubuntu-latest
-    if: false
 
     strategy:
       fail-fast: false
