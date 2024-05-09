@@ -1,0 +1,20 @@
+// https://www.typescriptlang.org/tsconfig
+
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": ".tsbuildinfo"
+  },
+  "files": [],
+  "exclude": [],
+  "references": [
+    // apps
+    {"path": "./packages/types"},
+    {"path": "./packages/db-connector"},
+    {"path": "./packages/card-server"}
+    // {"path": "./packages/lit-helper"},
+    // {"path": "./packages/mixins"},
+    // {"path": "./packages/styles"},
+  ]
+}

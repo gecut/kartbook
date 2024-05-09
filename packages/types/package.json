@@ -1,0 +1,38 @@
+{
+  "name": "@gecut/kartbook-types",
+  "version": "0.0.1",
+  "type": "module",
+  "author": {
+    "name": "S. MohammadMahdi Zamanian",
+    "email": "dev@mm25zamanain.ir",
+    "url": "https://mm25zamanain.ir"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gecut/kartbook",
+    "directory": "packages/types"
+  },
+  "main": "types.js",
+  "types": "types.d.ts",
+  "exports": {
+    ".": {
+      "default": "./types.js",
+      "types": "./types.d.ts"
+    },
+    "./*.js": {
+      "default": "./*.js",
+      "types": "./*.d.ts"
+    }
+  },
+  "files": [
+    "**/*.{js,mjs,cjs,map,d.ts,html,md,css}"
+  ],
+  "dependencies": {
+    "@types/node": "^20.12.7",
+    "mongoose": "^8.3.2"
+  }
+}

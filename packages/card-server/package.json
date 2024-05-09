@@ -1,0 +1,40 @@
+{
+  "name": "@gecut/kartbook-card-server",
+  "version": "0.0.1",
+  "private": true,
+  "author": {
+    "name": "S. MohammadMahdi Zamanian",
+    "email": "dev@mm25zamanain.ir",
+    "url": "https://mm25zamanain.ir"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gecut/kartbook",
+    "directory": "packages/card-server"
+  },
+  "scripts": {
+    "build": "yarn esbuild ./src/card-server.ts --target=node21 --bundle --minify --platform=node --format=cjs --outfile=./dist/card-server.js",
+    "watch:es": "yarn run build --watch=forever",
+    "watch:node": "yarn nodemon --exec 'node --env-file dist/.env' --watch 'dist/**/*' dist/card-server.js",
+    "watch": "run-p watch:es watch:node"
+  },
+  "files": [
+    "**/*.{js,mjs,cjs,map,d.ts,html,md,css}"
+  ],
+  "devDependencies": {
+    "@gecut/kartbook-db-connector": "workspace:^",
+    "@gecut/kartbook-types": "workspace:^",
+    "@gecut/logger": "^1.4.1",
+    "@gecut/utilities": "^5.2.1",
+    "@hono/node-server": "^1.11.1",
+    "@hono/zod-validator": "^0.2.1",
+    "@types/node": "^20.12.7",
+    "esbuild": "^0.21.0",
+    "hono": "^4.2.9",
+    "mongoose": "^8.3.2",
+    "nodemon": "^3.1.0",
+    "npm-run-all": "^4.1.5",
+    "zod": "^3.23.5"
+  }
+}
