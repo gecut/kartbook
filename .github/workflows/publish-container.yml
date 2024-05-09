@@ -125,12 +125,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: hybrid-ui-demo-app
-            path: ./demo/
-            context: .
+          - name: CARD_SERVER
 
     steps:
       - name: darkube-cli deploy
-        run: darkube deploy --token ${{secrets.DEPLOY_TOKEN_HYBRID_UI_DEMO_APP_GECUT_DEMO_HAMRAVESH_C14}}
-          --app-id ${{secrets.APP_ID_HYBRID_UI_DEMO_APP_GECUT_DEMO_HAMRAVESH_C14}} --image-tag latest
-          --job-id ${GITHUB_RUN_ID}
+        run: darkube deploy --token ${DARKUBE_DEPLOY_TOKEN} --app-id ${DARKUBE_APP_ID} --image-tag latest --job-id ${GITHUB_RUN_ID}
+        env:
+          DARKUBE_DEPLOY_TOKEN: ${{ secrets[format('DARKUBE_{0}_DEPLOY_TOKEN', matrix.name)] }}
+          DARKUBE_APP_ID: ${{ secrets[format('DARKUBE_{0}_APP_ID', matrix.name)] }}
