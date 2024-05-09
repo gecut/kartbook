@@ -1,8 +1,8 @@
 import {serve} from '@hono/node-server';
-import {db, logger, app} from './core';
 
-import './routes/cards';
 import config from './config';
+import {db, logger, app} from './core';
+import './routes/cards';
 
 db.connect().then(async () => {
   logger.other?.('DB Connected');

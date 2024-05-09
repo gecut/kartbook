@@ -1,12 +1,14 @@
 import {KartbookDbConnector} from '@gecut/kartbook-db-connector';
-import {CardInterface} from '@gecut/kartbook-types';
 import {GecutLogger} from '@gecut/logger';
 import {InMemorySimpleCache} from '@gecut/utilities/cache/in-memory.simple.js';
 import {Hono} from 'hono';
 import {compress} from 'hono/compress';
 import {etag} from 'hono/etag';
 import {timing} from 'hono/timing';
+
 import config from './config';
+
+import type {CardInterface} from '@gecut/kartbook-types';
 
 export const logger = new GecutLogger('card-server');
 export const app = new Hono();
@@ -61,7 +63,8 @@ if (logger.devMode) {
       status: `${context.res.status} ${context.res.ok ? 'Ok' : 'Error'}`,
     });
   });
-} else {
+}
+else {
   app.use(compress());
 }
 

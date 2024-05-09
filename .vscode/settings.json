@@ -22,16 +22,7 @@
   },
   "markdownlint.ignore": ["**/CHANGELOG.md"],
   "cSpell.language": "en,fa,fa-IR",
-  "cSpell.words": [
-    "Alwatr",
-    "Darkube",
-    "gecut",
-    "hamravesh",
-    "hono",
-    "iban",
-    "kartbook",
-    "Zamanian"
-  ],
+  "cSpell.words": ["Alwatr", "Darkube", "gecut", "hamravesh", "hono", "iban", "kartbook", "Zamanian"],
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "git.autoStash": true,
   "git.branchProtection": ["main", "next"],
