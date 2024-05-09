@@ -4,6 +4,9 @@ import config from './config';
 import {db, logger, app} from './core';
 import './routes/cards';
 
+app.get('/', (c) => c.redirect('/server-info'));
+app.get('/server-info', (c) => c.text('Gecut Web Server', 200));
+
 db.connect().then(async () => {
   logger.other?.('DB Connected');
 
