@@ -32,7 +32,7 @@
     "**/*.{js,mjs,cjs,map,d.ts,html,md,css}"
   ],
   "dependencies": {
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.12.11",
     "mongoose": "^8.3.2"
   }
 }

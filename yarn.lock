@@ -268,7 +268,7 @@ __metadata:
     "@gecut/utilities": "npm:^5.2.1"
     "@hono/node-server": "npm:^1.11.1"
     "@hono/zod-validator": "npm:^0.2.1"
-    "@types/node": "npm:^20.12.7"
+    "@types/node": "npm:^20.12.11"
     esbuild: "npm:^0.21.0"
     hono: "npm:^4.2.9"
     mongoose: "npm:^8.3.2"
@@ -284,7 +284,7 @@ __metadata:
   dependencies:
     "@gecut/kartbook-types": "workspace:^"
     "@gecut/logger": "npm:^1.4.1"
-    "@types/node": "npm:^20.12.7"
+    "@types/node": "npm:^20.12.11"
     mongoose: "npm:^8.3.2"
   languageName: unknown
   linkType: soft
@@ -293,7 +293,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@gecut/kartbook-types@workspace:packages/types"
   dependencies:
-    "@types/node": "npm:^20.12.7"
+    "@types/node": "npm:^20.12.11"
     mongoose: "npm:^8.3.2"
   languageName: unknown
   linkType: soft
@@ -1066,12 +1066,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.12.7":
-  version: 20.12.7
-  resolution: "@types/node@npm:20.12.7"
+"@types/node@npm:^20.12.11":
+  version: 20.12.11
+  resolution: "@types/node@npm:20.12.11"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10c0/dce80d63a3b91892b321af823d624995c61e39c6a223cc0ac481a44d337640cc46931d33efb3beeed75f5c85c3bda1d97cef4c5cd4ec333caf5dee59cff6eca0
+  checksum: 10c0/efaa7b08c50ba6e6982ac7d531ba08d5935539ba76e954807df1ff9382a319ead7e003ccaca5ad7cf33ecf53f212507f7c1f2794bd2ff52df6365fef21f6e1fb
   languageName: node
   linkType: hard
 
@@ -3889,7 +3889,7 @@ __metadata:
     "@lerna-lite/publish": "npm:^3.3.3"
     "@lerna-lite/run": "npm:^3.3.3"
     "@lerna-lite/version": "npm:^3.3.3"
-    "@types/node": "npm:^20.12.7"
+    "@types/node": "npm:^20.12.11"
     "@typescript-eslint/eslint-plugin": "npm:^7.7.1"
     "@typescript-eslint/parser": "npm:^7.7.1"
     eslint: "npm:^9.1.1"
