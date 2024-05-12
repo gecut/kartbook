@@ -53,7 +53,6 @@ export const getCardBySlug = async (slug: string) => {
 };
 
 if (logger.devMode) {
-  app.use(timing());
   app.use(async (context, next) => {
     logger.methodArgs?.('request', {
       url: context.req.path,
@@ -68,6 +67,7 @@ if (logger.devMode) {
   app.use(compress());
 }
 
+app.use(timing({enabled: logger.devMode}));
 app.use(etag());
 app.use(
   cors({
