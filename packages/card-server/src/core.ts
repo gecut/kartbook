@@ -4,6 +4,7 @@ import {InMemorySimpleCache} from '@gecut/utilities/cache/in-memory.simple.js';
 import {Hono} from 'hono';
 import {compress} from 'hono/compress';
 import {etag} from 'hono/etag';
+import {cors} from 'hono/cors';
 import {timing} from 'hono/timing';
 
 import config from './config';
@@ -68,5 +69,6 @@ if (logger.devMode) {
 }
 
 app.use(etag());
+app.use(cors())
 
 logger.property?.('config', config);
