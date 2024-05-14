@@ -4,7 +4,7 @@ import {z} from 'zod';
 
 import {app, getCardBySlug} from '../core';
 
-app.get('/:slug', zValidator('param', z.object({slug: z.string()})), async (c) => {
+app.get('/cards/:slug', zValidator('param', z.object({slug: z.string()})), async (c) => {
   const {slug} = c.req.valid('param');
 
   startTime(c, 'db');

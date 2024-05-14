@@ -20,7 +20,7 @@ db.connect().then(async () => {
       hostname: config.SERVER.HOST,
       port: config.SERVER.PORT,
     },
-    logger.other,
+    console.log,
   );
 
   logger.other?.('Server Launched', {devMode: logger.devMode});
