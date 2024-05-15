@@ -1,0 +1,6 @@
+@import '@gecut/styles/css';
+@import './h151.css';
+
+* {
+  user-select: none;
+}

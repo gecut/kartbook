@@ -63,7 +63,8 @@ if (logger.devMode) {
       status: `${context.res.status} ${context.res.ok ? 'Ok' : 'Error'}`,
     });
   });
-} else {
+}
+else {
   app.use(compress());
 }
 

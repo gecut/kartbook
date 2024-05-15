@@ -1,6 +1,6 @@
 import {$CardSchema, $UserSchema, $WalletSchema} from '@gecut/kartbook-types';
-import mongoose from 'mongoose';
 import {GecutLogger} from '@gecut/logger';
+import mongoose from 'mongoose';
 
 import type {CardInterface, UserInterface, WalletInterface} from '@gecut/kartbook-types';
 
