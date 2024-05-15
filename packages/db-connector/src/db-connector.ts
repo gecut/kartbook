@@ -41,8 +41,8 @@ export class KartbookDbConnector {
     if (userCount === 0) {
       const user = await this.$User
         .create({
-          firstName: 'MohammadMahdi',
-          lastName: 'Zamanian',
+          firstName: 'سید محمدمهدی',
+          lastName: 'زمانیان',
           email: 'dev@mm25zamanian.ir',
           phoneNumber: '09155595488',
           isAdmin: true,
