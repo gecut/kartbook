@@ -22,8 +22,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: kartbook/card-server
-            path: ./packages/card-server
+          - name: kartbook/card-api
+            path: ./packages/card-api
+            context: .
+          - name: kartbook/card-app
+            path: ./packages/card-api
+            context: .
+          - name: kartbook/admin
+            path: ./packages/admin
             context: .
 
     permissions:
@@ -118,6 +124,7 @@ jobs:
     name: Deploy Container On Darkube
     container: hamravesh/darkube-cli:v1.1
     needs: build
+    if: false
     runs-on: ubuntu-latest
 
     strategy:
