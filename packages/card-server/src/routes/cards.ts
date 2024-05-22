@@ -2,7 +2,7 @@ import {zValidator} from '@hono/zod-validator';
 import {startTime, endTime} from 'hono/timing';
 import {z} from 'zod';
 
-import {app, getCardBySlug} from '../core';
+import {app, getCardBySlug} from '../core.js';
 
 app.get('/cards/:slug', zValidator('param', z.object({slug: z.string()})), async (c) => {
   const {slug} = c.req.valid('param');

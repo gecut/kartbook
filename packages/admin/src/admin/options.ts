@@ -1,7 +1,7 @@
-import {AdminJSOptions} from 'adminjs';
-
 import componentLoader from './component-loader.js';
 import {resources} from './resources.js';
+
+import type {AdminJSOptions} from 'adminjs';
 
 const options: AdminJSOptions = {
   componentLoader,

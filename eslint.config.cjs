@@ -4,7 +4,7 @@ const importPlugin = require('eslint-plugin-import');
 
 module.exports = [
   {
-    files: ['**/*.ts'],
+    files: ['**/*'],
     ignores: [
       // OSX
       '.DS_STORE',

@@ -1,5 +1,5 @@
-import express from 'express';
 import AdminJS from 'adminjs';
+import express from 'express';
 import {buildAuthenticatedRouter} from '@adminjs/express';
 
 import provider from './admin/auth-provider.js';

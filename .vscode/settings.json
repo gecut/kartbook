@@ -22,8 +22,17 @@
   },
   "markdownlint.ignore": ["**/CHANGELOG.md"],
   "cSpell.language": "en,fa,fa-IR",
-  "cSpell.words": ["Alwatr", "Darkube", "gecut", "hamravesh", "hono", "iban", "kartbook", "Zamanian"],
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "cSpell.words": [
+    "adminjs",
+    "Alwatr",
+    "Darkube",
+    "gecut",
+    "hamravesh",
+    "hono",
+    "iban",
+    "kartbook",
+    "Zamanian"
+  ],
   "git.autoStash": true,
   "git.branchProtection": ["main", "next"],
   "githubPullRequests.ignoredPullRequestBranches": ["main", "next"],
@@ -31,7 +40,5 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "eslint.nodePath": ".yarn/sdks",
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": false
 }

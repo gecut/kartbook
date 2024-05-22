@@ -1,7 +1,7 @@
 import {serve} from '@hono/node-server';
 
-import config from './config';
-import {db, logger, app} from './core';
+import config from './config.js';
+import {db, logger, app} from './core.js';
 import './routes/cards';
 
 app.get('/', (c) => c.redirect('/server-info'));
