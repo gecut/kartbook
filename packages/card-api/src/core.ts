@@ -11,7 +11,7 @@ import config from './config.js';
 
 import type {CardInterface} from '@gecut/kartbook-types';
 
-export const logger = new GecutLogger('card-server');
+export const logger = new GecutLogger('card-api');
 export const app = new Hono();
 export const db = new KartbookDbConnector(config.DATABASE.URI, logger.sub('db-connector'));
 export const cardsInMemoryCache = new InMemorySimpleCache<CardInterface>(512);

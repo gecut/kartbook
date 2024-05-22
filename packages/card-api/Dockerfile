@@ -9,17 +9,17 @@ RUN set -eux; \
   yarn install --immutable; \
   yarn build; \
   ls -lahF .; \
-  ls -RlahF /app/packages/card-server;
+  ls -RlahF /app/packages/card-api;
 
 # ---
 
 FROM ghcr.io/alwatr/node:21.7.1
 
-COPY --from=builder /app/packages/card-server/dist/ .
+COPY --from=builder /app/packages/card-api/dist/ .
 
 ENV HOST="0.0.0.0" \
     PORT="80"
 
 EXPOSE 80
 
-CMD ["node", "card-server.js"]
+CMD ["node", "card-api.js"]
