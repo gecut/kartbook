@@ -11,15 +11,10 @@ RUN set -eux; \
   ls -lahF .; \
   ls -RlahF /app/packages/admin;
 
-# ---
-
-FROM ghcr.io/alwatr/node:21.7.1
-
-COPY --from=builder /app/packages/admin/dist/ .
-
 ENV HOST="0.0.0.0" \
     PORT="80"
 
 EXPOSE 80
 
-CMD ["node", "app.js"]
+CMD ["yarn", "node", "/app/packages/admin/dist/app.js"]
+
