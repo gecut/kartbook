@@ -2,6 +2,7 @@
   "name": "@gecut/kartbook-card-server",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "author": {
     "name": "S. MohammadMahdi Zamanian",
     "email": "dev@mm25zamanain.ir",

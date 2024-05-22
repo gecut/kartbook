@@ -7,7 +7,7 @@ import {cors} from 'hono/cors';
 import {etag} from 'hono/etag';
 import {timing} from 'hono/timing';
 
-import config from './config';
+import config from './config.js';
 
 import type {CardInterface} from '@gecut/kartbook-types';
 
@@ -63,8 +63,7 @@ if (logger.devMode) {
       status: `${context.res.status} ${context.res.ok ? 'Ok' : 'Error'}`,
     });
   });
-}
-else {
+} else {
   app.use(compress());
 }
 
