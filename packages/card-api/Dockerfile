@@ -22,4 +22,4 @@ ENV HOST="0.0.0.0" \
 
 EXPOSE 80
 
-CMD ["node", "card-api.js"]
+CMD ["node", "card-api.cjs"]

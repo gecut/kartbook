@@ -2,6 +2,7 @@
   "name": "@gecut/kartbook-card-api",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "author": {
     "name": "S. MohammadMahdi Zamanian",
     "email": "dev@mm25zamanain.ir",
@@ -14,9 +15,9 @@
     "directory": "packages/card-api"
   },
   "scripts": {
-    "build": "yarn esbuild ./src/card-api.ts --target=node21 --bundle --minify --platform=node --format=cjs --outfile=./dist/card-api.js",
+    "build": "yarn esbuild ./src/card-api.ts --target=node21 --bundle --minify --platform=node --format=cjs --outfile=./dist/card-api.cjs",
     "watch:es": "yarn run build --watch=forever",
-    "watch:node": "yarn nodemon --exec 'node --env-file dist/.env' --watch 'dist/**/*' dist/card-api.js",
+    "watch:node": "yarn nodemon --exec 'node --env-file dist/.env' --watch 'dist/**/*' dist/card-api.cjs",
     "watch": "run-p watch:es watch:node"
   },
   "files": [
