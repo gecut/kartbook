@@ -8,16 +8,16 @@ import {customElement, state} from 'lit/decorators.js';
 import {styleMap} from 'lit/directives/style-map.js';
 import 'unfonts.css';
 
-import {BankInfo, getBankInfo} from './banks';
-import {api} from './ky';
+import {BankInfo, getBankInfo} from './banks/index.js';
+import {api} from './ky.js';
 import './styles/global.css';
-import {getAverageColor} from './utilities/average-color';
+import {getAverageColor} from './utilities/average-color.js';
 import {
   Notification,
   notificationContext,
   notificationRenderer,
   pushNotification,
-} from './utilities/notification.context';
+} from './utilities/notification.context.js';
 
 import type {CardInterface, StringifyEntity} from '@gecut/kartbook-types';
 import type {RenderResult} from '@gecut/types';
@@ -227,8 +227,7 @@ export class AppIndex extends GecutApp {
         type: 'success',
         msg: 'شماره کارت کپی شد !',
       });
-    }
-    catch {
+    } catch {
       return await pushNotification({
         type: 'error',
         msg: 'مشکلی در کپی کردن شماره کارت ایجاد شد، دوباره امتحان کنید !',
@@ -249,8 +248,7 @@ export class AppIndex extends GecutApp {
         type: 'success',
         msg: 'شماره شبا کپی شد !',
       });
-    }
-    catch {
+    } catch {
       return await pushNotification({
         type: 'error',
         msg: 'مشکلی در کپی کردن شماره شبا ایجاد شد، دوباره امتحان کنید !',

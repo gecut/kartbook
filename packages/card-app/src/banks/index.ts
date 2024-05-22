@@ -113,8 +113,7 @@ export function getBankInfo(cardNumber: [string, string, string, string]): BankI
     const bankLogo = banksLogo[bankName];
 
     return {bin, bankName, bankLogo};
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error);
 
     return null;
