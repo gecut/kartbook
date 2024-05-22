@@ -1,7 +1,7 @@
 import {Schema} from 'mongoose';
 
-import type {Entity} from './_base';
-import type {UserInterface} from './user';
+import type {Entity} from './_base.js';
+import type {UserInterface} from './user.js';
 
 /**
  * Represents a transaction.

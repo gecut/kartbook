@@ -1,6 +1,6 @@
 import {Schema} from 'mongoose';
 
-import type {Entity} from './_base';
+import type {Entity} from './_base.js';
 
 /**
  * Represents a user entity.

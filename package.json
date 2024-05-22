@@ -1,6 +1,6 @@
 {
   "name": "kartbook",
-  "packageManager": "yarn@4.1.1",
+  "packageManager": "yarn@4.2.2",
   "author": {
     "name": "S. MohammadMahdi Zamanian",
     "email": "dev@mm25zamanain.ir",

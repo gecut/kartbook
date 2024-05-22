@@ -1,7 +1,7 @@
 import {Schema} from 'mongoose';
 
-import type {Entity} from './_base';
-import type {UserInterface} from './user';
+import type {Entity} from './_base.js';
+import type {UserInterface} from './user.js';
 
 /**
  * Represents a card entity.
@@ -48,7 +48,7 @@ export interface CardInterface extends Entity {
 
 export const $CardSchema = new Schema<CardInterface>(
   {
-    cardNumber: [{type: String, required: true}],
+    cardNumber: [{type: String, minlength: 4, maxlength: 4, match: /^[0-9]{4}$/, required: true}],
     iban: {type: String, required: true},
     slug: {type: String, required: true},
     isPremium: {type: Boolean, default: false},
