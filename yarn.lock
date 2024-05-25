@@ -2392,10 +2392,29 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@gecut/kartbook-panel-api@workspace:packages/panel-api":
+  version: 0.0.0-use.local
+  resolution: "@gecut/kartbook-panel-api@workspace:packages/panel-api"
+  dependencies:
+    "@gecut/kartbook-db-connector": "workspace:^"
+    "@gecut/kartbook-types": "workspace:^"
+    "@gecut/logger": "npm:^1.4.1"
+    "@gecut/utilities": "npm:^5.2.1"
+    "@trpc/server": "npm:^11.0.0-rc.374"
+    "@types/node": "npm:^20.12.7"
+    esbuild: "npm:^0.21.0"
+    mongoose: "npm:^8.3.2"
+    nodemon: "npm:^3.1.0"
+    npm-run-all: "npm:^4.1.5"
+    zod: "npm:^3.23.5"
+  languageName: unknown
+  linkType: soft
+
 "@gecut/kartbook-types@workspace:^, @gecut/kartbook-types@workspace:packages/types":
   version: 0.0.0-use.local
   resolution: "@gecut/kartbook-types@workspace:packages/types"
   dependencies:
+    "@gecut/utilities": "npm:^5.2.1"
     "@types/node": "npm:^20.12.7"
     mongoose: "npm:^8.3.2"
   languageName: unknown
@@ -4231,6 +4250,13 @@ __metadata:
     "@tiptap/extension-strike": "npm:^2.1.13"
     "@tiptap/extension-text": "npm:^2.1.13"
   checksum: 10c0/b2eab8535c870a03ab22eaecce55ca5c075dc5e0f7b5b41049969c808de18c826fd267ab51f651895ac3f9e879742878ddd680ea3597daee55a8f700537705ad
+  languageName: node
+  linkType: hard
+
+"@trpc/server@npm:^11.0.0-rc.374":
+  version: 11.0.0-rc.374
+  resolution: "@trpc/server@npm:11.0.0-rc.374"
+  checksum: 10c0/07c27bbc9a1ab2f0759a0fc99960e91513a03c51e5eb22d667495c1cbf0a5502a49383cf782867abb40926029c197b7cccc0a2ac46dc0e5a00eca5325204c74a
   languageName: node
   linkType: hard
 

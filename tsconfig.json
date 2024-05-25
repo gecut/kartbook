@@ -14,7 +14,8 @@
     {"path": "./packages/db-connector"},
     {"path": "./packages/card-api"},
     {"path": "./packages/card-app"},
-    {"path": "./packages/admin"}
+    {"path": "./packages/admin"},
+    {"path": "./packages/panel-api"}
     // {"path": "./packages/lit-helper"},
     // {"path": "./packages/mixins"},
     // {"path": "./packages/styles"},
