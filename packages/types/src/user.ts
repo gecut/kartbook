@@ -1,4 +1,5 @@
 import {Schema} from 'mongoose';
+import {uid} from '@gecut/utilities/uid.js';
 
 import type {Entity} from './_base.js';
 
@@ -21,6 +22,8 @@ export interface UserInterface extends Entity {
    */
   phoneNumber: string;
 
+  phoneNumberVerified: boolean;
+
   /**
    * The user's email address (optional).
    */
@@ -32,17 +35,30 @@ export interface UserInterface extends Entity {
   caller?: UserInterface;
 
   isAdmin: boolean;
+
+  token: string;
+
+  otp?: {
+    code: string;
+    expiredAt: number;
+  };
 }
 
 export const $UserSchema = new Schema<UserInterface>(
   {
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
-    phoneNumber: {type: String, required: true},
-    email: {type: String, required: false},
+    phoneNumber: {type: String, required: true, unique: true},
+    phoneNumberVerified: {type: Boolean, default: true},
+    email: {type: String, required: false, unique: true},
     caller: {type: Schema.ObjectId, ref: 'User', required: false},
     isAdmin: {type: Boolean, default: false},
     disabled: {type: Boolean, default: false},
+    token: {type: String, default: uid, unique: true},
+    otp: {
+      code: {type: String, required: true},
+      expiredAt: {type: Date, required: true},
+    },
   },
   {
     timestamps: true,
