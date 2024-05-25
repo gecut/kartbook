@@ -19,8 +19,8 @@ const errorIcon =
 export const notificationContext = new ContextSignal<Notification | null>('notification');
 
 export const removeNotification = async (target: HTMLElement) => {
-  target.classList.remove('animate-zoomFadeIn');
-  target.classList.add('animate-zoomFadeOut');
+  target.classList.remove('animate-fadeInSlide');
+  target.classList.add('animate-fadeOutSlide');
   await untilEvent(target, 'animationend');
   target.remove();
 };
@@ -29,8 +29,8 @@ export const notificationRenderer = (content: Notification | null) => {
     return html`
       <div
         id="notification"
-        class="gecut-card-filled shadow-xl cursor-pointer flex p-3 gap-3 text-onSurface text-bodyLarge
-               min-w-32 animate-zoomFadeIn"
+        class="gecut-card-filled shadow-xl cursor-pointer flex p-3 gap-3 justify-between text-onSurfaceVariant text-bodyMedium w-full
+               min-w-32 animate-fadeInSlide"
         @click=${(event: PointerEvent) => {
           const target = (event.currentTarget || event.target) as HTMLElement | null;
 
@@ -39,12 +39,13 @@ export const notificationRenderer = (content: Notification | null) => {
           }
         }}
       >
+        <span>${content.msg}</span>
+
         ${when(
           content.type === 'error',
           () => html` <span class="text-error [&>.gecut-icon]:text-2xl">${icon({svg: errorIcon})}</span> `,
           () => html` <span class="text-primary [&>.gecut-icon]:text-2xl">${icon({svg: successIcon})}</span> `,
         )}
-        <span>${content.msg}</span>
       </div>
     `;
 

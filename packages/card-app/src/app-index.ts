@@ -44,9 +44,9 @@ export class AppIndex extends GecutApp {
       ${this.renderSkeletonCard()} ${this.renderCard()} ${this.renderAmountBox()}
       <div class="grow relative">
         <div
-          class="absolute inset-0 flex flex-col gap-3 justify-center items-center text-bodyMedium text-onSurfaceVariant"
+          class="absolute inset-0 flex flex-col gap-3 justify-center items-center text-bodySmall lg:text-bodyMedium text-onSurfaceVariant"
         >
-          <img class="h-14" src="/icon.png" />
+          <img class="h-6 md:h-8 lg:h-10" src="/icon.png" />
 
           <span>پلتفرم شمـاره کـارت آنـلایـــن, کـــارت بـوک</span>
 
@@ -104,7 +104,7 @@ export class AppIndex extends GecutApp {
 
     return html`
       <div
-        class="w-full h-56 bg-surfaceVariant rounded-lg shadow-xl relative overflow-hidden
+        class="w-full h-56 bg-surfaceVariant rounded-2xl shadow-xl relative overflow-hidden
                animate-pulse *:animate-pulse"
       >
         <span class="absolute inset-0 opacity-20 bg-surfaceVariant z-[2]"></span>
@@ -136,11 +136,10 @@ export class AppIndex extends GecutApp {
     if (!this.data) return nothing;
 
     return html`
-      <div class="w-full h-56 bg-surface rounded-lg shadow-2xl relative overflow-hidden">
+      <div class="w-full h-56 bg-surface rounded-2xl shadow-2xl relative overflow-hidden">
         <span class="absolute inset-0 opacity-20 bg-surfaceVariant z-[2]"></span>
-        <span class="absolute inset-0 opacity-20 bg-cover bg-[url('/card-bg.webp')] z-[3]"></span>
         <span
-          class="absolute inset-0 opacity-40 bg-cover bg-gradient-to-bl from-primary from-0%
+          class="absolute inset-0 opacity-25 bg-cover bg-gradient-to-bl from-primary from-0%
                  to-transparent to-100% z-[4]"
           style=${styleMap({
             '--tw-gradient-from': `rgba(${this.data.primaryColor}, 1) var(--tw-gradient-from-position)`,
@@ -149,7 +148,7 @@ export class AppIndex extends GecutApp {
           })}
         ></span>
         <span
-          class="absolute inset-0 opacity-60 bg-cover bg-gradient-to-bl from-primary from-0% to-transparent
+          class="absolute inset-0 opacity-30 bg-cover bg-gradient-to-bl from-primary from-0% to-transparent
                  to-60% z-[4]"
           style=${styleMap({
             '--tw-gradient-from': `rgba(${this.data.primaryColor}, 1) var(--tw-gradient-from-position)`,
@@ -157,6 +156,8 @@ export class AppIndex extends GecutApp {
             '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to)',
           })}
         ></span>
+
+        <span class="absolute inset-0 opacity-20 bg-cover bg-[url('/card-bg.webp')] z-[3]"></span>
 
         <div class="absolute inset-0 z-[5] flex flex-col pt-3 pb-6 px-6">
           <div class="size-20 flex items-center justify-center">
@@ -166,18 +167,18 @@ export class AppIndex extends GecutApp {
           <div class="grow"></div>
 
           <div
-            class="flex justify-between text-titleLarge text-onSurface cursor-pointer"
+            class="flex justify-between text-titleLarge text-[20px] text-onSurface cursor-pointer"
             dir="ltr"
             @click=${this.copyCardNumber}
           >
             ${map(this, this.data.card.cardNumber, (str) => html`<span>${str}</span>`)}
           </div>
 
-          <div class="flex justify-between items-center text-bodyLarge text-outline pt-1 mt-1" dir="ltr">
-            <span class="opacity-85">IR${this.data.card.iban}</span>
+          <div class="flex justify-between items-center text-bodyMedium text-outline pt-1 mt-1" dir="ltr">
+            <span class="opacity-85 cursor-pointer" @click=${this.copyIBAN}>IR${this.data.card.iban}</span>
 
             <span
-              class="[&>.gecut-icon]:text-[22px] [&>.gecut-icon]:text-outline cursor-pointer"
+              class="[&>.gecut-icon]:text-[18px] [&>.gecut-icon]:text-outline cursor-pointer"
               @click=${this.copyIBAN}
             >
               ${icon({
@@ -189,7 +190,7 @@ export class AppIndex extends GecutApp {
 
           <div class="grow"></div>
 
-          <div class="text-bodyLarge text-outline opacity-85">
+          <div class="text-bodyMedium text-outline opacity-85">
             ${this.data.card.owner.firstName + ' ' + this.data.card.owner.lastName}
           </div>
         </div>
@@ -225,12 +226,12 @@ export class AppIndex extends GecutApp {
 
       return await pushNotification({
         type: 'success',
-        msg: 'شماره کارت کپی شد !',
+        msg: 'شماره کارت کپی شد',
       });
     } catch {
       return await pushNotification({
         type: 'error',
-        msg: 'مشکلی در کپی کردن شماره کارت ایجاد شد، دوباره امتحان کنید !',
+        msg: 'مشکلی در کپی کردن شماره کارت ایجاد شد، دوباره امتحان کنید',
       });
     }
   }
@@ -246,12 +247,12 @@ export class AppIndex extends GecutApp {
 
       return await pushNotification({
         type: 'success',
-        msg: 'شماره شبا کپی شد !',
+        msg: 'شماره شبا کپی شد',
       });
     } catch {
       return await pushNotification({
         type: 'error',
-        msg: 'مشکلی در کپی کردن شماره شبا ایجاد شد، دوباره امتحان کنید !',
+        msg: 'مشکلی در کپی کردن شماره شبا ایجاد شد، دوباره امتحان کنید',
       });
     }
   }
