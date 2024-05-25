@@ -2324,7 +2324,7 @@ __metadata:
     express: "npm:^4.18.2"
     express-formidable: "npm:^1.2.0"
     express-session: "npm:^1.17.3"
-    mongoose: "npm:^8.0.0"
+    mongoose: "npm:^8.4.0"
     nodemon: "npm:^3.1.0"
     npm-run-all: "npm:^4.1.5"
     react-is: "npm:^18.3.1"
@@ -2345,7 +2345,7 @@ __metadata:
     "@types/node": "npm:^20.12.7"
     esbuild: "npm:^0.21.0"
     hono: "npm:^4.2.9"
-    mongoose: "npm:^8.3.2"
+    mongoose: "npm:^8.4.0"
     nodemon: "npm:^3.1.0"
     npm-run-all: "npm:^4.1.5"
     zod: "npm:^3.23.5"
@@ -2388,7 +2388,7 @@ __metadata:
     "@gecut/kartbook-types": "workspace:^"
     "@gecut/logger": "npm:^1.4.1"
     "@types/node": "npm:^20.12.7"
-    mongoose: "npm:^8.3.2"
+    mongoose: "npm:^8.4.0"
   languageName: unknown
   linkType: soft
 
@@ -2403,7 +2403,7 @@ __metadata:
     "@trpc/server": "npm:^11.0.0-rc.374"
     "@types/node": "npm:^20.12.7"
     esbuild: "npm:^0.21.0"
-    mongoose: "npm:^8.3.2"
+    mongoose: "npm:^8.4.0"
     nodemon: "npm:^3.1.0"
     npm-run-all: "npm:^4.1.5"
     zod: "npm:^3.23.5"
@@ -2416,7 +2416,7 @@ __metadata:
   dependencies:
     "@gecut/utilities": "npm:^5.2.1"
     "@types/node": "npm:^20.12.7"
-    mongoose: "npm:^8.3.2"
+    mongoose: "npm:^8.4.0"
   languageName: unknown
   linkType: soft
 
@@ -5309,10 +5309,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bson@npm:^6.4.0, bson@npm:^6.5.0":
-  version: 6.6.0
-  resolution: "bson@npm:6.6.0"
-  checksum: 10c0/cb1690c6a72fbda88bc6af97540d5152d8f5c7ce3f004012b3dc8bfc3420a30af8aaf4eee47c731432ab7e470e288d078b0a339bdfe9cab1ebfc7c3bb3dcebc4
+"bson@npm:^6.7.0":
+  version: 6.7.0
+  resolution: "bson@npm:6.7.0"
+  checksum: 10c0/6cc5c66bafaa2b7127409abda094af7e6f76771123ffc9526b167de23860d62560ba5db9b59a1f51bad3e51d320adf372e8ae0b2e0d156b0781683b094f3a325
   languageName: node
   linkType: hard
 
@@ -9283,12 +9283,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mongodb@npm:6.5.0":
-  version: 6.5.0
-  resolution: "mongodb@npm:6.5.0"
+"mongodb@npm:6.6.2":
+  version: 6.6.2
+  resolution: "mongodb@npm:6.6.2"
   dependencies:
     "@mongodb-js/saslprep": "npm:^1.1.5"
-    bson: "npm:^6.4.0"
+    bson: "npm:^6.7.0"
     mongodb-connection-string-url: "npm:^3.0.0"
   peerDependencies:
     "@aws-sdk/credential-providers": ^3.188.0
@@ -9313,22 +9313,22 @@ __metadata:
       optional: true
     socks:
       optional: true
-  checksum: 10c0/d51f8673b76f073ef5d0101d96b1adc3ebacd63890771cb72ae245081415887a2e0b5a9451b18e370f930d63173f2af68fac98371487995ae921140756fe510b
+  checksum: 10c0/c07bc5339322325f82bd598c782412aa5c7adbf0d8f3d9ab530d1e6578901008def2185fb54e755e6a65592ad94389dc5f5dab5bac5fa4174934dcb67ad1dd2d
   languageName: node
   linkType: hard
 
-"mongoose@npm:^8.0.0, mongoose@npm:^8.3.2":
-  version: 8.3.5
-  resolution: "mongoose@npm:8.3.5"
+"mongoose@npm:^8.4.0":
+  version: 8.4.0
+  resolution: "mongoose@npm:8.4.0"
   dependencies:
-    bson: "npm:^6.5.0"
+    bson: "npm:^6.7.0"
     kareem: "npm:2.6.3"
-    mongodb: "npm:6.5.0"
+    mongodb: "npm:6.6.2"
     mpath: "npm:0.9.0"
     mquery: "npm:5.0.0"
     ms: "npm:2.1.3"
     sift: "npm:17.1.3"
-  checksum: 10c0/3b6eee352410ab4e5bda59ad14febc75469d44a38b4b4fb35689171e8f267ea1e08d5cb4c5e8c7d74c145bb77f6bcd3353bf37418340895e45e3a4cadcb1a297
+  checksum: 10c0/07208405f23200331c2d3732e845e324bdf9e853bd611fcc8c8e13660959afddd382391ba8d27bab467e5a56bb83dbda010adb986a0043aa31ada449393b4731
   languageName: node
   linkType: hard
 
