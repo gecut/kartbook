@@ -2338,7 +2338,7 @@ __metadata:
   dependencies:
     "@gecut/kartbook-db-connector": "workspace:^"
     "@gecut/kartbook-types": "workspace:^"
-    "@gecut/logger": "npm:^1.4.1"
+    "@gecut/logger": "npm:^1.4.2"
     "@gecut/utilities": "npm:^5.2.1"
     "@hono/node-server": "npm:^1.11.1"
     "@hono/zod-validator": "npm:^0.2.1"
@@ -2361,7 +2361,7 @@ __metadata:
     "@gecut/i18n": "npm:^2.0.2"
     "@gecut/kartbook-types": "workspace:^"
     "@gecut/lit-helper": "npm:^2.1.0"
-    "@gecut/logger": "npm:^1.4.1"
+    "@gecut/logger": "npm:^1.4.2"
     "@gecut/signal": "npm:^2.1.1"
     "@gecut/styles": "npm:^2.3.0"
     "@gecut/types": "npm:^2.1.1-alpha.0"
@@ -2386,7 +2386,7 @@ __metadata:
   resolution: "@gecut/kartbook-db-connector@workspace:packages/db-connector"
   dependencies:
     "@gecut/kartbook-types": "workspace:^"
-    "@gecut/logger": "npm:^1.4.1"
+    "@gecut/logger": "npm:^1.4.2"
     "@types/node": "npm:^20.12.7"
     mongoose: "npm:^8.3.2"
   languageName: unknown
@@ -2398,7 +2398,7 @@ __metadata:
   dependencies:
     "@gecut/kartbook-db-connector": "workspace:^"
     "@gecut/kartbook-types": "workspace:^"
-    "@gecut/logger": "npm:^1.4.1"
+    "@gecut/logger": "npm:^1.4.2"
     "@gecut/utilities": "npm:^5.2.1"
     "@trpc/server": "npm:^11.0.0-rc.374"
     "@types/node": "npm:^20.12.7"
@@ -2455,6 +2455,15 @@ __metadata:
   dependencies:
     "@gecut/utilities": "npm:^5.2.1"
   checksum: 10c0/1f83fe934092b03ea23db483c9d9789ec8f2fd8dbfdeb13cddd5af08e12f51f643f15ade9c27e3c44b66f18a57bedaf496d498bedddad4e423a225010750a787
+  languageName: node
+  linkType: hard
+
+"@gecut/logger@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "@gecut/logger@npm:1.4.2"
+  dependencies:
+    "@gecut/utilities": "npm:^5.2.1"
+  checksum: 10c0/c8ced904afb50b1612b2e79691da29de1d417941db8b763e6e48ce0c08bd58aa8021ea62d633a4d6246b1a45cfc7c8edca3ed28e27f253f7a2b2100bdda6cd01
   languageName: node
   linkType: hard
 

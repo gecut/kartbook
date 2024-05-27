@@ -26,7 +26,7 @@
   "devDependencies": {
     "@gecut/kartbook-db-connector": "workspace:^",
     "@gecut/kartbook-types": "workspace:^",
-    "@gecut/logger": "^1.4.1",
+    "@gecut/logger": "^1.4.2",
     "@gecut/utilities": "^5.2.1",
     "@hono/node-server": "^1.11.1",
     "@hono/zod-validator": "^0.2.1",

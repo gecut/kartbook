@@ -24,7 +24,7 @@
     "@gecut/i18n": "^2.0.2",
     "@gecut/kartbook-types": "workspace:^",
     "@gecut/lit-helper": "^2.1.0",
-    "@gecut/logger": "^1.4.1",
+    "@gecut/logger": "^1.4.2",
     "@gecut/signal": "^2.1.1",
     "@gecut/styles": "^2.3.0",
     "@gecut/types": "^2.1.1-alpha.0",
