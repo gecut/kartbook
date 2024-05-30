@@ -21,7 +21,7 @@
   "devDependencies": {
     "@fontsource/vazirmatn": "^5.0.19",
     "@gecut/components": "^2.1.0",
-    "@gecut/i18n": "^2.0.2",
+    "@gecut/i18n": "^2.0.4",
     "@gecut/kartbook-types": "workspace:^",
     "@gecut/lit-helper": "^2.1.0",
     "@gecut/logger": "^1.4.1",
