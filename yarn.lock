@@ -2317,7 +2317,7 @@ __metadata:
     "@gecut/kartbook-types": "workspace:^"
     "@tiptap/pm": "npm:^2.4.0"
     "@types/express": "npm:^4.17.17"
-    "@types/node": "npm:^18.15.11"
+    "@types/node": "npm:^20.12.13"
     "@types/react-is": "npm:^18"
     adminjs: "npm:^7.7.2"
     esbuild: "npm:^0.21.3"
@@ -2342,7 +2342,7 @@ __metadata:
     "@gecut/utilities": "npm:^5.2.1"
     "@hono/node-server": "npm:^1.11.1"
     "@hono/zod-validator": "npm:^0.2.1"
-    "@types/node": "npm:^20.12.7"
+    "@types/node": "npm:^20.12.13"
     esbuild: "npm:^0.21.0"
     hono: "npm:^4.2.9"
     mongoose: "npm:^8.3.2"
@@ -2367,7 +2367,7 @@ __metadata:
     "@gecut/types": "npm:^2.1.1-alpha.0"
     "@gecut/utilities": "npm:^5.2.1"
     "@tailwindcss/nesting": "npm:^0.0.0-insiders.565cd3e"
-    "@types/node": "npm:^20.11.30"
+    "@types/node": "npm:^20.12.13"
     autoprefixer: "npm:^10.4.19"
     ky: "npm:^1.2.4"
     lit: "npm:^3.1.3"
@@ -2387,7 +2387,7 @@ __metadata:
   dependencies:
     "@gecut/kartbook-types": "workspace:^"
     "@gecut/logger": "npm:^1.4.1"
-    "@types/node": "npm:^20.12.7"
+    "@types/node": "npm:^20.12.13"
     mongoose: "npm:^8.3.2"
   languageName: unknown
   linkType: soft
@@ -2401,7 +2401,7 @@ __metadata:
     "@gecut/logger": "npm:^1.4.1"
     "@gecut/utilities": "npm:^5.2.1"
     "@trpc/server": "npm:^11.0.0-rc.374"
-    "@types/node": "npm:^20.12.7"
+    "@types/node": "npm:^20.12.13"
     esbuild: "npm:^0.21.0"
     mongoose: "npm:^8.3.2"
     nodemon: "npm:^3.1.0"
@@ -2415,7 +2415,7 @@ __metadata:
   resolution: "@gecut/kartbook-types@workspace:packages/types"
   dependencies:
     "@gecut/utilities": "npm:^5.2.1"
-    "@types/node": "npm:^20.12.7"
+    "@types/node": "npm:^20.12.13"
     mongoose: "npm:^8.3.2"
   languageName: unknown
   linkType: soft
@@ -4372,7 +4372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20.11.30, @types/node@npm:^20.12.7":
+"@types/node@npm:*, @types/node@npm:^20.11.30":
   version: 20.12.12
   resolution: "@types/node@npm:20.12.12"
   dependencies:
@@ -4381,12 +4381,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.15.11":
-  version: 18.19.33
-  resolution: "@types/node@npm:18.19.33"
+"@types/node@npm:^20.12.13":
+  version: 20.12.13
+  resolution: "@types/node@npm:20.12.13"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10c0/0a17cf55c4e6ec90fdb47e73fde44a613ec0f6cd02619b156b1e8fd3f81f8b3346b06ca0757024ddff304d44c8ce5b99570eac8fa2d6baa0fc12e4b2146ac7c6
+  checksum: 10c0/2ac92bb631dbddfb560eb3ba4eedbb1c688044a0130bc1ef032f5c0f20148ac7c9aa3c5aaa5a9787b6c4c6299847d754b96ee8c9def951481ba6628c46b683f5
   languageName: node
   linkType: hard
 
@@ -8631,7 +8631,7 @@ __metadata:
     "@lerna-lite/publish": "npm:^3.3.3"
     "@lerna-lite/run": "npm:^3.3.3"
     "@lerna-lite/version": "npm:^3.3.3"
-    "@types/node": "npm:^20.12.7"
+    "@types/node": "npm:^20.12.13"
     "@typescript-eslint/eslint-plugin": "npm:^7.7.1"
     "@typescript-eslint/parser": "npm:^7.9.0"
     eslint: "npm:^9.1.1"
