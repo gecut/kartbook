@@ -43,7 +43,7 @@ const user = router({
 
       return await user.save();
     }),
-  otp: {
+  otp: router({
     send: publicProcedure
       .input(
         z.object({
@@ -121,7 +121,7 @@ const user = router({
 
         return user.token;
       }),
-  },
+  }),
 });
 
 export default user;

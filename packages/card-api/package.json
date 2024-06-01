@@ -26,16 +26,16 @@
   "devDependencies": {
     "@gecut/kartbook-db-connector": "workspace:^",
     "@gecut/kartbook-types": "workspace:^",
-    "@gecut/logger": "^1.4.1",
+    "@gecut/logger": "^1.4.2",
     "@gecut/utilities": "^5.2.1",
-    "@hono/node-server": "^1.11.1",
-    "@hono/zod-validator": "^0.2.1",
-    "@types/node": "^20.12.7",
-    "esbuild": "^0.21.0",
-    "hono": "^4.2.9",
-    "mongoose": "^8.3.2",
-    "nodemon": "^3.1.0",
+    "@hono/node-server": "^1.11.2",
+    "@hono/zod-validator": "^0.2.2",
+    "@types/node": "^20.13.0",
+    "esbuild": "^0.21.4",
+    "hono": "^4.4.2",
+    "mongoose": "^8.4.1",
+    "nodemon": "^3.1.2",
     "npm-run-all": "^4.1.5",
-    "zod": "^3.23.5"
+    "zod": "^3.23.8"
   }
 }

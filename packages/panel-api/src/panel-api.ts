@@ -21,8 +21,8 @@ db.connect().then(() => {
   db.init().then(() => {
     logger.other?.('Database Initialized');
 
-    server.listen(config.SERVER.PORT, config.SERVER.HOST).on('listening', () => {
-      logger.other?.('Server Launched On', 'http://' + config.SERVER.HOST + ':' + config.SERVER.PORT);
-    });
+    server.listen(config.SERVER.PORT, config.SERVER.HOST);
+
+    logger.other?.('Server Launched On', 'http://' + config.SERVER.HOST + ':' + config.SERVER.PORT);
   });
 });

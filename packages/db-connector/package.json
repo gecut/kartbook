@@ -32,9 +32,9 @@
     "**/*.{js,mjs,cjs,map,d.ts,html,md,css}"
   ],
   "dependencies": {
-    "@gecut/logger": "^1.4.1",
-    "@types/node": "^20.12.7",
-    "mongoose": "^8.3.2"
+    "@gecut/logger": "^1.4.2",
+    "@types/node": "^20.13.0",
+    "mongoose": "^8.4.1"
   },
   "devDependencies": {
     "@gecut/kartbook-types": "workspace:^"

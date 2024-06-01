@@ -27,15 +27,10 @@ module.exports = [
       'package-lock.json',
 
       // Build
-      '**/*/dist/',
+      'dist',
       'build',
       '.tsbuildinfo',
-      '**/*.map',
-      '**/*.d.ts',
-      '**/*.js',
-      '**/*.mjs',
-      '**/*.cjs',
-      '!**/*.config.*',
+      '**/*.*js',
 
       // Output of 'npm pack'
       '*.tgz',
