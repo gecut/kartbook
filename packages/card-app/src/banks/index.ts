@@ -84,6 +84,7 @@ const banksBINs: Record<`${number}`, keyof typeof banksLogo> = {
   '505416': 'gardeshgari',
   '639599': 'ghavamin',
   '627488': 'karafarin',
+  '585947': 'khavarMianeh',
   '603770': 'keshavarzi',
   '628023': 'maskan',
   '606256': 'melall',
