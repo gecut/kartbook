@@ -1,7 +1,9 @@
 import {untilEvent} from '@gecut/utilities/wait/wait.js';
 
-export function getAverageColor(imageUrl: string): Promise<{r: number; g: number; b: number} | null> {
+export function getAverageColor(imageUrl?: string): Promise<{r: number; g: number; b: number} | null> {
   return new Promise(async (resolve, reject) => {
+    if (!imageUrl) return resolve(null);
+
     try {
       const image = new Image();
       image.crossOrigin = 'anonymous';

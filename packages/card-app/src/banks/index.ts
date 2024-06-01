@@ -104,18 +104,12 @@ const banksBINs: Record<`${number}`, keyof typeof banksLogo> = {
   '627353': 'tejarat',
 };
 
-export type BankInfo = null | {bin: `${number}`; bankName: keyof typeof banksLogo; bankLogo: string};
+export type BankInfo = {bin: `${number}`; bankName?: keyof typeof banksLogo; bankLogo?: string};
 
 export function getBankInfo(cardNumber: [string, string, string, string]): BankInfo {
-  try {
-    const bin: `${number}` = (cardNumber[0].toString() + cardNumber[1].toString().slice(0, 2)) as `${number}`;
-    const bankName = banksBINs[bin];
-    const bankLogo = banksLogo[bankName];
+  const bin: `${number}` = (cardNumber[0].toString() + cardNumber[1].toString().slice(0, 2)) as `${number}`;
+  const bankName = banksBINs[bin];
+  const bankLogo = banksLogo[bankName];
 
-    return {bin, bankName, bankLogo};
-  } catch (error) {
-    console.error(error);
-
-    return null;
-  }
+  return {bin, bankName, bankLogo};
 }
