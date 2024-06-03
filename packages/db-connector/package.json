@@ -33,7 +33,7 @@
   ],
   "dependencies": {
     "@gecut/logger": "^1.4.2",
-    "@types/node": "^20.13.0",
+    "@types/node": "^20.14.0",
     "mongoose": "^8.4.1"
   },
   "devDependencies": {
