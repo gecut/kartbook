@@ -36,6 +36,8 @@ export interface UserInterface extends Entity {
 
   isAdmin: boolean;
 
+  isSeller: boolean;
+
   token: string;
 
   otp?: {
@@ -53,11 +55,12 @@ export const $UserSchema = new Schema<UserInterface>(
     email: {type: String, required: false, unique: true},
     caller: {type: Schema.ObjectId, ref: 'User', required: false},
     isAdmin: {type: Boolean, default: false},
+    isSeller: {type: Boolean, default: false},
     disabled: {type: Boolean, default: false},
     token: {type: String, default: uid, unique: true},
     otp: {
-      code: {type: String, required: true},
-      expiredAt: {type: Date, required: true},
+      code: {type: String},
+      expiredAt: {type: Date},
     },
   },
   {

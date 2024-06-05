@@ -19,7 +19,7 @@ export interface CardInterface extends Entity {
    * The IBAN (International Bank Account Number) without the first 'IR' prefix.
    * @type {string}
    */
-  iban: string;
+  iban?: string;
 
   /**
    * A unique slug identifier for the card.
@@ -49,7 +49,7 @@ export interface CardInterface extends Entity {
 export const $CardSchema = new Schema<CardInterface>(
   {
     cardNumber: [{type: String, minlength: 4, maxlength: 4, match: /^[0-9]{4}$/, required: true}],
-    iban: {type: String, required: true},
+    iban: {type: String},
     slug: {type: String, required: true},
     isPremium: {type: Boolean, default: false},
     owner: {type: Schema.ObjectId, ref: 'User'},
