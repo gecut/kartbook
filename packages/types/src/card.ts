@@ -21,6 +21,8 @@ export interface CardInterface extends Entity {
    */
   iban?: string;
 
+  ownerName?: string;
+
   /**
    * A unique slug identifier for the card.
    * @type {string}
@@ -50,6 +52,7 @@ export const $CardSchema = new Schema<CardInterface>(
   {
     cardNumber: [{type: String, minlength: 4, maxlength: 4, match: /^[0-9]{4}$/, required: true}],
     iban: {type: String},
+    ownerName: {type: String},
     slug: {type: String, required: true},
     isPremium: {type: Boolean, default: false},
     owner: {type: Schema.ObjectId, ref: 'User'},
