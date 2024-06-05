@@ -124,14 +124,15 @@ jobs:
     name: Deploy Container On Darkube
     container: hamravesh/darkube-cli:v1.1
     needs: build
-    if: false
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: CARD_SERVER
+          - name: CARD_API
+          - name: CARD_APP
+          - name: ADMIN
 
     steps:
       - name: darkube-cli deploy
