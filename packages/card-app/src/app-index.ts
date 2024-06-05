@@ -369,7 +369,7 @@ export class AppIndex extends GecutApp {
       });
 
     try {
-      await clipboard.write(this.data.card.iban);
+      await clipboard.write(this.data.card.iban ?? '');
 
       return await pushNotification({
         type: 'success',
