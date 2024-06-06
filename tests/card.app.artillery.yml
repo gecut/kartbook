@@ -1,0 +1,19 @@
+config:
+  target: https://k32.ir
+  phases:
+    - duration: 12
+      arrivalRate: 6
+      name: 'Preparation'
+    - duration: 6
+      arrivalRate: 3
+      name: 'Normal'
+    - duration: 12
+      arrivalRate: 6
+      name: 'Middle'
+    - duration: 24
+      arrivalRate: 13
+      name: 'Heavy'
+scenarios:
+  - flow:
+      - get:
+          url: '/'

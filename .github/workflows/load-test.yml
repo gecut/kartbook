@@ -1,0 +1,26 @@
+name: KartBook Artillery Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  artillery:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Card APP
+            script: ./tests/card.app.artillery.yml
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Execute load tests
+        uses: artilleryio/action-cli@v1
+        with:
+          command: run ${{matrix.script}} --record --key ${{secrets.ARTILLERY_KEY}}
