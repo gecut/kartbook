@@ -1,0 +1,27 @@
+config:
+  target: https://api.k32.ir
+  http:
+    extendedMetrics: true
+  phases:
+    - duration: 15
+      arrivalRate: 5
+      name: 'Preparation'
+    - duration: 30
+      arrivalRate: 10
+      name: 'Normal'
+    - duration: 60
+      arrivalRate: 20
+      name: 'Normal'
+    - duration: 120
+      arrivalRate: 30
+      name: 'Heavy'
+
+scenarios:
+  - name: 'Index'
+    flow:
+      - get:
+          url: /server-info
+      - get:
+          url: /cards/zmn
+      - get:
+          url: /cards/sahbaee

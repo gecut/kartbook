@@ -151,6 +151,8 @@ jobs:
         include:
           - name: Card APP
             script: ./tests/card.app.artillery.yml
+          - name: Card API
+            script: ./tests/card.api.artillery.yml
 
     steps:
       - name: Checkout repository

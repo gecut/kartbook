@@ -46,7 +46,8 @@
   "yaml.schemas": {
     "https://www.artillery.io/schema.json": [
       "file:///home/mm25zamanian/Codes/kartbook/packages/card-app/test.artillery.yml",
-      "file:///home/mm25zamanian/Codes/kartbook/tests/card.app.artillery.yml"
+      "file:///home/mm25zamanian/Codes/kartbook/tests/card.app.artillery.yml",
+      "file:///home/mm25zamanian/Codes/kartbook/tests/card.api.artillery.yml"
     ]
   }
 }
