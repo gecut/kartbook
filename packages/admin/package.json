@@ -18,7 +18,7 @@
     "**/*.{js,mjs,cjs,map,d.ts,html,md,css}"
   ],
   "scripts": {
-    "watch:node": "yarn nodemon --exec 'yarn node --env-file .env' --watch 'dist/**/*' dist/src/app",
+    "watch:node": "yarn nodemon --exec 'yarn node --env-file .env' --watch 'dist/**/*' dist/app",
     "watch": "run-p watch:node"
   },
   "dependencies": {
