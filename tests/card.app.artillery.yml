@@ -14,17 +14,6 @@ config:
 scenarios:
   - name: 'Index'
     flow:
-      - get:
-          url: '/'
-  - name: 'Manifest'
-    flow:
-      - get:
-          url: '/manifest.webmanifest'
-  - name: 'Icon'
-    flow:
-      - get:
-          url: '/favicon.ico'
-  - name: 'Script'
-    flow:
-      - get:
-          url: '/assets/index-BSYpN655.js'
+      - loop:
+          - get:
+              url: /
