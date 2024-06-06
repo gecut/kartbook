@@ -11,12 +11,14 @@ config:
       name: 'Normal'
     - duration: 60
       arrivalRate: 20
+      name: 'Normal'
+    - duration: 120
+      arrivalRate: 30
       name: 'Heavy'
 
 scenarios:
   - name: 'Index'
     flow:
-      - log: 'New virtual user running'
       - get:
           url: /
       - get:

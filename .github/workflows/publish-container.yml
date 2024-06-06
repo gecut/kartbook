@@ -140,3 +140,27 @@ jobs:
         env:
           DARKUBE_DEPLOY_TOKEN: ${{ secrets[format('DARKUBE_{0}_DEPLOY_TOKEN', matrix.name)] }}
           DARKUBE_APP_ID: ${{ secrets[format('DARKUBE_{0}_APP_ID', matrix.name)] }}
+
+  artillery:
+    runs-on: ubuntu-latest
+    needs: deploy
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Card APP
+            script: ./tests/card.app.artillery.yml
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.2
+
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
+
+      - name: Execute load tests
+        uses: artilleryio/action-cli@v1
+        with:
+          command: run ${{matrix.script}} --record --key ${{secrets.ARTILLERY_KEY}}
