@@ -1,24 +1,30 @@
 config:
   target: https://k32.ir
-  # arrivalRate ^ 2 * 1.5
   phases:
     - duration: 15
       arrivalRate: 5
       name: 'Preparation'
+    - duration: 30
+      arrivalRate: 10
+      name: 'Normal'
     - duration: 60
       arrivalRate: 20
-      name: 'Normal'
-    - duration: 150
-      arrivalRate: 50
-      name: 'Middle'
-    - duration: 900
-      arrivalRate: 300
       name: 'Heavy'
+
 scenarios:
-  - engine: http
-    name: 'Get Main PWA'
-    weight: 6
+  - name: 'Index'
     flow:
-      - loop:
-          - get:
-              url: '/'
+      - get:
+          url: '/'
+  - name: 'Manifest'
+    flow:
+      - get:
+          url: '/manifest.webmanifest'
+  - name: 'Icon'
+    flow:
+      - get:
+          url: '/favicon.ico'
+  - name: 'Script'
+    flow:
+      - get:
+          url: '/assets/index-BSYpN655.js'
