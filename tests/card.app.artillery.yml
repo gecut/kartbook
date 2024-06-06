@@ -1,5 +1,7 @@
 config:
   target: https://k32.ir
+  http:
+    extendedMetrics: true
   phases:
     - duration: 15
       arrivalRate: 5
@@ -14,6 +16,10 @@ config:
 scenarios:
   - name: 'Index'
     flow:
-      - loop:
-          - get:
-              url: /
+      - log: 'New virtual user running'
+      - get:
+          url: /
+      - get:
+          url: /manifest.webmanifest
+      - get:
+          url: /favicon.ico
