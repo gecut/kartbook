@@ -1,4 +1,4 @@
-name: KartBook Artillery Test
+name: Artillery Load Test
 
 on:
   push:

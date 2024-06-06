@@ -1,19 +1,24 @@
 config:
   target: https://k32.ir
+  # arrivalRate ^ 2 * 1.5
   phases:
-    - duration: 12
-      arrivalRate: 6
+    - duration: 15
+      arrivalRate: 5
       name: 'Preparation'
-    - duration: 6
-      arrivalRate: 3
+    - duration: 60
+      arrivalRate: 20
       name: 'Normal'
-    - duration: 12
-      arrivalRate: 6
+    - duration: 150
+      arrivalRate: 50
       name: 'Middle'
-    - duration: 24
-      arrivalRate: 13
+    - duration: 900
+      arrivalRate: 300
       name: 'Heavy'
 scenarios:
-  - flow:
-      - get:
-          url: '/'
+  - engine: http
+    name: 'Get Main PWA'
+    weight: 6
+    flow:
+      - loop:
+          - get:
+              url: '/'
