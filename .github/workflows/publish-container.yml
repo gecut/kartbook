@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - name: ⤵️ Checkout repository
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.6
 
       - name: ❔ Check Container files changed
         id: file_change
@@ -67,14 +67,14 @@ jobs:
 
       # - name: 🏗 Log into docker hub registry
       #   if: ${{ github.event_name != 'pull_request' && steps.file_change.outputs.container_folder != 'false' }}
-      #   uses: docker/login-action@v3.1.0
+      #   uses: docker/login-action@v3.2.0
       #   with:
       #     username: ${{env.USER}}
       #     password: ${{secrets.DOCKER_HUB_TOKEN}}
 
       - name: 🏗 Log into ghcr.io registry
         if: ${{ github.event_name != 'pull_request' && steps.file_change.outputs.container_folder != 'false' }}
-        uses: docker/login-action@v3.1.0
+        uses: docker/login-action@v3.2.0
         with:
           registry: ghcr.io
           username: ${{env.USER}}
@@ -156,7 +156,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.6
 
       - name: Sleep for 30 seconds
         run: sleep 30s
