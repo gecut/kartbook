@@ -12,7 +12,7 @@
     // apps
     {"path": "./packages/types"},
     {"path": "./packages/db-connector"},
-    {"path": "./packages/card-api"},
+    {"path": "./packages/card-db"},
     {"path": "./packages/card-app"},
     {"path": "./packages/admin"},
     {"path": "./packages/panel-api"}

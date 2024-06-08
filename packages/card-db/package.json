@@ -1,5 +1,5 @@
 {
-  "name": "@gecut/kartbook-card-api",
+  "name": "@gecut/kartbook-card-db",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -12,12 +12,12 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/gecut/kartbook",
-    "directory": "packages/card-api"
+    "directory": "packages/card-db"
   },
   "scripts": {
-    "build": "yarn esbuild ./src/card-api.ts --target=node21 --bundle --minify --platform=node --format=cjs --outfile=./dist/card-api.cjs",
+    "build": "yarn esbuild ./src/card-db.ts --target=node21 --bundle --minify --platform=node --format=cjs --outfile=./dist/card-db.cjs",
     "watch:es": "yarn run build --watch=forever",
-    "watch:node": "yarn nodemon --exec 'node --env-file dist/.env' --watch 'dist/**/*' dist/card-api.cjs",
+    "watch:node": "yarn nodemon --exec 'node --env-file dist/.env' --watch 'dist/**/*' dist/card-db.cjs",
     "watch": "run-p watch:es watch:node"
   },
   "files": [
