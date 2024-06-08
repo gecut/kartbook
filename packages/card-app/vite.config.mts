@@ -80,7 +80,7 @@ export default defineConfig(() => {
           ],
           display: 'swap',
           injectTo: 'head-prepend',
-          preconnect: true,
+          preconnect: false,
         },
         fontsource: {
           families: ['Vazirmatn'],
