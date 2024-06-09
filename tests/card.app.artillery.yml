@@ -9,10 +9,10 @@ config:
     - duration: 30
       arrivalRate: 10
       name: 'Normal'
-    - duration: 60
+    - duration: 40
       arrivalRate: 20
       name: 'Normal'
-    - duration: 120
+    - duration: 60
       arrivalRate: 30
       name: 'Heavy'
 
