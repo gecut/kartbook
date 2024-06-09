@@ -8,3 +8,7 @@ proxy_cache_valid 404 1m; # Cache 404 errors for 1 minute
 proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
 proxy_buffering on; # Enable buffering for caching
 proxy_max_temp_file_size 0; # Disable temporary file buffering
+
+upstream backend {
+    server $UPSTREAM_URL;
+}
