@@ -52,6 +52,8 @@ jobs:
           filters: |
             container_folder:
               ${{ matrix.context }}/**
+              !./.vscode/**
+              !./tests/**
 
       - name: 🏗 Install cosign
         if: ${{ github.event_name != 'pull_request' && steps.file_change.outputs.container_folder != 'false' }}

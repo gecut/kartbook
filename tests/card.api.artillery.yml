@@ -20,5 +20,14 @@ scenarios:
   - name: 'Index'
     flow:
       - get:
+          name: Server Health
           url: /server-info
-
+      - get:
+          name: Card 1
+          url: /zmn
+      - get:
+          name: Card 2
+          url: /sahbaee
+      - get:
+          name: Card 3
+          url: /sakhifar
