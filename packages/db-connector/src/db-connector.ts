@@ -24,7 +24,11 @@ export class KartbookDbConnector {
   async connect() {
     if (this.uri.startsWith('mongodb://') || this.uri.startsWith('mongodb+srv://')) {
       this.logger.method?.('connect');
-      return (this.connector = await mongoose.connect(this.uri, this.options));
+      try {
+        return (this.connector = await mongoose.connect(this.uri, this.options));
+      } catch (error) {
+        return this.logger.error('connect', 'connect_failed', error);
+      }
     }
 
     this.logger.error('connect', 'uri_not_valid', {uri: this.uri, options: this.options});
