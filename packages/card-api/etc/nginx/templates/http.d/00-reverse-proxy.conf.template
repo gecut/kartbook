@@ -1,5 +1,5 @@
 # Define caching zone
-proxy_cache_path "" levels=1:2 keys_zone=my_cache:10m max_size=10g inactive=60m;
+proxy_cache_path "" levels=1:2 keys_zone=cards:10m max_size=10g inactive=60m;
 
 # Define proxy settings
 proxy_cache cards;
