@@ -8,6 +8,10 @@ const logger = new GecutLogger('card-db');
 const db = new KartbookDbConnector(config.DATABASE.URI, logger.sub('db'));
 
 const server = http.createServer(async (request, response) => {
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+  response.setHeader('Access-Control-Max-Age', 2592000);
+
   if (!request.url) {
     response.writeHead(400, 'BAD REQUEST');
     return response.end('BAD REQUEST');
