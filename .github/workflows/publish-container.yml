@@ -148,7 +148,6 @@ jobs:
   artillery:
     runs-on: ubuntu-latest
     needs: deploy
-    if: false
 
     strategy:
       fail-fast: false
