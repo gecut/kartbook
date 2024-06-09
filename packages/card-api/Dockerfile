@@ -1,4 +1,4 @@
-FROM ghcr.io/alwatr/nginx-core:2.5.0
+FROM ghcr.io/alwatr/nginx-core:2.4.2
 
 COPY etc/nginx/ /etc/nginx/
 RUN set -eux; rm -rfv /default-data
@@ -30,9 +30,9 @@ ARG BUILD_DATE
 
 LABEL org.opencontainers.image.title="gecut/kartbook/card-api" \
       org.opencontainers.image.description="This is a high-performance version of NGINX, which has been enhanced by Gecut for the purpose of serving JSON content efficiently." \
-      org.opencontainers.image.base.name="ghcr.io/alwatr/nginx-core:2.5.0" \
-      org.opencontainers.image.version="2.5.0" \
-      org.opencontainers.image.ref.name="2.5.0-nginx1.25.4-alpine3.18-slim" \
+      org.opencontainers.image.base.name="ghcr.io/alwatr/nginx-core:2.4.2" \
+      org.opencontainers.image.version="2.4.2" \
+      org.opencontainers.image.ref.name="2.4.2-nginx1.25.4-alpine3.18-slim" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.created=${BUILD_DATE} \
       org.opencontainers.image.revision=${BUILD_REV} \
