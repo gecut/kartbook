@@ -1,9 +1,6 @@
 FROM ghcr.io/alwatr/nginx-core:2.5.0
 
 COPY etc/nginx/ /etc/nginx/
-RUN set -eux; rm -rfv /default-data
-COPY default-data/ /default-data/
-# RUN ls -RlahF /etc/nginx /default-data /data
 
 ENV NGINX_CLIENT_MAX_BODY_SIZE=1k \
     NGINX_SENDFILE=on \
