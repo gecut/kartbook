@@ -2387,16 +2387,11 @@ __metadata:
     "@gecut/kartbook-db-connector": "workspace:^"
     "@gecut/kartbook-types": "workspace:^"
     "@gecut/logger": "npm:^1.4.2"
-    "@gecut/utilities": "npm:^5.2.1"
-    "@hono/node-server": "npm:^1.11.2"
-    "@hono/zod-validator": "npm:^0.2.2"
     "@types/node": "npm:^20.13.0"
     esbuild: "npm:^0.21.4"
-    hono: "npm:^4.4.2"
     mongoose: "npm:^8.4.1"
     nodemon: "npm:^3.1.2"
     npm-run-all: "npm:^4.1.5"
-    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -2559,23 +2554,6 @@ __metadata:
     react: ^16.8.5 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.5 || ^17.0.0 || ^18.0.0
   checksum: 10c0/ef43ba21f063f6497f399b457452d45be456b1f28405b148d9683d2ca65e5f77e2685a0b7e9998aaca4f8676b1642ba2c277fc78643ea59fd6b9f71a56ffc5e0
-  languageName: node
-  linkType: hard
-
-"@hono/node-server@npm:^1.11.2":
-  version: 1.11.2
-  resolution: "@hono/node-server@npm:1.11.2"
-  checksum: 10c0/2743d65e9d1711586a447fc4bc1aa6ad71554ab9a7288a8ef826a97d9b5d44ab5022cd1b2f24addca01df5f77c04d51f782745d2d59b1889b8019d191e873050
-  languageName: node
-  linkType: hard
-
-"@hono/zod-validator@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "@hono/zod-validator@npm:0.2.2"
-  peerDependencies:
-    hono: ">=3.9.0"
-    zod: ^3.19.1
-  checksum: 10c0/3d6d03d28287e6f05e4cf5b86f3fa5fa386429a4212881f7344fe93272a69732ca8dd98634eb51df434b002230d2be2f3c6822f3b1ab320676932583856b30a5
   languageName: node
   linkType: hard
 
@@ -7690,13 +7668,6 @@ __metadata:
   dependencies:
     react-is: "npm:^16.7.0"
   checksum: 10c0/fe0889169e845d738b59b64badf5e55fa3cf20454f9203d1eb088df322d49d4318df774828e789898dcb280e8a5521bb59b3203385662ca5e9218a6ca5820e74
-  languageName: node
-  linkType: hard
-
-"hono@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "hono@npm:4.4.2"
-  checksum: 10c0/765957044d46b932cca5be672441b931e11f652c24c4e7980116931db22aa270dbae4675de03425cd31b1f0ec6e56bf26fbff2af905928f271e565adb6563f31
   languageName: node
   linkType: hard
 
