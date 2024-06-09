@@ -1,0 +1,5 @@
+{
+  "ok": false,
+  "statusCode": <!--# echo var="status" default="500" -->,
+  "errorCode": "serve_error"
+}
