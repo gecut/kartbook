@@ -49,5 +49,8 @@
       "file:///home/mm25zamanian/Codes/kartbook/tests/card.app.artillery.yml",
       "file:///home/mm25zamanian/Codes/kartbook/tests/card.api.artillery.yml"
     ]
+  },
+  "[nginx]": {
+    "editor.defaultFormatter": "raynigon.nginx-formatter"
   }
 }

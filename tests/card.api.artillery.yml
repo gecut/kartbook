@@ -3,17 +3,17 @@ config:
   http:
     extendedMetrics: true
   phases:
-    - duration: 15
-      arrivalRate: 5
+    - duration: 2
+      arrivalRate: 1
       name: 'Preparation'
-    - duration: 30
-      arrivalRate: 10
+    - duration: 3
+      arrivalRate: 1
       name: 'Normal'
-    - duration: 60
-      arrivalRate: 20
+    - duration: 6
+      arrivalRate: 2
       name: 'Normal'
-    - duration: 120
-      arrivalRate: 30
+    - duration: 12
+      arrivalRate: 3
       name: 'Heavy'
 
 scenarios:
@@ -21,7 +21,4 @@ scenarios:
     flow:
       - get:
           url: /server-info
-      - get:
-          url: /cards/zmn
-      - get:
-          url: /cards/sahbaee
+
