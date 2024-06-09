@@ -24,7 +24,7 @@ jobs:
         include:
           - name: kartbook/card-api
             path: ./packages/card-api
-            context: .
+            context: ./packages/card-api
           - name: kartbook/card-app
             path: ./packages/card-app
             context: .
