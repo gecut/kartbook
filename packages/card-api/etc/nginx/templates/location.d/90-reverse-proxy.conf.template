@@ -1,10 +1,10 @@
 location / {
-    proxy_pass http://$upstream_url;
+    proxy_pass $scheme://backend$uri;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_cache_bypass $http_upgrade;
 
     # Enable caching for this location
     proxy_cache cards;
-    proxy_cache_key $scheme$proxy_host$request_uri$is_args$args;
+    proxy_cache_key $request_uri;
 }

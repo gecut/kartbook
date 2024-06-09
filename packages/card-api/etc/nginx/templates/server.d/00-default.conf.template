@@ -2,7 +2,9 @@ server {
     listen 80 default_server;
     server_name _;
 
-    set $upstream_url $UPSTREAM_URL;
+    upstream backend {
+        server $UPSTREAM_URL;
+    }
 
     include /etc/nginx/conf.d/location.d/*.conf;
 }
