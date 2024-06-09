@@ -25,6 +25,9 @@ jobs:
           - name: kartbook/card-api
             path: ./packages/card-api
             context: ./packages/card-api
+          - name: kartbook/card-db
+            path: ./packages/card-db
+            context: .
           - name: kartbook/card-app
             path: ./packages/card-app
             context: .
@@ -131,6 +134,7 @@ jobs:
       matrix:
         include:
           - name: CARD_API
+          - name: CARD_DB
           - name: CARD_APP
           - name: ADMIN
 
