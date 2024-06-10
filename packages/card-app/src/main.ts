@@ -1,3 +1,3 @@
-window.addEventListener('load',()=>{
-    import('./app-index.js');
-})
+window.addEventListener('load', () => {
+  import('./app-index.js');
+});
