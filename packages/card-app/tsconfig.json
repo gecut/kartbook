@@ -7,7 +7,7 @@
     "outDir": ".",
     "types": ["vite/client"]
   },
-  "include": [],
+  "include": ["src/**/*.ts"],
   "exclude": [],
   "references": [
     {

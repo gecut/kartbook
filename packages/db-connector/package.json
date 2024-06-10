@@ -16,6 +16,9 @@
     "url": "https://github.com/gecut/kartbook",
     "directory": "packages/db-connector"
   },
+  "scripts": {
+    "build": "tsc --build"
+  },
   "main": "db-connector.js",
   "types": "db-connector.d.ts",
   "exports": {

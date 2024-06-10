@@ -7,7 +7,7 @@
     "outDir": "."
   },
 
-  "include": [],
+  "include": ["src/**/*.ts"],
   "exclude": [],
   "references": [
     {

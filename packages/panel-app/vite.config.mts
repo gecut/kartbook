@@ -8,7 +8,7 @@ const manifestJson: Partial<ManifestOptions> = {
   /* url */
   scope: '/',
   start_url: '/?pwa',
-  id: 'kartbook-card-app',
+  id: 'kartbook-panel-app',
   lang: 'fa-IR',
 
   /* info */
