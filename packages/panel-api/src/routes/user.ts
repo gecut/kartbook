@@ -1,9 +1,11 @@
-import {db, microSMS, publicProcedure, router} from '../core.js';
-import {UserInterface, StringifyEntity} from '@gecut/kartbook-types';
 import {numberUtils} from '@gecut/utilities/data-types/number.js';
 import {uid} from '@gecut/utilities/uid.js';
 import {TRPCError} from '@trpc/server';
 import z from 'zod';
+
+import {db, microSMS, publicProcedure, router} from '../core.js';
+
+import type {UserInterface, StringifyEntity} from '@gecut/kartbook-types';
 
 const user = router({
   has: publicProcedure
@@ -74,7 +76,8 @@ const user = router({
             receptor: user.phoneNumber,
             token: user.otp.code ?? '000000',
           });
-        } else {
+        }
+        else {
           throw new TRPCError({
             code: 'INTERNAL_SERVER_ERROR',
           });

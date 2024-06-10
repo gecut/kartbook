@@ -52,5 +52,13 @@
   },
   "[nginx]": {
     "editor.defaultFormatter": "raynigon.nginx-formatter"
+  },
+  "eslint.experimental.useFlatConfig": true,
+  "eslint.format.enable": true,
+  "eslint.options": {
+    "overrideConfigFile": "./eslint.config.cjs"
+  },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   }
 }

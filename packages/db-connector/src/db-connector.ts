@@ -26,7 +26,8 @@ export class KartbookDbConnector {
       this.logger.method?.('connect');
       try {
         return (this.connector = await mongoose.connect(this.uri, this.options));
-      } catch (error) {
+      }
+      catch (error) {
         return this.logger.error('connect', 'connect_failed', error);
       }
     }

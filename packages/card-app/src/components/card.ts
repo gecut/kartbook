@@ -1,14 +1,16 @@
-import {html} from 'lit/html.js';
-import {DataContextType} from '../utilities/data.context.js';
-import {skeletonCard} from './skeleton.card.js';
-import {errorCard} from './error.card.js';
-import {when} from 'lit/directives/when.js';
-import {styleMap} from 'lit/directives/style-map.js';
 import {icon} from '@gecut/components';
 import {map} from '@gecut/lit-helper';
-import {disabledCard} from './disabled.card.js';
 import clipboard from '@gecut/utilities/clipboard.js';
+import {styleMap} from 'lit/directives/style-map.js';
+import {when} from 'lit/directives/when.js';
+import {html} from 'lit/html.js';
+
+import {disabledCard} from './disabled.card.js';
+import {errorCard} from './error.card.js';
+import {skeletonCard} from './skeleton.card.js';
 import {pushNotification} from '../utilities/notification.context.js';
+
+import type {DataContextType} from '../utilities/data.context.js';
 
 export function card(data: DataContextType) {
   if (data == null) return skeletonCard;
@@ -23,7 +25,8 @@ export function card(data: DataContextType) {
         type: 'success',
         msg: 'شماره کارت کپی شد',
       });
-    } catch {
+    }
+    catch {
       return await pushNotification({
         type: 'error',
         msg: 'مشکلی در کپی کردن شماره کارت ایجاد شد، دوباره امتحان کنید',
@@ -38,7 +41,8 @@ export function card(data: DataContextType) {
         type: 'success',
         msg: 'شماره شبا کپی شد',
       });
-    } catch {
+    }
+    catch {
       return await pushNotification({
         type: 'error',
         msg: 'مشکلی در کپی کردن شماره شبا ایجاد شد، دوباره امتحان کنید',
@@ -73,10 +77,12 @@ export function card(data: DataContextType) {
         `,
         () => html`
           <span
-            class="absolute inset-0 opacity-5 bg-cover bg-gradient-to-bl from-primary from-0% to-transparent to-100% z-[4]"
+            class="absolute inset-0 opacity-5 bg-cover bg-gradient-to-bl from-primary
+                   from-0% to-transparentto-100% z-[4]"
           ></span>
           <span
-            class="absolute inset-0 opacity-15 bg-cover bg-gradient-to-bl from-primary from-0% to-transparent to-50% z-[4]"
+            class="absolute inset-0 opacity-15 bg-cover bg-gradient-to-bl from-primary
+                   from-0% to-transparent to-50% z-[4]"
           ></span>
         `,
       )}

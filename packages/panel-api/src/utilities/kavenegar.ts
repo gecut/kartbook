@@ -1,5 +1,6 @@
-import {GecutLogger} from '@gecut/logger';
 import fetch from 'node-fetch';
+
+import type {GecutLogger} from '@gecut/logger';
 
 export interface KavenegarResponse {
   return: {

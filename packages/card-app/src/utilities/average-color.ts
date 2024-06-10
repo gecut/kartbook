@@ -40,10 +40,12 @@ export function getAverageColor(imageUrl?: string): Promise<{r: number; g: numbe
         const avgB = Math.round(b / count);
 
         resolve({r: avgR, g: avgG, b: avgB});
-      } else {
+      }
+      else {
         reject();
       }
-    } catch (error) {
+    }
+    catch (error) {
       reject(error);
     }
   });

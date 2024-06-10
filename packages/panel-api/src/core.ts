@@ -1,6 +1,7 @@
 import {KartbookDbConnector} from '@gecut/kartbook-db-connector';
 import {GecutLogger} from '@gecut/logger';
 import {initTRPC} from '@trpc/server';
+
 import config from './config.js';
 import {KavenegarApi} from './utilities/kavenegar.js';
 

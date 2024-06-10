@@ -1,7 +1,8 @@
 import {createHTTPServer} from '@trpc/server/adapters/standalone';
-import user from './routes/user.js';
-import {db, logger, publicProcedure, router} from './core.js';
+
 import config from './config.js';
+import {db, logger, publicProcedure, router} from './core.js';
+import user from './routes/user.js';
 
 const appRouter = router({
   health: publicProcedure.query(() => 'Gecut Web Server (KartBook Panel Api)'),

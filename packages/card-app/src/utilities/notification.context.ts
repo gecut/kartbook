@@ -32,8 +32,8 @@ export const notificationRenderer = (content: Notification | null) => {
     return html`
       <div
         id="notification"
-        class="gecut-card-filled shadow-xl cursor-pointer flex p-3 gap-3 justify-between text-onSurfaceVariant text-bodyMedium w-full
-               min-w-32 animate-fadeInSlide"
+        class="gecut-card-filled shadow-xl cursor-pointer flex p-3 gap-3 justify-between text-onSurfaceVariant
+               text-bodyMedium w-full min-w-32 animate-fadeInSlide"
         @click=${(event: PointerEvent) => {
           const target = (event.currentTarget || event.target) as HTMLElement | null;
 

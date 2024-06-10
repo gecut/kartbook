@@ -1,5 +1,5 @@
-import {Schema} from 'mongoose';
 import {uid} from '@gecut/utilities/uid.js';
+import {Schema} from 'mongoose';
 
 import type {Entity} from './_base.js';
 

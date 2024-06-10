@@ -1,17 +1,20 @@
-import {CardInterface, StringifyEntity} from '@gecut/kartbook-types';
 import {ContextSignal} from '@gecut/signal';
-import {BankInfo, getBankInfo} from '../banks/index.js';
-import {api} from '../ky.js';
-import {pushNotification} from './notification.context.js';
+
 import {getAverageColor} from './average-color.js';
+import {pushNotification} from './notification.context.js';
+import {getBankInfo} from '../banks/index.js';
+import {api} from '../ky.js';
+
+import type {BankInfo} from '../banks/index.js';
+import type {CardInterface, StringifyEntity} from '@gecut/kartbook-types';
 
 export type DataContextType =
   | {
-      card: StringifyEntity<CardInterface>;
-      bankInfo: NonNullable<BankInfo>;
-      primaryColor: string | null;
-      amount?: number;
-    }
+    card: StringifyEntity<CardInterface>;
+    bankInfo: NonNullable<BankInfo>;
+    primaryColor: string | null;
+    amount?: number;
+  }
   | 'disabled'
   | 'error'
   | 'no-username'
@@ -74,7 +77,8 @@ export function load() {
           });
         }
       });
-  } else {
+  }
+  else {
     dataContext.setValue('no-username');
   }
 }

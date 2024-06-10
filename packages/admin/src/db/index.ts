@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
 import {Database, Resource} from '@adminjs/mongoose';
 import AdminJS from 'adminjs';
+import mongoose from 'mongoose';
 
 AdminJS.registerAdapter({Database, Resource});
 

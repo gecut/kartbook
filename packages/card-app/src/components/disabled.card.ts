@@ -4,7 +4,8 @@ import {html} from 'lit/html.js';
 export const disabledCard = html`
   <div class="w-full h-56 bg-surface rounded-2xl shadow-2xl relative overflow-hidden">
     <span
-      class="absolute inset-0 backdrop-blur-sm backdrop-brightness-90 flex flex-col justify-center items-center text-labelLarge text-onSurface [&>.gecut-icon]:text-[3rem] z-[10]"
+      class="absolute inset-0 backdrop-blur-sm backdrop-brightness-90 flex flex-col justify-center
+             items-center text-labelLarge text-onSurface [&>.gecut-icon]:text-[3rem] z-[10]"
     >
       ${icon({
         // eslint-disable-next-line max-len

@@ -27,7 +27,7 @@
     "rl": "run-s pull clean build release",
     "upd": "yarn set version latest; yarn up '*' -i; yarn up '*' -R; yarn dlx @yarnpkg/sdks vscode;",
     "lint": "run-s 'lint:*'",
-    "lint:ts": "eslint --debug -c eslint.config.cjs '.'",
+    "lint:ts": "eslint --debug --stats -c ./eslint.config.cjs '.'",
     "build": "lerna run build",
     "format": "run-s format:prettier format:eslint",
     "format:eslint": "yarn run lint:ts --fix",

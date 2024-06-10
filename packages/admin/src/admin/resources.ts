@@ -1,8 +1,8 @@
 import {$UserSchema, $WalletSchema, $CardSchema} from '@gecut/kartbook-types';
-import {ResourceWithOptions} from 'adminjs';
 import mongoose from 'mongoose';
 
 import type {UserInterface, WalletInterface, CardInterface} from '@gecut/kartbook-types';
+import type {ResourceWithOptions} from 'adminjs';
 
 export const resources: Array<ResourceWithOptions> = [
   {

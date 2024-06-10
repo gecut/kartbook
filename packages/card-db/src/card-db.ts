@@ -1,6 +1,7 @@
-import {GecutLogger} from '@gecut/logger';
-import {KartbookDbConnector} from '@gecut/kartbook-db-connector';
 import http from 'node:http';
+
+import {KartbookDbConnector} from '@gecut/kartbook-db-connector';
+import {GecutLogger} from '@gecut/logger';
 
 import config from './config.js';
 

@@ -19,7 +19,7 @@ module.exports = [
       '*.log*',
 
       // package managers
-      '.yarn',
+      '.yarn/**/*',
 
       //!.yarn/cache
       '.pnp.*',
@@ -27,11 +27,11 @@ module.exports = [
       'package-lock.json',
 
       // Build
-      'dist',
-      'build',
-      '.tsbuildinfo',
+      '**/dist/**/*',
+      '**/node_modules/**',
+      '**/*/.tsbuildinfo',
       '**/*.d.ts',
-      '**/*.*js',
+      '**/*.js',
 
       // Output of 'npm pack'
       '*.tgz',

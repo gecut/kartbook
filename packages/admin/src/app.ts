@@ -1,6 +1,6 @@
+import {buildAuthenticatedRouter} from '@adminjs/express';
 import AdminJS from 'adminjs';
 import express from 'express';
-import {buildAuthenticatedRouter} from '@adminjs/express';
 
 import provider from './admin/auth-provider.js';
 import options from './admin/options.js';
@@ -17,7 +17,8 @@ const start = async () => {
 
   if (process.env.NODE_ENV === 'production') {
     await admin.initialize();
-  } else {
+  }
+  else {
     admin.watch();
   }
 
