@@ -23,7 +23,7 @@
     "@gecut/components": "^2.3.0",
     "@gecut/i18n": "^2.0.4",
     "@gecut/kartbook-types": "workspace:^",
-    "@gecut/lit-helper": "^2.1.3",
+    "@gecut/lit-helper": "^2.1.4",
     "@gecut/logger": "^1.4.2",
     "@gecut/signal": "^2.1.2",
     "@gecut/styles": "^2.3.1",
