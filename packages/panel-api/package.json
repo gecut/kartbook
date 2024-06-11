@@ -27,7 +27,7 @@
     "@gecut/kartbook-db-connector": "workspace:^",
     "@gecut/kartbook-types": "workspace:^",
     "@gecut/logger": "^1.4.2",
-    "@gecut/utilities": "^5.2.1",
+    "@gecut/utilities": "^5.3.0",
     "@types/node": "^20.13.0",
     "esbuild": "^0.21.4",
     "mongoose": "^8.4.1",

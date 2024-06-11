@@ -28,7 +28,7 @@
     "@gecut/signal": "^2.1.2",
     "@gecut/styles": "^2.3.1",
     "@gecut/types": "^2.2.0",
-    "@gecut/utilities": "^5.2.1",
+    "@gecut/utilities": "^5.3.0",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@types/node": "^20.13.0",
     "autoprefixer": "^10.4.19",

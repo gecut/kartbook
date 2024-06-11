@@ -2364,7 +2364,7 @@ __metadata:
     "@gecut/signal": "npm:^2.1.2"
     "@gecut/styles": "npm:^2.3.1"
     "@gecut/types": "npm:^2.2.0"
-    "@gecut/utilities": "npm:^5.2.1"
+    "@gecut/utilities": "npm:^5.3.0"
     "@tailwindcss/nesting": "npm:^0.0.0-insiders.565cd3e"
     "@types/node": "npm:^20.13.0"
     autoprefixer: "npm:^10.4.19"
@@ -2413,7 +2413,7 @@ __metadata:
     "@gecut/kartbook-db-connector": "workspace:^"
     "@gecut/kartbook-types": "workspace:^"
     "@gecut/logger": "npm:^1.4.2"
-    "@gecut/utilities": "npm:^5.2.1"
+    "@gecut/utilities": "npm:^5.3.0"
     "@trpc/server": "npm:^10.45.2"
     "@types/node": "npm:^20.13.0"
     esbuild: "npm:^0.21.4"
@@ -2437,7 +2437,7 @@ __metadata:
     "@gecut/signal": "npm:^2.1.2"
     "@gecut/styles": "npm:^2.3.1"
     "@gecut/types": "npm:^2.2.0"
-    "@gecut/utilities": "npm:^5.2.1"
+    "@gecut/utilities": "npm:^5.3.0"
     "@tailwindcss/nesting": "npm:^0.0.0-insiders.565cd3e"
     "@types/node": "npm:^20.13.0"
     autoprefixer: "npm:^10.4.19"
@@ -2456,7 +2456,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@gecut/kartbook-types@workspace:packages/types"
   dependencies:
-    "@gecut/utilities": "npm:^5.2.1"
+    "@gecut/utilities": "npm:^5.3.0"
     "@types/node": "npm:^20.13.0"
     mongoose: "npm:^8.4.1"
   languageName: unknown
@@ -2549,6 +2549,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gecut/types@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "@gecut/types@npm:2.2.1"
+  checksum: 10c0/11c021fa3749003ebde51f2cb22d19a277db1097a508e2044b73eca3607b1376a44972c88fa446dd6943a5dc502dafc803a319b80905b0ec62aa01c8c3da996e
+  languageName: node
+  linkType: hard
+
 "@gecut/utilities@npm:1.2.3":
   version: 1.2.3
   resolution: "@gecut/utilities@npm:1.2.3"
@@ -2564,6 +2571,15 @@ __metadata:
   dependencies:
     "@gecut/types": "npm:^2.2.0"
   checksum: 10c0/bed573b0562bf04cb510bdec73698343ebaf478c4b8f3ab708ec8edd777c2ccd6f625413a25cde66e05f32531f3de9470d2a8b5c6aa84c5d0a44eb1f935f04f0
+  languageName: node
+  linkType: hard
+
+"@gecut/utilities@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@gecut/utilities@npm:5.3.0"
+  dependencies:
+    "@gecut/types": "npm:^2.2.1"
+  checksum: 10c0/e486344c52f66f8f5f50584a50936577eb888b24deacd3c4b11a5df09e3ce2d1c26697d2d120c4af57aadf2a7ef61c7ae530b96128f8d960d810a63e65951c12
   languageName: node
   linkType: hard
 
