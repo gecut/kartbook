@@ -1,5 +1,6 @@
 import {defineConfig} from 'vite';
 import Unfonts from 'unplugin-fonts/vite';
+import Unicons from 'unplugin-icons/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import {ManifestOptions, VitePWA as vitePWA} from 'vite-plugin-pwa';
 
@@ -69,6 +70,10 @@ export default defineConfig(() => {
 
     plugins: [
       tsconfigPaths(),
+      Unicons({
+        compiler: 'raw',
+        autoInstall: true,
+      }),
       Unfonts({
         google: {
           families: [
