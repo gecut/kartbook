@@ -35,7 +35,7 @@
     "**/*.{js,mjs,cjs,map,d.ts,html,md,css}"
   ],
   "dependencies": {
-    "@gecut/logger": "^1.4.2",
+    "@gecut/logger": "^1.4.3",
     "@types/node": "^20.13.0",
     "mongoose": "^8.4.1"
   },
