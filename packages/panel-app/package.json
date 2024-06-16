@@ -29,7 +29,7 @@
     "@gecut/signal": "^2.2.1",
     "@gecut/styles": "^2.3.1",
     "@gecut/types": "^2.2.1",
-    "@gecut/utilities": "^5.3.0",
+    "@gecut/utilities": "^5.4.0",
     "@iconify-json/solar": "^1.1.9",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@thepassle/app-tools": "^0.9.12",
