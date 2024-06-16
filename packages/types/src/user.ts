@@ -2,6 +2,7 @@ import {uid} from '@gecut/utilities/uid.js';
 import {Schema} from 'mongoose';
 
 import type {Entity} from './_base.js';
+import type {Jsonify} from '@gecut/types';
 
 /**
  * Represents a user entity.
@@ -45,6 +46,8 @@ export interface UserInterface extends Entity {
     expiredAt: number;
   };
 }
+
+export type UserData = Jsonify<UserInterface>;
 
 export const $UserSchema = new Schema<UserInterface>(
   {

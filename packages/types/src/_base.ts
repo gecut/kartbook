@@ -6,9 +6,3 @@ export interface Entity {
   disabled?: boolean;
   createdAt: Date;
 }
-
-export type StringifyEntity<T extends Entity> = Omit<T, '_id' | 'createdAt'> & {
-  _id?: string;
-
-  createdAt?: string;
-};

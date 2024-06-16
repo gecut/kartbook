@@ -2,6 +2,7 @@ import {Schema} from 'mongoose';
 
 import type {Entity} from './_base.js';
 import type {UserInterface} from './user.js';
+import type {Jsonify} from '@gecut/types';
 
 /**
  * Represents a transaction.
@@ -37,6 +38,8 @@ export interface WalletInterface extends Entity {
    */
   owner: UserInterface;
 }
+
+export type WalletData = Jsonify<WalletInterface>;
 
 export const $WalletSchema = new Schema<WalletInterface>(
   {

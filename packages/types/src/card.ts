@@ -2,6 +2,7 @@ import {Schema} from 'mongoose';
 
 import type {Entity} from './_base.js';
 import type {UserInterface} from './user.js';
+import type {Jsonify} from '@gecut/types';
 
 /**
  * Represents a card entity.
@@ -47,6 +48,8 @@ export interface CardInterface extends Entity {
    */
   owner: UserInterface;
 }
+
+export type CardData = Jsonify<CardInterface>;
 
 export const $CardSchema = new Schema<CardInterface>(
   {
