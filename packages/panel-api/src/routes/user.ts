@@ -5,8 +5,6 @@ import z from 'zod';
 
 import {db, microSMS, publicProcedure, router} from '../core.js';
 
-import type {UserInterface, StringifyEntity} from '@gecut/kartbook-types';
-
 const user = router({
   has: publicProcedure
     .input(
@@ -14,10 +12,10 @@ const user = router({
         phoneNumber: z.string(),
       }),
     )
-    .query((opts) => {
+    .query(async (opts) => {
       const {phoneNumber} = opts.input;
 
-      return db.$User.findOne({phoneNumber: phoneNumber}) as unknown as StringifyEntity<UserInterface> | null;
+      return (await db.$User.exists({phoneNumber: phoneNumber}))?._id;
     }),
   create: publicProcedure
     .input(
