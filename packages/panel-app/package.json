@@ -25,7 +25,7 @@
     "@gecut/kartbook-panel-api": "workspace:^",
     "@gecut/kartbook-types": "workspace:^",
     "@gecut/lit-helper": "^2.1.5",
-    "@gecut/logger": "^1.4.3",
+    "@gecut/logger": "^1.4.4",
     "@gecut/signal": "^2.2.1",
     "@gecut/styles": "^2.3.1",
     "@gecut/types": "^2.2.1",
