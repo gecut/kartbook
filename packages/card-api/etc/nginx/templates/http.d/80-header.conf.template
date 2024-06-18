@@ -3,6 +3,6 @@ add_header X-Frame-Options SAMEORIGIN;
 add_header X-Content-Type-Options nosniff;
 add_header X-XSS-Protection "1; mode=block";
 add_header X-UA-Compatible "IE=Edge,chrome=1";
-add_header Access-Control-Allow-Origin 'k32.ir, *.k32.ir, kartbook.ir, *.kartbook.ir' always;
+add_header Access-Control-Allow-Origin '*' always;
 add_header Access-Control-Allow-Methods 'GET, OPTIONS';
 # add_header  X-Cache $upstream_cache_status always;
