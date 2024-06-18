@@ -6,11 +6,11 @@ import {getBankInfo} from '../banks/index.js';
 import {api} from '../ky.js';
 
 import type {BankInfo} from '../banks/index.js';
-import type {CardInterface, StringifyEntity} from '@gecut/kartbook-types';
+import type {CardData} from '@gecut/kartbook-types';
 
 export type DataContextType =
   | {
-    card: StringifyEntity<CardInterface>;
+    card: CardData;
     bankInfo: NonNullable<BankInfo>;
     primaryColor: string | null;
     amount?: number;
@@ -20,9 +20,9 @@ export type DataContextType =
   | 'no-username'
   | null;
 
-export const dataContext = new ContextSignal<DataContextType>('data');
+export const dataContext = new ContextSignal<DataContextType>('data', 'AnimationFrame');
 
-dataContext.setValue(null);
+dataContext.value = null;
 
 export function load() {
   const slug = window.location.pathname.split('/');
@@ -32,19 +32,21 @@ export function load() {
 
   if (username != '') {
     api
-      .get('cards/' + username, {throwHttpErrors: false})
+      .get(username, {throwHttpErrors: false})
       .then((response) => {
         if (!response.ok) {
           if (response.status === 403) {
-            dataContext.setValue('disabled');
+            dataContext.value = 'disabled';
           }
 
           throw new Error('fetch failed: ' + response.statusText);
         }
 
-        return response.json<{ok: true; data: StringifyEntity<CardInterface>}>();
+        return response.json<{ok: true; data: CardData}>();
       })
       .then((response) => {
+        console.log(response);
+
         const card = response.data;
         const bankInfo = getBankInfo(card.cardNumber);
 
@@ -59,17 +61,19 @@ export function load() {
       })
       .then(async ({card, bankInfo}) => ({card, bankInfo, primaryColor: await getAverageColor(bankInfo?.bankLogo)}))
       .then((data) => {
-        dataContext.setValue({
+        dataContext.value = {
           ...data,
           primaryColor: data.primaryColor
             ? `${data.primaryColor?.r},${data.primaryColor?.g},${data.primaryColor?.b}`
             : null,
           amount,
-        });
+        };
       })
-      .catch(() => {
-        if (dataContext.getValue() !== 'disabled') {
-          dataContext.setValue('error');
+      .catch((error) => {
+        console.error(error);
+
+        if (dataContext.value !== 'disabled') {
+          dataContext.value = 'error';
 
           pushNotification({
             type: 'error',
@@ -79,7 +83,7 @@ export function load() {
       });
   }
   else {
-    dataContext.setValue('no-username');
+    dataContext.value = 'no-username';
   }
 }
 

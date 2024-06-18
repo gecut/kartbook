@@ -57,7 +57,12 @@ const server = http.createServer(async (request, response) => {
 
   response.writeHead(200, {'Content-Type': 'application/json'});
 
-  return response.end(JSON.stringify(card));
+  return response.end(
+    JSON.stringify({
+      ok: true,
+      data: card,
+    }),
+  );
 });
 
 db.connect().then(async () => {

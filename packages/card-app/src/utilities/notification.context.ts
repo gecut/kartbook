@@ -67,9 +67,9 @@ export const pushNotification = async (content: Notification) => {
     await removeNotification(target);
   }
 
-  notificationContext.setValue(null);
+  notificationContext.value = null;
 
   await untilNextFrame();
 
-  notificationContext.setValue(content);
+  notificationContext.value = content;
 };
