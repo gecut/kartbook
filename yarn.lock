@@ -2387,7 +2387,7 @@ __metadata:
     "@gecut/kartbook-types": "workspace:^"
     "@gecut/lit-helper": "npm:^2.1.5"
     "@gecut/logger": "npm:^1.4.3"
-    "@gecut/signal": "npm:^2.2.1"
+    "@gecut/signal": "npm:^2.2.3"
     "@gecut/styles": "npm:^2.3.1"
     "@gecut/types": "npm:^2.2.1"
     "@gecut/utilities": "npm:^5.3.0"
@@ -2463,7 +2463,7 @@ __metadata:
     "@gecut/kartbook-types": "workspace:^"
     "@gecut/lit-helper": "npm:^2.1.5"
     "@gecut/logger": "npm:^1.4.3"
-    "@gecut/signal": "npm:^2.2.1"
+    "@gecut/signal": "npm:^2.2.3"
     "@gecut/styles": "npm:^2.3.1"
     "@gecut/types": "npm:^2.2.1"
     "@gecut/utilities": "npm:^5.3.0"
@@ -2556,6 +2556,17 @@ __metadata:
     "@gecut/types": "npm:^2.2.1"
     "@gecut/utilities": "npm:^5.4.0"
   checksum: 10c0/c40cf932c21cbb411c6cbbaa7d583959f500e144c1563a85bf6b4e58b237fdb0dadacf5a038e2129bfda6bc4da2026901f63534cb491e8a62be501ab0cd851af
+  languageName: node
+  linkType: hard
+
+"@gecut/signal@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "@gecut/signal@npm:2.2.3"
+  dependencies:
+    "@gecut/logger": "npm:^1.4.4"
+    "@gecut/types": "npm:^2.2.1"
+    "@gecut/utilities": "npm:^5.4.0"
+  checksum: 10c0/a4ec9dfd887cad99e8cc20170fecd46a59d0b6bb865426221b8f32c4fb29b98bef1ddaf53c08ec8c022914a31d8315ec30932bc8bfc4f937f1e685c0a0ead64c
   languageName: node
   linkType: hard
 
