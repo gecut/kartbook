@@ -15,6 +15,7 @@
     {"path": "./packages/card-db"},
     {"path": "./packages/card-app"},
     {"path": "./packages/admin"},
+    {"path": "./packages/banks-data"},
     {"path": "./packages/panel-app"},
     {"path": "./packages/panel-api"}
     // {"path": "./packages/lit-helper"},
