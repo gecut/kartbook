@@ -3,10 +3,13 @@ import {uid} from '@gecut/utilities/uid.js';
 import {TRPCError} from '@trpc/server';
 import z from 'zod';
 
-import {db, microSMS, publicProcedure, router} from '../core.js';
+import {db, microSMS, $PublicProcedure, router, $UserProcedure} from '../core.js';
+
+import type {UserData} from '@gecut/kartbook-types';
 
 const user = router({
-  has: publicProcedure
+  info: $UserProcedure.query((opts) => opts.ctx.user as unknown as UserData),
+  has: $PublicProcedure
     .input(
       z.object({
         phoneNumber: z.string(),
@@ -17,7 +20,7 @@ const user = router({
 
       return (await db.$User.exists({phoneNumber: phoneNumber}))?._id;
     }),
-  create: publicProcedure
+  create: $PublicProcedure
     .input(
       z.object({
         firstName: z.string(),
@@ -44,7 +47,7 @@ const user = router({
       return await user.save();
     }),
   otp: router({
-    send: publicProcedure
+    send: $PublicProcedure
       .input(
         z.object({
           userId: z.string(),
@@ -84,7 +87,7 @@ const user = router({
         return 'Code Sended';
       }),
 
-    verify: publicProcedure
+    verify: $PublicProcedure
       .input(
         z.object({
           userId: z.string(),
