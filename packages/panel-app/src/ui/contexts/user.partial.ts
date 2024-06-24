@@ -5,4 +5,4 @@ import type {PartialDeep} from '@gecut/types';
 
 export const userPartialContext = new ContextSignal<PartialDeep<UserData>>('user.partial');
 
-userPartialContext.setValue({});
+userPartialContext.value = {};

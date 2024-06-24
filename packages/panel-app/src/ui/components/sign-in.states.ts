@@ -5,7 +5,10 @@ import {otpTimer} from './otp-timer.js';
 import {client} from '../client/index.js';
 import {signInStatesContext} from '../contexts/sign-in.states.js';
 import {userExistsContext} from '../contexts/user.exists.js';
+import {loadUser} from '../contexts/user.js';
 import {userPartialContext} from '../contexts/user.partial.js';
+import {router} from '../router/index.js';
+import {envvm} from '../utilities/envvm.js';
 
 import SolarNotificationUnreadLinesLineDuotone from '~icons/solar/notification-unread-lines-line-duotone';
 import SolarSmartphone2LineDuotone from '~icons/solar/smartphone-2-line-duotone';
@@ -21,7 +24,7 @@ export const signInFormStates: StateManager<'tel' | 'otp' | 'info'> = {
         name="tel"
         placeholder="شمـاره همراه"
         pattern="^[09]{2}[0-9]{9}$"
-        .value=${userPartialContext.getValue()?.phoneNumber ?? ''}
+        .value=${userPartialContext.value?.phoneNumber ?? ''}
         required
       />
     </label>
@@ -46,12 +49,12 @@ export const signInFormStates: StateManager<'tel' | 'otp' | 'info'> = {
                   await client.user.otp.send.mutate({userId});
                 }
 
-                userExistsContext.setValue(exists);
-                userPartialContext.setValue({
+                userExistsContext.value = exists;
+                userPartialContext.value = {
                   ...userPartial,
 
                   _id: userId,
-                });
+                };
               })
               .finally(() => {
                 target.removeAttribute('loading');
@@ -72,7 +75,7 @@ export const signInFormStates: StateManager<'tel' | 'otp' | 'info'> = {
     <div class="flex justify-between">
       <span
         class="text-bodySmall font-bold text-primary cursor-pointer"
-        @click=${() => signInStatesContext.setValue('tel')}
+        @click=${() => (signInStatesContext.value = 'tel')}
       >
         ویرایش شماره تلفن
       </span>
@@ -95,7 +98,13 @@ export const signInFormStates: StateManager<'tel' | 'otp' | 'info'> = {
                 userId: userPartial._id,
                 otpCode: userPartial.otp?.code,
               })
-              .then((token) => {})
+              .then((token) => {
+                envvm.set('user-token', token);
+
+                loadUser();
+
+                router.navigate('/');
+              })
               .finally(() => target.removeAttribute('loading'));
           }
         },

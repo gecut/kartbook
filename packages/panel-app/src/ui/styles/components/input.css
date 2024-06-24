@@ -12,7 +12,7 @@ label.gecut-input {
       @apply font-black;
     }
 
-    @apply bg-transparent grow;
+    @apply bg-transparent grow outline-none;
   }
 
   .gecut-icon {

@@ -9,7 +9,7 @@ class OtpTimerDirective extends GecutAsyncDirective {
     super(partInfo, 'otp-timer');
   }
 
-  protected timer?: number;
+  protected timer?: NodeJS.Timeout;
 
   override render(): unknown {
     if (!this.timer) {

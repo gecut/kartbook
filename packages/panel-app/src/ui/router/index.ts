@@ -10,6 +10,7 @@ import {Router} from '@thepassle/app-tools/router.js';
 
 import {routes} from './routes.js';
 import {routerContext} from '../contexts/router.js';
+import {titleContext} from '../contexts/title.js';
 
 import type {Routes, RoutesPaths} from './routes.js';
 import type {RouteDefinition} from '@thepassle/app-tools/router.js';
@@ -38,6 +39,7 @@ export const router = new Router({
         path: resolveRouterPath(path as RoutesPaths),
         title: options.title,
         render: options?.render,
+        plugins: options.plugins,
       }),
     ),
   ],
@@ -54,6 +56,7 @@ export function resolveRouterPath(key: RoutesPaths) {
 router.addEventListener(
   'route-changed',
   debounce(() => {
-    routerContext.setValue(router);
+    routerContext.value = router;
+    titleContext.value = router.context.title.replace(' | کارت بوک', '');
   }, 1000 / 30),
 );

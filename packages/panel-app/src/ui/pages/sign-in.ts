@@ -23,11 +23,11 @@ const formSubmitter = async (event: SubmitEvent) => {
       const otp = data.get('otp')?.toString();
 
       if (otp) {
-        userPartialContext.setValue({
+        userPartialContext.value = {
           ...userPartial,
 
           otp: {code: otp},
-        });
+        };
       }
 
       break;
@@ -35,18 +35,18 @@ const formSubmitter = async (event: SubmitEvent) => {
       const phoneNumber = data.get('tel')?.toString();
 
       if (phoneNumber) {
-        userPartialContext.setValue({
+        userPartialContext.value = {
           ...userPartial,
 
           phoneNumber,
-        });
+        };
       }
 
       if (await userExistsContext.requireValue()) {
-        signInStatesContext.setValue('otp');
+        signInStatesContext.value = 'otp';
       }
       else {
-        signInStatesContext.setValue('info');
+        signInStatesContext.value = 'info';
       }
       break;
     case 'info':
@@ -54,15 +54,15 @@ const formSubmitter = async (event: SubmitEvent) => {
       const lastName = data.get('last-name')?.toString();
 
       if (firstName && lastName) {
-        userPartialContext.setValue({
+        userPartialContext.value = {
           ...userPartial,
 
           firstName,
           lastName,
-        });
+        };
       }
 
-      signInStatesContext.setValue('otp');
+      signInStatesContext.value = 'otp';
 
       break;
   }
