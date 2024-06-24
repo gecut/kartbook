@@ -1,5 +1,5 @@
 {
-  "name": "@gecut/banks-data",
+  "name": "@gecut/kartbook-banks-data",
   "version": "0.0.1",
   "private": true,
   "type": "module",
