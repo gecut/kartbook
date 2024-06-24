@@ -90,8 +90,8 @@ export function card(data: DataContextType) {
       <span class="absolute inset-0 opacity-20 bg-cover bg-[url('/card-bg.webp')] z-[3]"></span>
 
       <div class="absolute inset-0 z-[5] flex flex-col pt-3 pb-6 px-6">
-        <div class="size-20 flex items-center justify-center">
-          <img class="h-full w-full object-contain" src=${data.bankInfo?.bankLogo ?? '/icon.png'} />
+        <div class="size-20 flex items-center justify-center *:h-full *:w-full *:object-contain">
+          ${data.bank.image ?? html`<img src=${data.bank.logo} />`}
         </div>
 
         <div class="grow"></div>

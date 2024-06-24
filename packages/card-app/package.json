@@ -15,13 +15,14 @@
     "directory": "packages/card-app"
   },
   "scripts": {
-    "serve": "vite --host 0.0.0.0 --port 3031 --open --clearScreen",
+    "serve": "vite --host 0.0.0.0 --port 3031 --open --cors",
     "build": "vite build --clearScreen"
   },
   "devDependencies": {
     "@fontsource/vazirmatn": "^5.0.20",
     "@gecut/components": "^2.3.2",
     "@gecut/i18n": "^2.0.6",
+    "@gecut/kartbook-banks-data": "workspace:^",
     "@gecut/kartbook-types": "workspace:^",
     "@gecut/lit-helper": "^2.1.5",
     "@gecut/logger": "^1.4.3",

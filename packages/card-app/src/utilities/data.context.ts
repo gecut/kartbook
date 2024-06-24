@@ -1,17 +1,16 @@
+import IranianBanks from '@gecut/kartbook-banks-data';
 import {ContextSignal} from '@gecut/signal';
 
-import {getAverageColor} from './average-color.js';
 import {pushNotification} from './notification.context.js';
-import {getBankInfo} from '../banks/index.js';
 import {api} from '../ky.js';
 
-import type {BankInfo} from '../banks/index.js';
+import type {Info as Bank} from '@gecut/kartbook-banks-data';
 import type {CardData} from '@gecut/kartbook-types';
 
 export type DataContextType =
   | {
     card: CardData;
-    bankInfo: NonNullable<BankInfo>;
+    bank: Bank;
     primaryColor: string | null;
     amount?: number;
   }
@@ -44,27 +43,24 @@ export function load() {
 
         return response.json<{ok: true; data: CardData}>();
       })
-      .then((response) => {
-        console.log(response);
-
+      .then(async (response) => {
         const card = response.data;
-        const bankInfo = getBankInfo(card.cardNumber);
+        const bank = await IranianBanks.getInfo(card.cardNumber);
 
-        if (!bankInfo?.bankName) {
+        if (!bank.id) {
           pushNotification({
             type: 'warning',
             msg: 'اطلاعات بانک یافت نشد',
           });
         }
 
-        return {card, bankInfo};
+        return {card, bank};
       })
-      .then(async ({card, bankInfo}) => ({card, bankInfo, primaryColor: await getAverageColor(bankInfo?.bankLogo)}))
       .then((data) => {
         dataContext.value = {
           ...data,
-          primaryColor: data.primaryColor
-            ? `${data.primaryColor?.r},${data.primaryColor?.g},${data.primaryColor?.b}`
+          primaryColor: data.bank.color
+            ? `${data.bank.color.red},${data.bank.color.green},${data.bank.color.blue}`
             : null,
           amount,
         };
