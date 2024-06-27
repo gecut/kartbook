@@ -2373,7 +2373,7 @@ __metadata:
     nodemon: "npm:^3.1.2"
     npm-run-all: "npm:^4.1.5"
     react-is: "npm:^18.3.1"
-    tslib: "npm:^2.6.2"
+    tslib: "npm:^2.6.3"
   languageName: unknown
   linkType: soft
 
@@ -2476,7 +2476,6 @@ __metadata:
     "@gecut/styles": "npm:^2.3.1"
     "@gecut/types": "npm:^2.2.1"
     "@gecut/utilities": "npm:^5.3.0"
-    "@iconify-json/line-md": "npm:^1.1.38"
     "@iconify-json/solar": "npm:^1.1.9"
     "@tailwindcss/nesting": "npm:^0.0.0-insiders.565cd3e"
     "@thepassle/app-tools": "npm:^0.9.12"
@@ -2663,15 +2662,6 @@ __metadata:
     prop-types: ^15.0.0
     react: ">=0.14.0"
   checksum: 10c0/e8072221f9f9c2c47c3ebc5bc6079f9a71938e181d2b4aa3e1d3922707bc097336d5260dad088cf47c1d6e1ff34839fa21f2505a95bddda0d7548c5a955b5691
-  languageName: node
-  linkType: hard
-
-"@iconify-json/line-md@npm:^1.1.38":
-  version: 1.1.38
-  resolution: "@iconify-json/line-md@npm:1.1.38"
-  dependencies:
-    "@iconify/types": "npm:*"
-  checksum: 10c0/e611a556230e7b85d79123ab89eaf153292b823e827aa0a17826201d1b44a72bd5a78d22a2e99078ec9532a1472d8dad4c9c33da14ae73ae0808f6d071e77c5f
   languageName: node
   linkType: hard
 
@@ -12619,6 +12609,13 @@ __metadata:
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: 10c0/e03a8a4271152c8b26604ed45535954c0a45296e32445b4b87f8a5abdb2421f40b59b4ca437c4346af0f28179780d604094eb64546bee2019d903d01c6c19bdb
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.6.3":
+  version: 2.6.3
+  resolution: "tslib@npm:2.6.3"
+  checksum: 10c0/2598aef53d9dbe711af75522464b2104724d6467b26a60f2bdac8297d2b5f1f6b86a71f61717384aa8fd897240467aaa7bcc36a0700a0faf751293d1331db39a
   languageName: node
   linkType: hard
 
