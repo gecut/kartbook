@@ -2370,7 +2370,7 @@ __metadata:
     express-formidable: "npm:^1.2.0"
     express-session: "npm:^1.18.0"
     mongoose: "npm:^8.4.1"
-    nodemon: "npm:^3.1.2"
+    nodemon: "npm:^3.1.4"
     npm-run-all: "npm:^4.1.5"
     react-is: "npm:^18.3.1"
     tslib: "npm:^2.6.2"
@@ -2425,7 +2425,7 @@ __metadata:
     "@types/node": "npm:^20.13.0"
     esbuild: "npm:^0.21.4"
     mongoose: "npm:^8.4.1"
-    nodemon: "npm:^3.1.2"
+    nodemon: "npm:^3.1.4"
     npm-run-all: "npm:^4.1.5"
   languageName: unknown
   linkType: soft
@@ -2455,7 +2455,7 @@ __metadata:
     cors: "npm:^2.8.5"
     esbuild: "npm:^0.21.4"
     mongoose: "npm:^8.4.1"
-    nodemon: "npm:^3.1.2"
+    nodemon: "npm:^3.1.4"
     npm-run-all: "npm:^4.1.5"
     zod: "npm:^3.23.8"
   languageName: unknown
@@ -9647,9 +9647,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "nodemon@npm:3.1.2"
+"nodemon@npm:^3.1.4":
+  version: 3.1.4
+  resolution: "nodemon@npm:3.1.4"
   dependencies:
     chokidar: "npm:^3.5.2"
     debug: "npm:^4"
@@ -9663,7 +9663,7 @@ __metadata:
     undefsafe: "npm:^2.0.5"
   bin:
     nodemon: bin/nodemon.js
-  checksum: 10c0/7a091067d766768fb6660b796194b01748bba5dc3f1e3ed3dd5f804bfa305e207d24635755078ee5e7cc53848cea35204901e0a6e51ac64483bb8e9ecb237c95
+  checksum: 10c0/be2335396a4c25549f86e9c69bb57e6a21758a9649d74182a359d88b80afbe84f67a1651e293a08c6d77ecdf5c6224d02990de9de225f70d7c659021206c877f
   languageName: node
   linkType: hard
 
