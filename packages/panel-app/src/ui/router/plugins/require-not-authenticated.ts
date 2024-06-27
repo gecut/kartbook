@@ -6,7 +6,9 @@ const requireNotAuthenticated = (redirect: string): Plugin => ({
   name: 'requireNotAuthenticated',
   shouldNavigate: () => ({
     condition: () => {
-      if (envvm.get('user-token').trim() !== '') return false;
+      console.log('fuck', envvm.get('user-token'));
+
+      if (envvm.get('user-token').trim().length > 0) return false;
 
       return true;
     },

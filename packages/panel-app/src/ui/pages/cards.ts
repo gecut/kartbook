@@ -1,24 +1,78 @@
-import {gecutButton} from '@gecut/components';
+import {gecutButton, gecutIconButton} from '@gecut/components';
 import {gecutContext} from '@gecut/lit-helper/directives/context.js';
+import {ContextSignal} from '@gecut/signal';
 import {nextAnimationFrame} from '@gecut/utilities/wait/polyfill.js';
 import {repeat} from 'lit/directives/repeat.js';
 import {html} from 'lit/html.js';
 
-import {cardsContext, selectedCardSlugContext} from '../contexts/cards.js';
+import {$CardRenderer} from '../components/card.js';
+import {cardsContext, selectedCardSlugContext, setSelectedCard} from '../contexts/cards.js';
 
 import SolarAddCircleBoldDuotone from '~icons/solar/add-circle-bold-duotone';
+import SolarEyeLineDuotone from '~icons/solar/eye-line-duotone';
+import SolarInfoCircleLineDuotone from '~icons/solar/info-circle-line-duotone';
+import SolarPenNewRoundLineDuotone from '~icons/solar/pen-new-round-line-duotone';
+import SolarShareLineDuotone from '~icons/solar/share-line-duotone';
+
+import type {TemplateResult, nothing} from 'lit/html.js';
+
+const cardDialog = new ContextSignal<TemplateResult | typeof nothing>('card-dialog');
 
 export function $CardsPage() {
   return gecutContext(
     cardsContext,
     (cards) => html`
-      ${gecutContext(selectedCardSlugContext, (slug) => {
-        return slug;
-      })}
+      <div class="flex flex-col py-4 gap-4">
+        ${gecutContext(
+          selectedCardSlugContext,
+          (card) => html`
+            ${$CardRenderer(card, () => html`${gecutContext(cardDialog, (t) => t)}`)}
+
+            <div class="flex w-full max-w-[24.5rem] mx-auto justify-between items-center mx-2">
+              <div class="flex flex-col gap-2 justify-center items-center kb-icon-buttons">
+                ${gecutIconButton({
+                  type: 'filledTonal',
+                  name: 'info',
+                  svg: SolarInfoCircleLineDuotone,
+                })}
+
+                <span class="text-labelMedium text-onSurfaceVariant">اطلاعات</span>
+              </div>
+              <div class="flex flex-col gap-2 justify-center items-center kb-icon-buttons">
+                ${gecutIconButton({
+                  type: 'filledTonal',
+                  name: 'enable',
+                  svg: SolarEyeLineDuotone,
+                })}
+
+                <span class="text-labelMedium text-onSurfaceVariant">فعال سازی</span>
+              </div>
+              <div class="flex flex-col gap-2 justify-center items-center kb-icon-buttons">
+                ${gecutIconButton({
+                  type: 'filledTonal',
+                  name: 'share',
+                  svg: SolarShareLineDuotone,
+                })}
+
+                <span class="text-labelMedium text-onSurfaceVariant">اشتراک گذاری</span>
+              </div>
+              <div class="flex flex-col gap-2 justify-center items-center kb-icon-buttons">
+                ${gecutIconButton({
+                  type: 'filledTonal',
+                  name: 'edit',
+                  svg: SolarPenNewRoundLineDuotone,
+                })}
+
+                <span class="text-labelMedium text-onSurfaceVariant">ویرایش</span>
+              </div>
+            </div>
+          `,
+        )}
+      </div>
 
       <div class="flex flex-col gap-2 p-4">
         <h2 class="text-titleMedium text-onSurfaceVariant mb-2">کارت های شما</h2>
-        ${gecutContext(selectedCardSlugContext, (slug) =>
+        ${gecutContext(selectedCardSlugContext, (selectedCard) =>
           repeat(
             cards,
             (card) => card._id,
@@ -27,10 +81,10 @@ export function $CardsPage() {
                 const target = event.target as HTMLElement;
                 const radio = target.querySelector<HTMLInputElement>('input#' + card.slug);
 
-                selectedCardSlugContext.value = card.slug;
+                setSelectedCard(card);
                 nextAnimationFrame(() => radio && (radio.checked = true));
               };
-              const ring = slug === card.slug ? 'ring-primary' : 'ring-surfaceContainer';
+              const ring = selectedCard.slug === card.slug ? 'ring-primary' : 'ring-surfaceContainer';
 
               return html`
                 <div

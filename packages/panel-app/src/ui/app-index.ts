@@ -15,7 +15,9 @@ document.body.innerHTML = '';
 render(
   html`
     ${topBar()}
-    <main class="w-full pt-16 pb-20 px-4">${cache(gecutContext(routerContext, (router) => router.render()))}</main>
+    <main class="has-top-bar pb-20 px-4">
+      ${cache(gecutContext(routerContext, (router) => router.render()))}
+    </main>
     ${navigationBar()}
   `,
   document.body,

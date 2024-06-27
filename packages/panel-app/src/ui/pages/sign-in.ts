@@ -82,7 +82,7 @@ export function $SignPage() {
         </div>
 
         <div class="flex w-full items-center justify-center pb-4">
-          <img src="/icon.png" class="h-32" />
+          <img src="/logo.png" class="h-32" />
         </div>
 
         ${gecutContext(signInStatesContext, (state) => stateManager(signInFormStates, state))}

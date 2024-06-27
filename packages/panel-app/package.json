@@ -15,7 +15,7 @@
     "directory": "packages/panel-app"
   },
   "scripts": {
-    "serve": "vite --host 0.0.0.0 --port 3031 --open --clearScreen",
+    "serve": "vite --host 0.0.0.0 --port 3031 --cors",
     "build": "vite build --clearScreen"
   },
   "devDependencies": {
@@ -30,6 +30,7 @@
     "@gecut/styles": "^2.3.1",
     "@gecut/types": "^2.2.1",
     "@gecut/utilities": "^5.3.0",
+    "@iconify-json/line-md": "^1.1.38",
     "@iconify-json/solar": "^1.1.9",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@thepassle/app-tools": "^0.9.12",
