@@ -78,7 +78,7 @@ export function card(data: DataContextType) {
         () => html`
           <span
             class="absolute inset-0 opacity-5 bg-cover bg-gradient-to-bl from-primary
-                   from-0% to-transparentto-100% z-[4]"
+                   from-0% to-transparent to-100% z-[4]"
           ></span>
           <span
             class="absolute inset-0 opacity-15 bg-cover bg-gradient-to-bl from-primary
