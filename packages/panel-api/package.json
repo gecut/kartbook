@@ -32,7 +32,7 @@
     "@gecut/logger": "^1.4.3",
     "@gecut/utilities": "^5.3.0",
     "@types/cors": "^2.8.17",
-    "@types/node": "^20.13.0",
+    "@types/node": "^22.0.0",
     "cors": "^2.8.5",
     "esbuild": "^0.21.4",
     "mongoose": "^8.4.1",
