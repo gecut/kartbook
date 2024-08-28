@@ -67,15 +67,16 @@ export const $UserProcedure = $PublicProcedure.use(authorizeMiddleware);
 export const $AdminProcedure = $UserProcedure.use(adminMiddleware);
 
 export const logger = new GecutLogger('panel-api');
-export const zibalAPILogger = logger.sub('zibal-api');
 export const db = new KartbookDbConnector(config.DATABASE.URI, logger.sub('db-connector'));
 export const microSMS = new KavenegarApi(config.KAVENEGAR_TOKEN, logger);
-export const zibalGateway = new ZibalGateWay('66801ae6e7fe28000d1f414a', logger);
+export const zibalGateway = new ZibalGateWay(config.ZIBAL.PAYMENT, logger);
+
+export const zibalAPILogger = logger.sub('zibal-api');
 export const zibalAPI = ky.create({
   prefixUrl: 'https://api.zibal.ir/v1/facility/',
   headers: {
     'Content-Type': 'application/json',
-    Authorization: 'Bearer 38d470affd204ee6bc05ab7df5c1d4b7',
+    Authorization: 'Bearer ' + config.ZIBAL.INQUIRY,
   },
   retry: {
     limit: 5,

@@ -9,4 +9,8 @@ export default {
     URI: env('DB_URI', '', 'string'),
   },
   KAVENEGAR_TOKEN: env('KAVENEGAR_TOKEN', '', 'string'),
+  ZIBAL: {
+    INQUIRY: env('ZIBAL_INQUIRY', '', 'string'),
+    PAYMENT: env('ZIBAL_PAYMENT', '', 'string'),
+  },
 };
