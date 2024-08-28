@@ -22,18 +22,29 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # Services
           - name: kartbook/cdn
-            path: ./packages/cdn
-            context: ./packages/cdn
+            path: ./packages/services/cdn
+            context: ./packages/services/cdn
           - name: kartbook/card-api
-            path: ./packages/card-api
-            context: ./packages/card-api
+            path: ./packages/services/card-api
+            context: ./packages/services/card-api
           - name: kartbook/card-db
-            path: ./packages/card-db
+            path: ./packages/services/card-db
             context: .
+          - name: kartbook/panel-api
+            path: ./packages/services/panel-api
+            context: .
+
+          # Applications
           - name: kartbook/card-app
-            path: ./packages/card-app
+            path: ./packages/apps/card-app
             context: .
+          - name: kartbook/panel-app
+            path: ./packages/apps/panel-app
+            context: .
+
+          # Admin Panel
           - name: kartbook/admin
             path: ./packages/admin
             context: .
