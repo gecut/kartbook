@@ -10,7 +10,7 @@
   "type": "module",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/**"
   ],
   "scripts": {
     "l": "yarn run lint",
@@ -38,7 +38,10 @@
     "watch:lerna": "lerna run watch",
     "pull": "git pull",
     "release": "lerna version",
-    "publish": "lerna publish from-package"
+    "publish": "lerna publish from-package",
+    "panel:run": "run-p panel-api:run panel-app:run",
+    "panel-app:run": "yarn workspace @gecut/kartbook-panel-app serve",
+    "panel-api:run": "yarn workspace @gecut/kartbook-panel-api watch"
   },
   "devDependencies": {
     "@lerna-lite/changed": "^3.4.0",

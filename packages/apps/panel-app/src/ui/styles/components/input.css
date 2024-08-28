@@ -1,0 +1,55 @@
+label.gecut-input {
+  input {
+    direction: rtl;
+
+    &::placeholder {
+      @apply text-onSurfaceVariant font-normal tracking-normal;
+    }
+
+    &[name='otp'] {
+      letter-spacing: 0.5rem;
+
+      @apply font-black;
+    }
+
+    &.card-number {
+      letter-spacing: 0.2rem;
+
+      @apply text-center w-full px-0;
+    }
+
+    @apply bg-transparent grow !outline-none !border-none !ring-0;
+  }
+
+  .loading {
+    @apply opacity-0 !text-onSurfaceVariant transition;
+  }
+
+  .gecut-icon {
+    @apply text-[1.75rem] text-onSurfaceVariant transition-colors;
+  }
+
+  &:has(input:valid) {
+    .gecut-icon {
+      @apply text-primary;
+    }
+
+    @apply stateActive-primary;
+  }
+  &:has(input:invalid) {
+    .gecut-icon {
+      @apply text-outline;
+    }
+
+    @apply stateActive-error;
+  }
+
+  &:has(input:focus:valid) {
+    @apply border-primary;
+  }
+  &:has(input:focus:invalid) {
+    @apply border-error;
+  }
+
+  @apply bg-surfaceContainerLowest h-12 rounded-xl overflow-hidden flex items-center gap-2 px-2 text-bodyMedium text-onSurface border border-transparent transition-colors;
+}

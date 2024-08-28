@@ -11,7 +11,7 @@
   "exclude": ["./**/*.js", "./**/*.d.ts", "./dist/**/*"],
   "references": [
     {
-      "path": "../types"
+      "path": "../libraries/types"
     }
   ]
 }

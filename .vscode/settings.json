@@ -34,7 +34,8 @@
     "kartbook",
     "Kavenegar",
     "trpc",
-    "Zamanian"
+    "Zamanian",
+    "zibal"
   ],
   "git.autoStash": true,
   "git.branchProtection": ["main", "next"],
@@ -61,5 +62,6 @@
   },
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

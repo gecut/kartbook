@@ -1,0 +1,9 @@
+.gecut-button {
+  .gecut-button-body {
+    span {
+      @apply empty:hidden;
+    }
+  }
+
+  @apply h-12 rounded-xl;
+}

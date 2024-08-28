@@ -1,0 +1,18 @@
+@import '@gecut/styles/css';
+@import './h168.css';
+@import './components/input.css';
+@import './components/button.css';
+@import './components/icon-button.css';
+
+header,
+footer {
+  @apply z-fixed;
+}
+
+main {
+  @apply z-default;
+}
+
+.page-modal {
+  @apply fixed z-modal inset-0 bg-surface shadow-[0_0_100vw_100vw] shadow-surface;
+}

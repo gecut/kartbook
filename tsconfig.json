@@ -10,14 +10,17 @@
   "exclude": [],
   "references": [
     // apps
-    {"path": "./packages/types"},
-    {"path": "./packages/db-connector"},
-    {"path": "./packages/card-db"},
-    {"path": "./packages/card-app"},
     {"path": "./packages/admin"},
-    {"path": "./packages/banks-data"},
-    {"path": "./packages/panel-app"},
-    {"path": "./packages/panel-api"}
+
+    {"path": "./packages/libraries/types"},
+    {"path": "./packages/libraries/db-connector"},
+    {"path": "./packages/libraries/banks-data"},
+
+    {"path": "./packages/apps/card-app"},
+    {"path": "./packages/apps/panel-app"},
+
+    {"path": "./packages/services/card-db"},
+    {"path": "./packages/services/panel-api"}
     // {"path": "./packages/lit-helper"},
     // {"path": "./packages/mixins"},
     // {"path": "./packages/styles"},
