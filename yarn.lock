@@ -2478,6 +2478,8 @@ __metadata:
     "@gecut/styles": "npm:^2.7.0"
     "@gecut/types": "npm:^2.2.1"
     "@gecut/utilities": "npm:^5.4.0"
+    "@iconify-json/fluent-emoji": "npm:^1.1.19"
+    "@iconify-json/fluent-emoji-flat": "npm:^1.1.17"
     "@iconify-json/line-md": "npm:^1.1.38"
     "@iconify-json/solar": "npm:^1.1.9"
     "@iconify-json/svg-spinners": "npm:^1.1.2"
@@ -2667,6 +2669,24 @@ __metadata:
     prop-types: ^15.0.0
     react: ">=0.14.0"
   checksum: 10c0/e8072221f9f9c2c47c3ebc5bc6079f9a71938e181d2b4aa3e1d3922707bc097336d5260dad088cf47c1d6e1ff34839fa21f2505a95bddda0d7548c5a955b5691
+  languageName: node
+  linkType: hard
+
+"@iconify-json/fluent-emoji-flat@npm:^1.1.17":
+  version: 1.1.17
+  resolution: "@iconify-json/fluent-emoji-flat@npm:1.1.17"
+  dependencies:
+    "@iconify/types": "npm:*"
+  checksum: 10c0/8d1fca72101a5ea5bd2293d6778c9f9d8153ccc430355025fdad11e78be9a5947fd28422ac63873be004de6b1083a9446494f577a8cf11d6966eb20d4677c13f
+  languageName: node
+  linkType: hard
+
+"@iconify-json/fluent-emoji@npm:^1.1.19":
+  version: 1.1.19
+  resolution: "@iconify-json/fluent-emoji@npm:1.1.19"
+  dependencies:
+    "@iconify/types": "npm:*"
+  checksum: 10c0/21cc229b831e70c8e893aeb6115c735aeb71c6f34fae70181185636cc136d1dd14a65776d2add06038c9c34f03a83d042e4e2ca4f4e2afaf48cbeb147768e168
   languageName: node
   linkType: hard
 

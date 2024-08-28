@@ -31,6 +31,8 @@
     "@gecut/styles": "^2.7.0",
     "@gecut/types": "^2.2.1",
     "@gecut/utilities": "^5.4.0",
+    "@iconify-json/fluent-emoji": "^1.1.19",
+    "@iconify-json/fluent-emoji-flat": "^1.1.17",
     "@iconify-json/line-md": "^1.1.38",
     "@iconify-json/solar": "^1.1.9",
     "@iconify-json/svg-spinners": "^1.1.2",

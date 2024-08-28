@@ -16,7 +16,7 @@ document.body.innerHTML = '';
 render(
   html`
     ${topBar()}
-    <main class="has-top-bar max-w-screen-sm mx-auto pb-20 px-4">
+    <main class="has-top-bar max-w-md mx-auto pb-20 px-4">
       ${cache(gecutContext(routerContext, (router) => router.render()))}
     </main>
     ${sbm.html} ${navigationBar()}

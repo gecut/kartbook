@@ -5,7 +5,6 @@ if (!(globalThis as any).URLPattern) {
 import debounce from '@gecut/utilities/debounce.js';
 import {offline} from '@thepassle/app-tools/router/plugins/offline.js';
 import {redirect} from '@thepassle/app-tools/router/plugins/redirect.js';
-import {resetFocus} from '@thepassle/app-tools/router/plugins/resetFocus.js';
 import {Router} from '@thepassle/app-tools/router.js';
 
 import requireAuthenticated from './plugins/require-authenticated.js';
@@ -18,7 +17,6 @@ import type {RouteDefinition} from '@thepassle/app-tools/router.js';
 
 export const router = new Router({
   plugins: [
-    resetFocus,
     offline,
     {
       name: 'appName',

@@ -27,7 +27,7 @@ export function $CardDetail(selectedCard: SelectedCardType) {
       () => html`${gecutContext(cardDialogContext, (state) => stateManager(cardDialogStates, state))}`,
     )}
 
-    <div class="flex w-full max-w-[24.5rem] mx-auto justify-between items-center px-3">
+    <div class="flex w-full justify-between items-center">
       <div class="flex flex-col gap-2 justify-center items-center kb-icon-buttons min-w-20">
         ${gecutIconButton({
           type: 'filledTonal',

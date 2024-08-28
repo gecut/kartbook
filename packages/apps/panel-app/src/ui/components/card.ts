@@ -4,7 +4,7 @@ import {styleMap} from 'lit/directives/style-map.js';
 import {when} from 'lit/directives/when.js';
 import {html} from 'lit/html.js';
 
-import type {Info as BankInfo} from '../../../../../../libraries/banks-data/src/banks-data';
+import type {Info as BankInfo} from '@gecut/kartbook-banks-data';
 import type {TemplateResult} from 'lit/html.js';
 
 export function $CardRenderer(
@@ -18,7 +18,7 @@ export function $CardRenderer(
   const color = bColor ? `${bColor.red},${bColor.green},${bColor.blue}` : null;
 
   return html`
-    <div class="w-full max-w-[24.5rem] mx-auto h-56 bg-darkSurface rounded-2xl shadow-xl relative overflow-hidden">
+    <div class="w-full h-56 bg-darkSurface rounded-2xl shadow-xl relative overflow-hidden">
       ${layer?.()}
 
       <span class="absolute inset-0 opacity-20 bg-darkSurfaceVariant z-[2]"></span>

@@ -10,7 +10,7 @@ import {routes} from '../router/routes.js';
 export function navigationBar() {
   return html`
     <footer class="fixed bottom-0 inset-x-0 bg-surfaceContainer translucent flex flex-col h-20">
-      <div class="max-w-screen-sm mx-auto flex items-center justify-center gap-4 w-full h-full relative px-4">
+      <div class="max-w-md mx-auto flex items-center justify-center gap-4 w-full h-full relative px-4">
         ${gecutContext(routerContext, (router) =>
           mapObject(null, routes, (route, path) =>
             when(route.nav, () =>

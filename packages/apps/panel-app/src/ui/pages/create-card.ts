@@ -146,7 +146,7 @@ export function $CreateCardPage() {
                       type="text"
                       inputmode="numeric"
                       class="card-number"
-                      .value=${createCardMemory.value?.cardNumber?.[0] ?? '6104'}
+                      .value=${createCardMemory.value?.cardNumber?.[0] ?? ''}
                       name="cardNumber1"
                       pattern="^[0-9]{4}$"
                       maxlength="4"
@@ -158,7 +158,7 @@ export function $CreateCardPage() {
                       type="text"
                       inputmode="numeric"
                       class="card-number"
-                      .value=${createCardMemory.value?.cardNumber?.[1] ?? '3386'}
+                      .value=${createCardMemory.value?.cardNumber?.[1] ?? ''}
                       name="cardNumber2"
                       pattern="^[0-9]{4}$"
                       maxlength="4"
@@ -170,7 +170,7 @@ export function $CreateCardPage() {
                       type="text"
                       inputmode="numeric"
                       class="card-number"
-                      .value=${createCardMemory.value?.cardNumber?.[2] ?? '0702'}
+                      .value=${createCardMemory.value?.cardNumber?.[2] ?? ''}
                       name="cardNumber3"
                       pattern="^[0-9]{4}$"
                       maxlength="4"
@@ -182,7 +182,7 @@ export function $CreateCardPage() {
                       type="text"
                       inputmode="numeric"
                       class="card-number"
-                      .value=${createCardMemory.value?.cardNumber?.[3] ?? '1942'}
+                      .value=${createCardMemory.value?.cardNumber?.[3] ?? ''}
                       name="cardNumber4"
                       pattern="^[0-9]{4}$"
                       maxlength="4"
