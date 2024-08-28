@@ -9,13 +9,13 @@ RUN set -eux; \
   yarn install --immutable; \
   yarn build; \
   ls -lahF .; \
-  ls -RlahF /app/packages/card-db;
+  ls -RlahF /app/packages/services/card-db;
 
 # ---
 
 FROM ghcr.io/alwatr/node:21.7.1
 
-COPY --from=builder /app/packages/card-db/dist/ .
+COPY --from=builder /app/packages/services/card-db/dist/ .
 
 ENV HOST="0.0.0.0" \
     PORT="80"

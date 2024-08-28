@@ -9,13 +9,13 @@ RUN set -eux; \
   yarn install --immutable; \
   yarn build; \
   ls -lahF .; \
-  ls -RlahF /app/packages/panel-api;
+  ls -RlahF /app/packages/services/panel-api;
 
 # ---
 
 FROM ghcr.io/alwatr/node:21.7.1
 
-COPY --from=builder /app/packages/panel-api/dist/ .
+COPY --from=builder /app/packages/services/panel-api/dist/ .
 
 ENV HOST="0.0.0.0" \
     PORT="80"

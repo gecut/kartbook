@@ -9,13 +9,13 @@ RUN set -eux; \
   yarn install --immutable; \
   yarn build; \
   ls -lahF .; \
-  ls -RlahF /app/packages/card-app;
+  ls -RlahF /app/packages/apps/card-app;
 
 # ---
 
 FROM ghcr.io/alwatr/nginx-pwa:2.5.0 as nginx
 
-COPY --from=builder /app/packages/card-app/dist/ .
+COPY --from=builder /app/packages/apps/card-app/dist/ .
 
 RUN pwd; ls -lAhF;
 
