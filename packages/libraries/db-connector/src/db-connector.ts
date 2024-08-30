@@ -21,7 +21,7 @@ import type {PlanInterface} from '@gecut/kartbook-types/plan.js';
 export class KartbookDbConnector {
   constructor(uri: string, logger?: GecutLogger, options?: mongoose.ConnectOptions) {
     options = {
-      dbName: 'test2',
+      dbName: 'main',
 
       ...(options ?? {}),
     };
