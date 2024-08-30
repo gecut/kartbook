@@ -8,7 +8,7 @@ import type {AppRouter} from '@gecut/kartbook-panel-api/panel-api.js';
 export const client = createTRPCProxyClient<AppRouter>({
   links: [
     httpLink({
-      url: import.meta.env.API_URL ?? 'http://localhost:8083',
+      url: import.meta.env.API_URL ?? 'https://api.panel.kartbook.ir',
       headers: () => ({
         Authorization: `Bearer ${envvm.get('user-token')}`,
       }),
