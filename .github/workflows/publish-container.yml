@@ -92,7 +92,6 @@ jobs:
             type=semver,enable=true,pattern={{version}}
             type=ref,enable=true,event=branch
             type=raw,enable={{is_default_branch}},value=latest
-            type=raw,enable=true,value={{GITHUB_SHA:0:7}}
           labels: |
             org.opencontainers.image.title="gecut/${{matrix.name}}"
             org.opencontainers.image.vendor="Gecut"
@@ -131,7 +130,7 @@ jobs:
 
     steps:
       - name: darkube-cli deploy
-        run: darkube deploy --token ${DARKUBE_DEPLOY_TOKEN} --app-id ${DARKUBE_APP_ID} --image-tag ${GITHUB_SHA:0:7} --job-id ${GITHUB_RUN_ID}
+        run: darkube deploy --token ${DARKUBE_DEPLOY_TOKEN} --app-id ${DARKUBE_APP_ID} --image-tag latest --job-id ${GITHUB_RUN_ID}
         env:
           DARKUBE_DEPLOY_TOKEN: ${{ secrets[format('__{0}__DEPLOY_TOKEN', matrix.name)] }}
           DARKUBE_APP_ID: ${{ secrets[format('__{0}__APP_ID', matrix.name)] }}
