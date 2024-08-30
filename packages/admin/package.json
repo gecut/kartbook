@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@gecut/kartbook-types": "workspace:^",
+    "@gecut/kartbook-db-connector": "workspace:^",
     "@tiptap/pm": "^2.4.0",
     "adminjs": "^7.8.1",
     "express": "^4.19.2",

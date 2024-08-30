@@ -4,14 +4,15 @@ import express from 'express';
 
 import provider from './admin/auth-provider.js';
 import options from './admin/options.js';
-import initializeDb from './db/index.js';
+import db from './db/index.js';
 
 const port = process.env.PORT || 3000;
 
 const start = async () => {
   const app = express();
 
-  await initializeDb();
+  await db.connect();
+  await db.init();
 
   const admin = new AdminJS(options);
 

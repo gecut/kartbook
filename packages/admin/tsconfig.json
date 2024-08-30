@@ -12,6 +12,9 @@
   "references": [
     {
       "path": "../libraries/types"
+    },
+    {
+      "path": "../libraries/db-connector"
     }
   ]
 }

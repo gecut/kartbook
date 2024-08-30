@@ -1,20 +1,30 @@
-import {$UserSchema, $WalletSchema, $CardSchema} from '@gecut/kartbook-types';
-import mongoose from 'mongoose';
+import db from '../db/index.js';
 
-import type {UserInterface, WalletInterface, CardInterface} from '@gecut/kartbook-types';
 import type {ResourceWithOptions} from 'adminjs';
 
 export const resources: Array<ResourceWithOptions> = [
   {
-    resource: mongoose.model<UserInterface>('User', $UserSchema),
+    resource: db.$User,
     options: {},
   },
   {
-    resource: mongoose.model<WalletInterface>('Wallet', $WalletSchema),
+    resource: db.$Wallet,
     options: {},
   },
   {
-    resource: mongoose.model<CardInterface>('Card', $CardSchema),
+    resource: db.$Order,
+    options: {},
+  },
+  {
+    resource: db.$Card,
+    options: {},
+  },
+  {
+    resource: db.$ValidatedCard,
+    options: {},
+  },
+  {
+    resource: db.$Plan,
     options: {},
   },
 ];

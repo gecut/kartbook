@@ -1,13 +1,11 @@
 import {Database, Resource} from '@adminjs/mongoose';
+import {KartbookDbConnector} from '@gecut/kartbook-db-connector';
 import AdminJS from 'adminjs';
-import mongoose from 'mongoose';
 
 AdminJS.registerAdapter({Database, Resource});
 
-const initialize = async () => {
-  const db = await mongoose.connect(process.env.DATABASE_URL as string);
+const db = new KartbookDbConnector(process.env.DB_URI as string, undefined, {
+  appName: 'admin',
+});
 
-  return {db};
-};
-
-export default initialize;
+export default db;
