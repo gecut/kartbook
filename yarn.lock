@@ -2359,6 +2359,7 @@ __metadata:
   dependencies:
     "@adminjs/express": "npm:^6.1.0"
     "@adminjs/mongoose": "npm:^4.1.0"
+    "@gecut/kartbook-db-connector": "workspace:^"
     "@gecut/kartbook-types": "workspace:^"
     "@tiptap/pm": "npm:^2.4.0"
     "@types/express": "npm:^4.17.21"

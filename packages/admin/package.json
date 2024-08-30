@@ -23,8 +23,8 @@
     "watch": "run-p watch:node"
   },
   "dependencies": {
-    "@gecut/kartbook-types": "workspace:^",
     "@gecut/kartbook-db-connector": "workspace:^",
+    "@gecut/kartbook-types": "workspace:^",
     "@tiptap/pm": "^2.4.0",
     "adminjs": "^7.8.1",
     "express": "^4.19.2",
