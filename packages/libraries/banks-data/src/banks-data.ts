@@ -74,7 +74,7 @@ export type Info = {
 };
 
 export const cdnConfig = {
-  base: 'https://k32-cdn.darkube.app/',
+  base: 'https://cdn.k32.ir/',
   path: 'banks/logos/',
 };
 
