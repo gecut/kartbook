@@ -15,7 +15,7 @@ env:
 
 jobs:
   build:
-    name: Build & Publish Containers
+    name: Build Containers
     runs-on: ubuntu-latest
 
     strategy:
@@ -78,15 +78,6 @@ jobs:
           registry: ghcr.io
           username: ${{env.USER}}
           password: ${{secrets.GITHUB_TOKEN}}
-
-      - name: 🏗 Log into registry.hamdocker.ir registry
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: docker/login-action@v3.1.0
-        with:
-          registry: registry.hamdocker.ir
-          username: ${{env.USER}}
-          password: P61agRtnHDOisaBrA1!
-
       - name: 🏗 Extract metadata
         id: meta
         uses: docker/metadata-action@v5.5.1
@@ -94,7 +85,6 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           images: |
             name=ghcr.io/${{env.USER}}/${{matrix.name}},enable=true
-            name=registry.hamdocker.ir/${{env.USER}}/${{matrix.name}},enable=true
             name=docker.io/${{env.USER}}/${{matrix.name}},enable=false
           tags: |
             type=semver,enable=true,pattern={{major}}
@@ -102,10 +92,11 @@ jobs:
             type=semver,enable=true,pattern={{version}}
             type=ref,enable=true,event=branch
             type=raw,enable={{is_default_branch}},value=latest
+            type=raw,enable=true,value=${GITHUB_SHA:0:7}
           labels: |
             org.opencontainers.image.title="gecut/${{matrix.name}}"
             org.opencontainers.image.vendor="Gecut"
-            org.opencontainers.image.documentation="https://github.com/gecut/hybrid-ui"
+            org.opencontainers.image.documentation="https://github.com/gecut/kartbook"
             org.opencontainers.image.authors="S. MohammadMahdi Zamanian <dev@mm25zamanain.ir> (https://mm25zamanian.ir)"
 
       - name: 🚀 Build and push container image
@@ -121,27 +112,29 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
 
   deploy:
-    name: Deploy Container On Darkube
+    name: Deploy Containers
     container: hamravesh/darkube-cli:v1.1
     needs: build
     runs-on: ubuntu-latest
-    if: false
 
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: CARD_API
-          - name: CARD_DB
-          - name: CARD_APP
           - name: ADMIN
+          - name: CARD_API
+          - name: CARD_APP
+          - name: CARD_DB
+          - name: CDN
+          - name: PANEL_API
+          - name: PANEL_APP
 
     steps:
       - name: darkube-cli deploy
-        run: darkube deploy --token ${DARKUBE_DEPLOY_TOKEN} --app-id ${DARKUBE_APP_ID} --image-tag latest --job-id ${GITHUB_RUN_ID}
+        run: darkube deploy --token ${DARKUBE_DEPLOY_TOKEN} --app-id ${DARKUBE_APP_ID} --image-tag ${GITHUB_SHA:0:7} --job-id ${GITHUB_RUN_ID}
         env:
-          DARKUBE_DEPLOY_TOKEN: ${{ secrets[format('DARKUBE_{0}_DEPLOY_TOKEN', matrix.name)] }}
-          DARKUBE_APP_ID: ${{ secrets[format('DARKUBE_{0}_APP_ID', matrix.name)] }}
+          DARKUBE_DEPLOY_TOKEN: ${{ secrets[format('__{0}__DEPLOY_TOKEN', matrix.name)] }}
+          DARKUBE_APP_ID: ${{ secrets[format('__{0}__APP_ID', matrix.name)] }}
 
   artillery:
     runs-on: ubuntu-latest
