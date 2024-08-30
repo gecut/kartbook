@@ -69,7 +69,6 @@ export const $AdminProcedure = $UserProcedure.use(adminMiddleware);
 export const logger = new GecutLogger('panel-api');
 export const db = new KartbookDbConnector(config.DATABASE.URI, logger.sub('db-connector'), {
   appName: 'panel-api',
-  loadBalanced: true,
 });
 export const microSMS = new KavenegarApi(config.KAVENEGAR_TOKEN, logger);
 export const zibalGateway = new ZibalGateWay(config.ZIBAL.PAYMENT, logger);

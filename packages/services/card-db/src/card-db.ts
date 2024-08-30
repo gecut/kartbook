@@ -8,7 +8,6 @@ import config from './config.js';
 const logger = new GecutLogger('card-db');
 const db = new KartbookDbConnector(config.DATABASE.URI, logger.sub('db'), {
   appName: 'card-db',
-  loadBalanced: true,
 });
 
 const server = http.createServer(async (request, response) => {
