@@ -8,13 +8,13 @@ export function $SupportPage() {
   return html`
     <div
       class="h-full w-full flex flex-col items-center justify-center gap-4 text-onSurfaceVariant
-             [&>.gecut-button]:w-full"
+             [&>.gecut-button]:w-full *:animate-fadeInSlide"
     >
-      <div class="[&>.gecut-icon]:text-[6rem]">
+      <i class="[&>.gecut-icon]:text-[6rem]">
         ${icon({
           svg: SolarCallChatRoundedLineDuotone,
         })}
-      </div>
+      </i>
       <h1 class="text-titleMedium">گفتگوی مستقیم با کارشناس پشتیبانی</h1>
       ${gecutButton({
         type: 'filled',
