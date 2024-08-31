@@ -6,16 +6,19 @@ import {when} from 'lit/directives/when.js';
 import {html} from 'lit/html.js';
 
 import {userContext} from '../../contexts/user.js';
+import {envvm} from '../../utilities/envvm.js';
 import {i18n} from '../../utilities/i18n.js';
 import {router} from '../router/index.js';
 
 import FluentEmojiRevolvingHearts from '~icons/fluent-emoji/revolving-hearts';
 import LineMdAccount from '~icons/line-md/account';
+import LineMdAccountAlertLoop from '~icons/line-md/account-alert-loop';
 import LineMdEmail from '~icons/line-md/email';
-import LineMdEmojiSmileWink from '~icons/line-md/emoji-smile-wink';
+import LineMdLightbulbTwotone from '~icons/line-md/lightbulb-twotone';
 import LineMdLogOut from '~icons/line-md/log-out';
 import LineMdPencil from '~icons/line-md/pencil';
 import LineMdPhone from '~icons/line-md/phone';
+import LineMdTextBoxMultiple from '~icons/line-md/text-box-multiple';
 
 export function $UserPage() {
   const timerState = new GecutState('date', 0);
@@ -34,11 +37,31 @@ export function $UserPage() {
 
   return html`
     <main class="flex flex-1 flex-col max-w-md mx-auto page-modal has-top-bar pb-20 px-4 !z-sticky">
-      <div class="w-full h-full flex flex-col items-center justify-center py-4">
+      <div class="w-full h-full flex flex-col items-center justify-center py-4 *:animate-fadeInSlide">
         ${gecutContext(
           userContext,
           (user) => html`
-            <div class="gecut-card-filled w-full flex flex-col gap-4 py-4">
+            ${when(
+              user.email == null,
+              () => html`
+                <button
+                  class="gecut-card-filled w-full flex gap-2 p-4 bg-secondaryContainer text-onSecondaryContainer
+                     text-bodyMedium focus-ring"
+                >
+                  <i>${icon({svg: LineMdLightbulbTwotone})}</i>
+                  <p class="text-start text-pretty">
+                    <span class="text-primary text-labelLarge !font-black">${user.firstName}</span>
+                    عزیز، با تکمیل پروفایل،
+                    <span class="text-primary text-labelLarge !font-bold">کـــارت بـوک</span>
+                    را به بهترین شکل شخصی‌سازی کنید و از پیشنهادهای ویژه ما لذت ببرید. برای تکمیل،
+                    <span class="text-error text-labelLarge !font-black">کلـــــیـک</span>
+                    کنید.
+                  </p>
+                </button>
+              `,
+            )}
+
+            <div class="gecut-card-elevated w-full flex flex-col gap-4 py-4">
               <div class="flex flex-col gap-6 w-full">
                 <div class="flex items-center justify-start gap-4 w-full">
                   <i class="text-primary">
@@ -75,7 +98,7 @@ export function $UserPage() {
                     <div class="flex items-center justify-start gap-4 w-full">
                       <i class="text-primary">
                         ${icon({
-                          svg: LineMdEmojiSmileWink,
+                          svg: LineMdAccountAlertLoop,
                         })}
                       </i>
                       <span class="text-onSurfaceVariant">${user.caller?.firstName} ${user.caller?.lastName}</span>
@@ -88,29 +111,36 @@ export function $UserPage() {
                     <div class="flex items-center justify-start gap-4 w-full">
                       <i class="text-primary">
                         ${icon({
-                          svg: LineMdEmojiSmileWink,
+                          svg: LineMdTextBoxMultiple,
                         })}
                       </i>
-                      <span class="text-onSurfaceVariant">${i18n.n(user.wallet.balance)}</span>
+                      <span class="text-onSurfaceVariant">${i18n.n(user.wallet.balance)} ﷼</span>
                     </div>
                   `,
                 )}
               </div>
               ${divider({})}
-              <div class="flex gap-4 *:grow *:flex-1">
+              <div class="flex gap-4 *:grow flex-col sm:*:flex-1 sm:flex-row">
                 ${gecutButton({
                   type: 'filled',
                   icon: {svg: LineMdPencil},
                   label: 'ویرایش اطلاعات',
                 })}
                 ${gecutButton({
-                  type: 'elevated',
+                  type: 'outlined',
                   icon: {svg: LineMdLogOut},
+                  events: {
+                    click: async () => {
+                      envvm.remove('user-token');
+                      await untilIdle();
+                      return window.location.reload();
+                    },
+                  },
                   label: 'خروج',
                 })}
               </div>
             </div>
-            <div class="gecut-card-filled w-full flex flex-col gap-4 py-4">
+            <div class="gecut-card-elevated w-full flex flex-col gap-4 py-4">
               <div class="flex flex-col justify-center gap-4 w-full">
                 <p
                   class="text-onSurfaceVariant text-bodySmall [&>.gecut-icon]:inline-block
