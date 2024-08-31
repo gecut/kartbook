@@ -5,10 +5,10 @@ window.addEventListener('load', () => {
   const userToken = envvm.get('user-token');
 
   if (userToken) {
-    loadUser();
-
-    userContext.requireValue().then(() => {
-      return import('./ui/app-index.js');
+    loadUser().then(() => {
+      userContext.requireValue().then(() => {
+        return import('./ui/app-index.js');
+      });
     });
   }
   else {
