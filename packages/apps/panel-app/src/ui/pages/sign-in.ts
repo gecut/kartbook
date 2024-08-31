@@ -94,7 +94,8 @@ export const $OnFormSubmit = async (event: SubmitEvent) => {
             lastName: lastName,
             phoneNumber,
           })
-          .then((user) => client.user.otp.send.mutate({userId: user._id}))
+          .then((user) => (userId = user._id))
+          .then(() => client.user.otp.send.mutate({userId: userId!}))
           .then(() => (signInSlides.value = 'otp'))
           .finally(() => (signInLoading.value = false));
       }

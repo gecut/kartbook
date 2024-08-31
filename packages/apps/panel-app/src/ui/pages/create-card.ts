@@ -288,7 +288,7 @@ export function $CreateCardPage() {
                     when(
                       isExists,
                       () => html`<span class="text-error">دامنه فوق موجود نمی باشد، دامنه دیگری انتخاب نمایید</span>`,
-                      () => html` <span class="text-primary" dir="ltr">k32.ir/${value}</span> `,
+                      () => html`<span class="text-primary" dir="ltr">k32.ir/${value}</span>`,
                     ),
                   )}
                 `;
