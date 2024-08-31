@@ -1,4 +1,4 @@
-import {createTRPCProxyClient, httpLink} from '@trpc/client';
+import {createTRPCProxyClient, httpBatchLink} from '@trpc/client';
 
 import {envvm} from '../utilities/envvm.js';
 import {sbm} from '../utilities/sbm.js';
@@ -7,7 +7,7 @@ import type {AppRouter} from '@gecut/kartbook-panel-api/panel-api.js';
 
 export const client = createTRPCProxyClient<AppRouter>({
   links: [
-    httpLink({
+    httpBatchLink({
       url: import.meta.env.API_URL ?? 'https://api.panel.kartbook.ir',
       headers: () => ({
         Authorization: `Bearer ${envvm.get('user-token')}`,
