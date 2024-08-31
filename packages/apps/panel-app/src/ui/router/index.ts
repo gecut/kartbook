@@ -4,10 +4,10 @@ if (!(globalThis as any).URLPattern) {
 
 import debounce from '@gecut/utilities/debounce.js';
 import {offline} from '@thepassle/app-tools/router/plugins/offline.js';
-import {redirect} from '@thepassle/app-tools/router/plugins/redirect.js';
 import {Router} from '@thepassle/app-tools/router.js';
 
 import requireAuthenticated from './plugins/require-authenticated.js';
+import requireNotAuthenticated from './plugins/require-not-authenticated.js';
 import {routes} from './routes.js';
 import {routerContext} from '../../contexts/router.js';
 import {titleContext} from '../../contexts/title.js';
@@ -30,7 +30,10 @@ export const router = new Router({
     {
       path: '/',
       title: 'خانه',
-      plugins: [requireAuthenticated(resolveRouterPath('sign-in')), redirect(resolveRouterPath('cards'))],
+      plugins: [
+        requireAuthenticated(resolveRouterPath('sign-in')),
+        requireNotAuthenticated(resolveRouterPath('cards')),
+      ],
     },
 
     ...Object.entries(routes as Routes).map(
