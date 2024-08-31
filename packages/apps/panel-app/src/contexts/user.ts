@@ -14,22 +14,25 @@ export async function loadUser() {
   const token = envvm.get('user-token');
 
   if (token !== '') {
-    await client.user.info
+    return await client.user.info
       .query()
-      .then((user) => {
-        userContext.value = user;
-
-        loadCards();
-        loadPlans();
-      })
+      .then((user) => (userContext.value = user))
+      .then(() => loadCards())
+      .then(() => loadPlans())
+      .then(() => true)
       .catch((cause) => {
         const error = TRPCClientError.from(cause);
 
         if (error.message === 'unauthorized') {
           envvm.remove('user-token');
+
+          window.location.reload();
         }
 
-        window.location.reload();
+
+        return false;
       });
   }
+
+  return false;
 }
