@@ -6,7 +6,7 @@ const requireAuthenticated = (redirect: string): Plugin => ({
   name: 'requireAuthenticated',
   shouldNavigate: () =>
     ({
-      condition: async () => {
+      condition: () => {
         return isAuthenticated();
       },
       redirect,
