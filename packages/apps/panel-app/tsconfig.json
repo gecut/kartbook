@@ -5,7 +5,7 @@
     "tsBuildInfoFile": ".tsbuildinfo",
     "rootDir": "src",
     "outDir": ".",
-    "types": ["vite/client", "unplugin-icons/types/raw"]
+    "types": ["vite/client","vite-plugin-pwa/client", "unplugin-icons/types/raw"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["./**/*.js", "./**/*.d.ts", "./dist/**/*"],

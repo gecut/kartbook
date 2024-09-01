@@ -3,15 +3,17 @@ import {cache} from 'lit/directives/cache.js';
 import {html, render} from 'lit/html.js';
 import 'unfonts.css';
 
-// eslint-disable-next-line import/order
-import './router/index.js';
 import {navigationBar} from './components/navigation-bar.js';
 import {topBar} from './components/top-bar.js';
+import './router/index.js';
 import './styles/global.css';
 import {routerContext} from '../contexts/router.js';
+import {pwa} from '../utilities/pwa.js';
 import {sbm} from '../utilities/sbm.js';
 
 document.body.innerHTML = '';
+
+pwa();
 
 render(
   html`

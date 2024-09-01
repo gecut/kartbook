@@ -9,17 +9,20 @@ const manifestJson: Partial<ManifestOptions> = {
   /* url */
   scope: '/',
   start_url: '/?pwa',
-  id: 'kartbook-panel-app',
+  id: 'com.kartbook.app',
   lang: 'fa-IR',
 
   /* info */
   name: 'Kartbook',
   short_name: 'Kartbook',
+  description:
+    "This project aims to create a secure online platform where users can generate a shareable digital version of their physical bank card. Instead of sharing photos of their card, users can send a unique, short link that displays the card's essential information.",
 
   /* screen */
   display: 'standalone',
   orientation: 'portrait',
   dir: 'rtl',
+  display_override: ['fullscreen', 'minimal-ui', 'window-controls-overlay'],
 
   /* theming */
   theme_color: '#fff',
@@ -50,7 +53,15 @@ const manifestJson: Partial<ManifestOptions> = {
       type: 'image/png',
       sizes: '512x512',
     },
+    {
+      src: '/icon-512.png',
+      type: 'image/png',
+      sizes: '512x512',
+      purpose: 'any',
+    },
   ],
+
+  categories: ['business', 'productivity', 'shopping'],
 };
 
 export default defineConfig(() => {
