@@ -5,7 +5,8 @@ import {html} from 'lit/html.js';
 
 import {client} from '../../client/index.js';
 import {loadUser} from '../../contexts/user.js';
-import {resolveRouterPath, router} from '../router/index.js';
+import {router} from '../router/index.js';
+import {resolvePath} from '../router/resolver.js';
 
 import SolarCheckCircleLineDuotone from '~icons/solar/check-circle-line-duotone';
 import SolarCloseCircleLineDuotone from '~icons/solar/close-circle-line-duotone';
@@ -50,7 +51,7 @@ export function $CreateCardCallbackPage() {
                 <div class="w-full mt-4 flex flex-col gap-2">
                   ${gecutButton({
                     type: 'filled',
-                    href: resolveRouterPath('cards'),
+                    href: resolvePath('cards'),
                     label: 'مشاهده کارت',
                   })}
                   ${gecutButton({
@@ -72,7 +73,7 @@ export function $CreateCardCallbackPage() {
                 <div class="w-full mt-4 flex flex-col gap-2">
                   ${gecutButton({
                     type: 'filledTonal',
-                    href: resolveRouterPath('cards'),
+                    href: resolvePath('cards'),
                     label: 'بازگشت',
                   })}
                 </div>

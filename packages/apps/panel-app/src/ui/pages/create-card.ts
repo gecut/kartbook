@@ -12,7 +12,8 @@ import {client} from '../../client/index.js';
 import {plansContext} from '../../contexts/plans.js';
 import {sbm} from '../../utilities/sbm.js';
 import {$CardRenderer} from '../components/card.js';
-import {resolveRouterPath, router} from '../router/index.js';
+import {router} from '../router/index.js';
+import {resolvePath} from '../router/resolver.js';
 
 import SolarCard2LineDuotone from '~icons/solar/card-2-line-duotone';
 import SolarEarthLineDuotone from '~icons/solar/earth-line-duotone';
@@ -453,8 +454,8 @@ export function $CreateCardPage() {
                     if (currentIndex > 0) {
                       createCardSlides.value = slides[currentIndex - 1];
                     }
-                    else {
-                      router.navigate(resolveRouterPath('cards'));
+ else {
+                      router.navigate(resolvePath('cards'));
                     }
                   },
                 },

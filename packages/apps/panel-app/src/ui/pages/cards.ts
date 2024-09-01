@@ -7,7 +7,7 @@ import {html} from 'lit/html.js';
 import {cardsContext, selectedCardContext} from '../../contexts/cards.js';
 import {$CardDetail} from '../components/card-detail.js';
 import {$CardListItem} from '../components/card-list-item.js';
-import {resolveRouterPath} from '../router/index.js';
+import {resolvePath} from '../router/resolver.js';
 
 import LineMdPlus from '~icons/line-md/plus';
 import SolarCardLineDuotone from '~icons/solar/card-line-duotone';
@@ -16,7 +16,7 @@ export function $CardsPage() {
   const _$NewCardButton = gecutButton({
     type: 'filled',
     label: 'ایجاد کارت جدید',
-    href: resolveRouterPath('cards/create'),
+    href: resolvePath('cards/create'),
     icon: {
       svg: LineMdPlus,
     },
@@ -44,8 +44,10 @@ export function $CardsPage() {
       `,
       () => html`
         <main class="flex flex-1 flex-col max-w-md mx-auto page-modal has-top-bar pb-20 px-4 h-full w-full !z-sticky">
-          <div class="h-full w-full flex flex-col items-center justify-center [&>.gecut-button]:w-full
-                      *:animate-fadeInSlide">
+          <div
+            class="h-full w-full flex flex-col items-center justify-center [&>.gecut-button]:w-full
+                      *:animate-fadeInSlide"
+          >
             <i class="[&>.gecut-icon]:text-[6rem] text-primary !animate-bounce">
               ${icon({
                 svg: SolarCardLineDuotone,
