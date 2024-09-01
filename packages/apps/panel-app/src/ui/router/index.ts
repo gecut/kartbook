@@ -8,6 +8,7 @@ import {Router} from '@thepassle/app-tools/router.js';
 
 import requireAuthenticated from './plugins/require-authenticated.js';
 import requireNotAuthenticated from './plugins/require-not-authenticated.js';
+import {resolvePath} from './resolver.js';
 import {routes} from './routes.js';
 import {routerContext} from '../../contexts/router.js';
 import {titleContext} from '../../contexts/title.js';
@@ -30,15 +31,11 @@ export const router = new Router({
     {
       path: '/',
       title: 'خانه',
-      plugins: [
-        requireAuthenticated(resolveRouterPath('sign-in')),
-        requireNotAuthenticated(resolveRouterPath('cards')),
-      ],
+      plugins: [requireAuthenticated(resolvePath('sign-in')), requireNotAuthenticated(resolvePath('cards'))],
     },
-
     ...Object.entries(routes as Routes).map(
       ([path, options]): RouteDefinition => ({
-        path: resolveRouterPath(path as RoutesPaths),
+        path: resolvePath(path as RoutesPaths),
         title: options.title,
         render: options?.render,
         plugins: options.plugins,
@@ -46,14 +43,6 @@ export const router = new Router({
     ),
   ],
 });
-
-export function resolveRouterPath(key: RoutesPaths) {
-  let resolvedPath = '/';
-
-  resolvedPath = resolvedPath + key;
-
-  return resolvedPath;
-}
 
 router.addEventListener(
   'route-changed',
