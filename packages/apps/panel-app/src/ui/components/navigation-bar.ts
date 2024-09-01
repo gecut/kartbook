@@ -7,7 +7,7 @@ import {html} from 'lit/html.js';
 import {routerContext} from '../../contexts/router.js';
 import {routes} from '../router/routes.js';
 
-export function navigationBar() {
+const _$NavBar = () => {
   return html`
     <footer class="fixed bottom-0 inset-x-0 bg-surfaceContainer translucent flex flex-col h-20">
       <div class="max-w-md mx-auto flex items-center justify-center gap-4 w-full h-full relative px-4">
@@ -26,9 +26,9 @@ export function navigationBar() {
       </div>
     </footer>
   `;
-}
+};
 
-function navigationItem(unselectedIcon: string, selectedIcon: string, link: string, active = false) {
+const navigationItem = (unselectedIcon: string, selectedIcon: string, link: string, active = false) => {
   return html`
     <a
       .href=${link}
@@ -52,4 +52,6 @@ function navigationItem(unselectedIcon: string, selectedIcon: string, link: stri
       </span>
     </a>
   `;
-}
+};
+
+export default _$NavBar;
