@@ -1,3 +1,5 @@
+import {nextIdleCallback} from '@gecut/utilities/wait/polyfill.js';
+
 import {loadUser, userContext} from './contexts/user.js';
 import {envvm} from './utilities/envvm.js';
 
@@ -14,4 +16,8 @@ window.addEventListener('load', () => {
   else {
     import('./ui/app-index.js');
   }
+
+  nextIdleCallback(() => {
+    import('./utilities/pwa.js');
+  });
 });
