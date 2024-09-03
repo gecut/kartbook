@@ -5,12 +5,14 @@ import {
   $PlanSchema,
   $ValidatedCardSchema,
   $OrderSchema,
+  $DiscountSchema,
 } from '@gecut/kartbook-types';
 import {GecutLogger} from '@gecut/logger';
 import mongoose from 'mongoose';
 
 import type {
   CardInterface,
+  DiscountInterface,
   OrderInterface,
   UserInterface,
   ValidatedCardInterface,
@@ -31,12 +33,13 @@ export class KartbookDbConnector {
     this.logger = logger ?? new GecutLogger('db-connector');
   }
 
-  $User = mongoose.model<UserInterface>('User', $UserSchema);
-  $Wallet = mongoose.model<WalletInterface>('Wallet', $WalletSchema);
-  $Plan = mongoose.model<PlanInterface>('Plan', $PlanSchema);
   $Card = mongoose.model<CardInterface>('Card', $CardSchema);
+  $Discount = mongoose.model<DiscountInterface>('Discount', $DiscountSchema);
   $Order = mongoose.model<OrderInterface>('Order', $OrderSchema);
+  $Plan = mongoose.model<PlanInterface>('Plan', $PlanSchema);
+  $User = mongoose.model<UserInterface>('User', $UserSchema);
   $ValidatedCard = mongoose.model<ValidatedCardInterface>('ValidatedCard', $ValidatedCardSchema);
+  $Wallet = mongoose.model<WalletInterface>('Wallet', $WalletSchema);
 
   connector?: typeof mongoose;
 
@@ -69,8 +72,17 @@ export class KartbookDbConnector {
     const cardCount = await this.$Card.countDocuments();
     const orderCount = await this.$Order.countDocuments();
     const validatedCardCount = await this.$ValidatedCard.countDocuments();
+    const discountCount = await this.$Discount.countDocuments();
 
-    this.logger.methodArgs?.('init', {userCount, walletCount, planCount, cardCount, orderCount, validatedCardCount});
+    this.logger.methodArgs?.('init', {
+      userCount,
+      walletCount,
+      planCount,
+      cardCount,
+      orderCount,
+      validatedCardCount,
+      discountCount,
+    });
 
     if (userCount + walletCount + planCount + cardCount < 5) {
       await this.connector?.connection?.db?.dropDatabase();
