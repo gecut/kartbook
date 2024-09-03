@@ -32,7 +32,7 @@ export const client = createTRPCProxyClient<AppRouter>({
             console.error('trpc_fetch_error', error);
 
             sbm.notify({
-              message: 'اتصال به سرور با خطا مواجه شد',
+              message: 'اتصال به سرور با مشکل روبه‌رو شد. لطفا اتصال خود را بررسی کرده و دوباره تلاش کنید.',
               close: true,
             });
 

@@ -53,7 +53,7 @@ export function $CreateCardPage() {
             .then((exist) => {
               if (exist) {
                 sbm.notify({
-                  message: 'شماره کارت وارد شده وجود دارد.',
+                  message: 'شماره کارتی که وارد کردید قبلاً ثبت شده است.',
                   close: true,
                 });
 
@@ -117,7 +117,7 @@ export function $CreateCardPage() {
         }
         else {
           sbm.notify({
-            message: 'اطلاعات کارت را مطالعه و تایید کنید.',
+            message: ' لطفا اطلاعات کارت را با دقت بررسی کرده و در صورت تایید، عملیات را ادامه دهید.',
             close: true,
           });
         }
