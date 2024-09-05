@@ -23,14 +23,14 @@ export const dataContext = new ContextSignal<DataContextType>('data', 'Animation
 
 dataContext.value = null;
 
-export function load() {
+export async function load() {
   const slug = window.location.pathname.split('/');
 
   const username = slug[1] ?? '';
   const amount = amountSanitizer(slug[2] ?? '');
 
   if (username != '') {
-    api
+    await api
       .get(username, {throwHttpErrors: false})
       .then((response) => {
         if (!response.ok) {
@@ -81,6 +81,8 @@ export function load() {
   else {
     dataContext.value = 'no-username';
   }
+
+  return;
 }
 
 export function amountSanitizer(amount: string): number | undefined {
