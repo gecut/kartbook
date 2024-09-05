@@ -118,7 +118,7 @@ export function card(data: DataContextType) {
         <div class="grow"></div>
 
         <div class="text-bodyMedium text-outline opacity-85">
-          ${data.card.owner.firstName + ' ' + data.card.owner.lastName}
+          ${data.card.ownerName || data.card.owner.firstName + ' ' + data.card.owner.lastName}
         </div>
       </div>
     </div>
