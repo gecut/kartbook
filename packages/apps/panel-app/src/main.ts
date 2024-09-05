@@ -1,23 +1,11 @@
-import {nextIdleCallback} from '@gecut/utilities/wait/polyfill.js';
+import {untilIdle} from '@gecut/utilities/wait/wait.js';
 
-import {loadUser, userContext} from './contexts/user.js';
-import {envvm} from './utilities/envvm.js';
+window.addEventListener('load', async () => {
+  await import('unfonts.css');
 
-window.addEventListener('load', () => {
-  const userToken = envvm.get('user-token');
+  const {startApp} = await import('./ui/app-index.js');
 
-  if (userToken) {
-    loadUser().then(() => {
-      userContext.requireValue().then(() => {
-        return import('./ui/app-index.js');
-      });
-    });
-  }
-  else {
-    import('./ui/app-index.js');
-  }
+  await untilIdle();
 
-  nextIdleCallback(() => {
-    import('./utilities/pwa.js');
-  });
+  startApp();
 });
