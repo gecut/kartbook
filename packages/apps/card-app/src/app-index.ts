@@ -23,9 +23,11 @@ export async function startApp() {
         </div>
       </div>
 
-      ${gecutContext(dataContext, card)}
+      <div class="*:animate-fadeInSlide *:[animation-duration:1024ms] *:[animation-delay:256ms]">
+        ${gecutContext(dataContext, card)}
+      </div>
 
-      <div class="grow relative *:animate-fadeInSlide">
+      <div class="grow relative">
         <div
           class="absolute inset-0 flex flex-col gap-3 justify-center items-center text-bodySmall
                  lg:text-bodyMedium text-onSurfaceVariant"
