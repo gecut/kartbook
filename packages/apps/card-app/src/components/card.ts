@@ -10,10 +10,10 @@ import {errorCard} from './error.card.js';
 import {skeletonCard} from './skeleton.card.js';
 import {pushNotification} from '../utilities/notification.context.js';
 
-import type {DataContextType} from '../utilities/data.context.js';
+import type {DataContextType} from '../utilities/data.state.js';
 
 export function card(data: DataContextType) {
-  if (data == null) return skeletonCard;
+  if (data === 'loading') return skeletonCard;
   if (data === 'error' || data === 'no-username') return errorCard;
   if (data === 'disabled') return disabledCard;
 

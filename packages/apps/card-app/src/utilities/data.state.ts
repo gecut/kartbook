@@ -1,5 +1,5 @@
 import IranianBanks from '@gecut/kartbook-banks-data';
-import {ContextSignal} from '@gecut/signal';
+import {GecutState} from '@gecut/lit-helper';
 
 import {pushNotification} from './notification.context.js';
 import {api} from '../ky.js';
@@ -17,25 +17,23 @@ export type DataContextType =
   | 'disabled'
   | 'error'
   | 'no-username'
-  | null;
+  | 'loading';
 
-export const dataContext = new ContextSignal<DataContextType>('data', 'AnimationFrame');
+export const dataState = new GecutState<DataContextType>('data', 'loading');
 
-dataContext.value = null;
-
-export async function load() {
+export async function load(): Promise<DataContextType> {
   const slug = window.location.pathname.split('/');
 
   const username = slug[1] ?? '';
   const amount = amountSanitizer(slug[2] ?? '');
 
   if (username != '') {
-    await api
+    return await api
       .get(username, {throwHttpErrors: false})
       .then((response) => {
         if (!response.ok) {
           if (response.status === 403) {
-            dataContext.value = 'disabled';
+            dataState.value = 'disabled';
           }
 
           throw new Error('fetch failed: ' + response.statusText);
@@ -57,7 +55,7 @@ export async function load() {
         return {card, bank};
       })
       .then((data) => {
-        dataContext.value = {
+        return {
           ...data,
           primaryColor: data.bank.color
             ? `${data.bank.color.red},${data.bank.color.green},${data.bank.color.blue}`
@@ -68,21 +66,18 @@ export async function load() {
       .catch((error) => {
         console.error(error);
 
-        if (dataContext.value !== 'disabled') {
-          dataContext.value = 'error';
-
+        if (dataState.value !== 'disabled') {
           pushNotification({
             type: 'error',
             msg: 'مشکلی در دریافت داده به وجود آمده، دوباره تلاش کنید.',
           });
         }
+
+        return 'error';
       });
   }
-  else {
-    dataContext.value = 'no-username';
-  }
 
-  return;
+  return 'no-username';
 }
 
 export function amountSanitizer(amount: string): number | undefined {

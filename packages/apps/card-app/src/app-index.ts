@@ -1,16 +1,14 @@
 import {gecutContext} from '@gecut/lit-helper/directives/context.js';
-import {untilNextFrame} from '@gecut/utilities/wait/wait.js';
+import {untilIdle, untilMS, untilNextFrame} from '@gecut/utilities/wait/wait.js';
 import {html, render} from 'lit/html.js';
 
 import {card} from './components/card.js';
-import {dataContext, load as loadCardData} from './utilities/data.context.js';
+import {dataState, load as loadCardData} from './utilities/data.state.js';
 import {notificationContext, notificationRenderer} from './utilities/notification.context.js';
 
 import type {Notification} from './utilities/notification.context.js';
 
 export async function startApp() {
-  await loadCardData();
-
   document.body.innerHTML = '';
 
   await untilNextFrame();
@@ -24,7 +22,7 @@ export async function startApp() {
       </div>
 
       <div class="*:animate-fadeInSlide *:[animation-duration:1024ms] *:[animation-delay:256ms]">
-        ${gecutContext(dataContext, card)}
+        ${dataState.hydrate(card)}
       </div>
 
       <div class="grow relative">
@@ -45,4 +43,10 @@ export async function startApp() {
     `,
     document.body,
   );
+
+  await untilIdle();
+  const data = await loadCardData();
+  await untilMS(1024);
+
+  dataState.value = data;
 }
