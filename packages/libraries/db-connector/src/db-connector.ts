@@ -135,5 +135,19 @@ export class KartbookDbConnector {
 
       this.logger.property?.('card', await card.populate(['owner', 'subscription']));
     }
+
+    if (discountCount == 0) {
+      const discount = new this.$Discount({
+        code: 'KROOT',
+        discount: 100,
+        discountType: 'percentage',
+        name: 'Root',
+        filters: {
+          maxUsage: 5,
+        },
+      });
+
+      await discount.save();
+    }
   }
 }
