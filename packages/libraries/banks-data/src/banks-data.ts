@@ -64,7 +64,7 @@ export const banksBinList: BanksBinListType = {
   '603769': 'saderat',
   '621986': {
     '10': 'saman',
-    '16': 'blu',
+    '19': 'blu',
   },
   '627961': 'sanat-madan',
   '639607': 'sarmayeh',
