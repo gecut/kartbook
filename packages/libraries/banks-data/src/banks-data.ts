@@ -2,9 +2,9 @@ export const banksIdList = [
   'ansar',
   'caspian',
   'gardeshgari',
-  'iranEurope',
+  'iran-europe',
   'keshavarzi',
-  'mehrEghtesad',
+  'mehr-eghtesad',
   'melli',
   'post',
   'saman',
@@ -12,17 +12,17 @@ export const banksIdList = [
   'ayandeh',
   'dey',
   'ghavamin',
-  'iranVenezuela',
-  'khavarMianeh',
+  'iran-venezuela',
+  'khavar-mianeh',
   'mehrIran',
   'noor',
   'refah',
-  'sanatMadan',
+  'sanat-madan',
   'sina',
-  'bankMarkazi',
-  'eghtesadNovin',
+  'bank-markazi',
+  'eghtesad-novin',
   'hekmat',
-  'iranZamin',
+  'iran-zamin',
   'kosar',
   'melall',
   'parsian',
@@ -38,13 +38,19 @@ export const banksIdList = [
   'saderat',
   'sepah',
 ] as const;
-export const banksBinList: Record<`${number}`, (typeof banksIdList)[number]> = {
+
+type BanksBinListType = Record<
+  `${number}`,
+  (typeof banksIdList)[number] | Record<`${number}`, (typeof banksIdList)[number]>
+>;
+
+export const banksBinList: BanksBinListType = {
   '502938': 'dey',
-  '627412': 'eghtesadNovin',
+  '627412': 'eghtesad-novin',
   '505416': 'gardeshgari',
   '639599': 'ghavamin',
   '627488': 'karafarin',
-  '585947': 'khavarMianeh',
+  '585947': 'khavar-mianeh',
   '603770': 'keshavarzi',
   '628023': 'maskan',
   '606256': 'melall',
@@ -56,8 +62,11 @@ export const banksBinList: Record<`${number}`, (typeof banksIdList)[number]> = {
   '627760': 'post',
   '589463': 'refah',
   '603769': 'saderat',
-  '621986': 'saman',
-  '627961': 'sanatMadan',
+  '621986': {
+    '10': 'saman',
+    '16': 'blu',
+  },
+  '627961': 'sanat-madan',
   '639607': 'sarmayeh',
   '589210': 'sepah',
   '504706': 'shahr',
@@ -161,8 +170,13 @@ export default class IranianBanks {
     cardNumber: [string, string, string, string],
   ): (typeof banksIdList)[number] | null {
     const bin: `${number}` = (cardNumber[0].toString() + cardNumber[1].toString().slice(0, 2)) as `${number}`;
+    const result = banksBinList[bin];
 
-    return banksBinList[bin] ?? null;
+    if (typeof result === 'string') return result;
+
+    const subBin: `${number}` = cardNumber[1].toString().slice(2, 4) as `${number}`;
+
+    return result[subBin] ?? null;
   }
 
   static async getInfo(cardNumber: [string, string, string, string]): Promise<Info> {
