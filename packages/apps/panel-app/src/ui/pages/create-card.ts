@@ -20,14 +20,17 @@ import SolarEarthLineDuotone from '~icons/solar/earth-line-duotone';
 import SolarUndoLeftLineDuotone from '~icons/solar/undo-left-line-duotone';
 import SvgSpinnersRingResize from '~icons/svg-spinners/ring-resize';
 
-import type {CardData, OrderData} from '@gecut/kartbook-types';
+import type {CardData, DiscountData, OrderData, PlanData} from '@gecut/kartbook-types';
 import type {ArrayValues, PartialDeep} from '@gecut/types';
+
+type CreateCardMemory = {card: PartialDeep<CardData>; discount: DiscountData | null};
 
 export function $CreateCardPage() {
   const slides = ['cardNumber', 'preview', 'slug', 'plan'] as const;
   const createCardSlides = new GecutState<ArrayValues<typeof slides>>('create-card.slides', 'cardNumber');
   const createCardLoading = new GecutState<boolean>('create-card.loading', false);
-  const createCardMemory = new GecutState<PartialDeep<CardData>>('create-card.memory', {});
+
+  const createCardMemory = new GecutState<CreateCardMemory>('create-card.memory', {card: {}, discount: null});
 
   const $OnFormSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
@@ -63,13 +66,9 @@ export function $CreateCardPage() {
               return client.card.authorize.mutate({cardNumber});
             })
             .then((validatedCard) => {
-              createCardMemory.value = {
-                ...createCardMemory.value,
-
-                cardNumber: validatedCard.cardNumber,
-                iban: validatedCard.iban,
-                ownerName: validatedCard.ownerName,
-              };
+              createCardMemory.value!.card.cardNumber = validatedCard.cardNumber;
+              createCardMemory.value!.card.iban = validatedCard.iban;
+              createCardMemory.value!.card.ownerName = validatedCard.ownerName;
 
               createCardSlides.value = 'preview';
             })
@@ -81,29 +80,41 @@ export function $CreateCardPage() {
         const slug = data.get('slug')?.toString();
 
         if (slug) {
-          createCardMemory.value = {
-            ...createCardMemory.value,
-
-            slug,
-          };
-
+          createCardMemory.value!.card.slug = slug;
           createCardSlides.value = 'plan';
         }
 
         break;
       case 'plan':
-        const card = createCardMemory.value;
+        const memory = createCardMemory.value;
 
-        if (card && card.cardNumber && card.iban && card.slug && card.subscription?._id && card.ownerName) {
+        if (
+          memory &&
+          memory.card &&
+          memory.card.cardNumber &&
+          memory.card.iban &&
+          memory.card.slug &&
+          memory.card.subscription?._id &&
+          memory.card.ownerName
+        ) {
           const order: OrderData = await client.order.create.mutate({
-            cardNumber: card.cardNumber,
-            iban: card.iban,
-            ownerName: card.ownerName,
-            planId: card.subscription._id,
-            slug: card.slug,
+            cardNumber: memory.card.cardNumber,
+            iban: memory.card.iban,
+            ownerName: memory.card.ownerName,
+            planId: memory.card.subscription._id,
+            slug: memory.card.slug,
+            discountCode: memory.discount?.code ?? undefined,
           });
 
-          if (order.trackId) {
+          if (order.status === 1) {
+            router.navigate(
+              resolvePath('cards/create/callback', {
+                trackId: String(order.trackId),
+                orderId: order._id,
+              }),
+            );
+          }
+          else if (order.trackId) {
             window.open('https://gateway.zibal.ir/start/' + order.trackId, '_self');
           }
         }
@@ -134,295 +145,38 @@ export function $CreateCardPage() {
         ${createCardSlides.hydrate((state) =>
           stateManager(
             {
-              cardNumber: () => html`
-                <div class="flex flex-col gap-4 items-center justify-center">
-                  <div class="text-primary [&>.gecut-icon]:text-[6rem]">${icon({svg: SolarCard2LineDuotone})}</div>
-                </div>
-                <div class="w-full text-center text-bodyMedium text-onSurfaceVariant">
-                  شماره کارت 16 رقمی خود را وارد کنید.
-                </div>
-                <div class="flex w-full gap-4" dir="ltr">
-                  <label class="gecut-input">
-                    <input
-                      type="text"
-                      inputmode="numeric"
-                      class="card-number"
-                      .value=${createCardMemory.value?.cardNumber?.[0] ?? ''}
-                      name="cardNumber1"
-                      pattern="^[0-9]{4}$"
-                      maxlength="4"
-                      required
-                    />
-                  </label>
-                  <label class="gecut-input">
-                    <input
-                      type="text"
-                      inputmode="numeric"
-                      class="card-number"
-                      .value=${createCardMemory.value?.cardNumber?.[1] ?? ''}
-                      name="cardNumber2"
-                      pattern="^[0-9]{4}$"
-                      maxlength="4"
-                      required
-                    />
-                  </label>
-                  <label class="gecut-input">
-                    <input
-                      type="text"
-                      inputmode="numeric"
-                      class="card-number"
-                      .value=${createCardMemory.value?.cardNumber?.[2] ?? ''}
-                      name="cardNumber3"
-                      pattern="^[0-9]{4}$"
-                      maxlength="4"
-                      required
-                    />
-                  </label>
-                  <label class="gecut-input">
-                    <input
-                      type="text"
-                      inputmode="numeric"
-                      class="card-number"
-                      .value=${createCardMemory.value?.cardNumber?.[3] ?? ''}
-                      name="cardNumber4"
-                      pattern="^[0-9]{4}$"
-                      maxlength="4"
-                      required
-                    />
-                  </label>
-                </div>
-              `,
-              preview: () => html`
-                ${createCardMemory.hydrate(
-                  (card) =>
-                    html`${until(
-                      when(card.cardNumber, () =>
-                        IranianBanks.getInfo(card.cardNumber!).then((bank) =>
-                          $CardRenderer(card.cardNumber!, card.iban ?? '', card.ownerName ?? '', bank),
-                        ),
-                      ),
-                    )}`,
-                )}
-
-                <label class="px-4 flex gap-2">
-                  <input type="checkbox" name="confirm" />
-
-                  <span>اطلاعات فوق صحیح و آن را تایید میکنم.</span>
-                </label>
-              `,
-              slug: () => {
-                const slugOptions = new GecutState<{
-                  value: null | string;
-                  isExists: boolean;
-                  loading: boolean;
-                }>('slug.options', {
-                  value: null,
-                  isExists: false,
-                  loading: false,
-                });
-
-                const onSlugInput = debounce((event: InputEvent) => {
-                  const input = event.target as HTMLInputElement;
-
-                  if (input.validity.patternMismatch === true) return;
-
-                  slugOptions.value = {
-                    loading: true,
-                    value: input.value,
-                    isExists: slugOptions.value?.isExists ?? false,
-                  };
-
-                  client.card.slugExist.mutate({slug: input.value}).then((exist) => {
-                    slugOptions.value = {
-                      loading: false,
-                      isExists: exist,
-                      value: slugOptions.value?.value ?? null,
-                    };
-
-                    if (exist) {
-                      return input.setCustomValidity('Slug is exists');
-                    }
-
-                    return input.setCustomValidity('');
-                  });
-                }, 1024);
-
-                return html`
-                  <div class="flex flex-col gap-4 items-center justify-center">
-                    <div class="text-primary [&>.gecut-icon]:text-[6rem]">${icon({svg: SolarEarthLineDuotone})}</div>
-                  </div>
-
-                  <div class="flex flex-col w-full">
-                    <div class="w-full text-center text-bodyMedium text-onSurfaceVariant">
-                      دامنه مورد نظر خود را وارد نمایید.
-                    </div>
-                    <div class="w-full text-center text-bodySmall text-onSurfaceVariant">
-                      از دامنه جهت اشتراک گذاری کارت آنلاین استفاده خواهد شد.
-                    </div>
-                  </div>
-
-                  <label class="gecut-input">
-                    <input
-                      type="text"
-                      .value=${createCardMemory.value?.slug ?? ''}
-                      name="slug"
-                      pattern="^[a-z][a-z0-9]{3,16}$"
-                      @input=${onSlugInput}
-                      required
-                    />
-
-                    ${slugOptions.hydrate(({loading}) =>
-                      when(
-                        loading,
-                        () => html`
-                          <div class="loading">
-                            ${icon({
-                              svg: SvgSpinnersRingResize,
-                            })}
-                          </div>
-                        `,
-                      ),
-                    )}
-                  </label>
-
-                  ${slugOptions.hydrate(({isExists, value}) =>
-                    when(
-                      isExists,
-                      () => html`<span class="text-error">دامنه فوق موجود نمی باشد، دامنه دیگری انتخاب نمایید</span>`,
-                      () => html`<span class="text-primary" dir="ltr">k32.ir/${value}</span>`,
-                    ),
-                  )}
-                `;
-              },
+              cardNumber: () => _$CardNumberSlide(createCardMemory.value),
+              preview: () => _$PreviewSlide(createCardMemory.value),
+              slug: () => _$SlugSlide(createCardMemory.value),
               plan: () => html`
-                <h1 class="text-bodyLarge text-center">پلن اشتراک خود را انتخاب کنید</h1>
-                <div class="flex flex-col gap-4">
-                  ${gecutContext(plansContext, (plans) =>
-                    map(
-                      null,
-                      plans,
-                      (plan) => html`
-                        <label
-                          class="w-full h-24 group rounded-lg ring ring-transparent has-[:checked]:ring-primary
-                                 relative overflow-hidden bg-surface"
-                        >
-                          <div class="absolute z-[1] inset-0 opacity-20 bg-surfaceVariant"></div>
+                ${_$PlansList(plansContext.value ?? [], (plan) => {
+                  createCardMemory.value!.card.subscription = plan;
 
-                          ${when(
-                            plan.patternUrl,
-                            () => html`
-                              <div
-                                class="absolute z-[2] inset-0 opacity-10 bg-cover"
-                                style="background-image:url('${plan.patternUrl ?? ''}');"
-                              ></div>
-                            `,
-                          )}
+                  if (createCardMemory.value!.discount != null) {
+                    createCardMemory.value!.discount = null;
 
-                          <div class="w-full h-full flex gap-4 p-4 items-center absolute z-[3] inset-0">
-                            <input
-                              type="radio"
-                              name="plan"
-                              .value=${plan.name}
-                              class="hidden"
-                              @change=${() => {
-                                createCardMemory.value = {
-                                  ...createCardMemory.value,
+                    sbm.notify({
+                      message: 'درصورت تعویض پلن اشتراک تخفیف حذف خواهد شد',
+                      close: true,
+                    });
+                  }
 
-                                  subscription: plan,
-                                };
-                              }}
-                            />
-
-                            <div class="size-5 rounded-full bg-surfaceVariant flex items-center justify-center">
-                              <div class="size-3 rounded-full bg-transparent group-has-[:checked]:bg-primary"></div>
-                            </div>
-
-                            <div class="text-onSurface text-labelMedium grow">
-                              ${unsafeHTML(plan.htmlTitle || plan.name)}
-                            </div>
-
-                            ${when(
-                              plan.isPremium,
-                              () => html`
-                                <span class="text-onSurfaceVariant text-labelSmall group-has-[:checked]:text-primary">
-                                  کد اختصاصی
-                                </span>
-                              `,
-                              () => html`
-                                <span class="text-onSurfaceVariant text-labelSmall group-has-[:checked]:text-primary">
-                                  ${plan.price.toLocaleString('fa-IR')} ریال
-                                </span>
-                              `,
-                            )}
-                          </div>
-                        </label>
-                      `,
-                    ),
-                  )}
-                </div>
+                  createCardMemory.value! = createCardMemory.value!;
+                })}
 
                 <div class="flex flex-col gap-4 pt-4 text-bodyMedium text-onSurfaceVariant *:animate-fadeIn">
-                  ${createCardMemory.hydrate((card) =>
+                  ${createCardMemory.hydrate((memory) =>
                     when(
-                      card.subscription?.isPremium === true,
-                      () => html`
-                        <div class="flex w-full gap-4 [&>*:first-child]:grow [&>*:last-child]:px-3">
-                          <label class="gecut-input">
-                            <input
-                              type="text"
-                              name="discount"
-                              pattern="^[a-Z0-9]{6}$"
-                              maxlength="6"
-                              placeholder="کد اختصاصی"
-                            />
-                          </label>
-                          ${gecutButton({
-                            type: 'filled',
-                            label: 'فعال سازی',
-                          })}
-                        </div>
-                        <div class="flex w-full justify-between items-center">
-                          <span>هزینه اشتراک</span>
-                          <span>${(0).toLocaleString('fa-IR')} ریال</span>
-                        </div>
-                        <div class="flex w-full justify-between items-center">
-                          <span>تخفیف</span>
-                          <span>${(0).toLocaleString('fa-IR')} ریال</span>
-                        </div>
-                        <div class="flex w-full justify-between items-center text-onSurface">
-                          <span>جمع کل</span>
-                          <span>${(0).toLocaleString('fa-IR')} ریال</span>
-                        </div>
-                      `,
-                      () => html`
-                        <div class="flex w-full gap-4 [&>*:first-child]:grow [&>*:last-child]:px-3">
-                          <label class="gecut-input">
-                            <input
-                              type="text"
-                              name="discount"
-                              pattern="^[a-Z0-9]{6}$"
-                              maxlength="6"
-                              placeholder="کد تخفیف"
-                            />
-                          </label>
-                          ${gecutButton({
-                            type: 'filledTonal',
-                            label: 'اعمال',
-                          })}
-                        </div>
-                        <div class="flex w-full justify-between items-center">
-                          <span>هزینه اشتراک</span>
-                          <span>${(card.subscription?.price || 0).toLocaleString('fa-IR')} ریال</span>
-                        </div>
-                        <div class="flex w-full justify-between items-center">
-                          <span>تخفیف</span>
-                          <span>${(0).toLocaleString('fa-IR')} ریال</span>
-                        </div>
-                        <div class="flex w-full justify-between items-center text-onSurface">
-                          <span>جمع کل</span>
-                          <span>${(card.subscription?.price || 0).toLocaleString('fa-IR')} ریال</span>
-                        </div>
-                      `,
+                      memory.card.subscription?.isPremium === true,
+                      () => _$PremiumOrder(memory),
+                      () =>
+                        _$NormalOrder(memory, (discount) => {
+                          createCardMemory.value!.discount = discount;
+
+                          if (createCardMemory.value) {
+                            createCardMemory.value = createCardMemory.value;
+                          }
+                        }),
                     ),
                   )}
                 </div>
@@ -465,5 +219,336 @@ export function $CreateCardPage() {
         )}
       </form>
     </main>
+  `;
+}
+
+function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
+  return html`
+    <div class="flex flex-col gap-4 items-center justify-center">
+      <div class="text-primary [&>.gecut-icon]:text-[6rem]">${icon({svg: SolarCard2LineDuotone})}</div>
+    </div>
+    <div class="w-full text-center text-bodyMedium text-onSurfaceVariant">شماره کارت 16 رقمی خود را وارد کنید.</div>
+    <div class="flex w-full gap-4" dir="ltr">
+      <label class="gecut-input">
+        <input
+          type="text"
+          inputmode="numeric"
+          class="card-number"
+          .value=${memory?.card.cardNumber?.[0] ?? '5022'}
+          name="cardNumber1"
+          pattern="^[0-9]{4}$"
+          maxlength="4"
+          required
+        />
+      </label>
+      <label class="gecut-input">
+        <input
+          type="text"
+          inputmode="numeric"
+          class="card-number"
+          .value=${memory?.card.cardNumber?.[1] ?? '2915'}
+          name="cardNumber2"
+          pattern="^[0-9]{4}$"
+          maxlength="4"
+          required
+        />
+      </label>
+      <label class="gecut-input">
+        <input
+          type="text"
+          inputmode="numeric"
+          class="card-number"
+          .value=${memory?.card.cardNumber?.[2] ?? '3497'}
+          name="cardNumber3"
+          pattern="^[0-9]{4}$"
+          maxlength="4"
+          required
+        />
+      </label>
+      <label class="gecut-input">
+        <input
+          type="text"
+          inputmode="numeric"
+          class="card-number"
+          .value=${memory?.card.cardNumber?.[3] ?? '8703'}
+          name="cardNumber4"
+          pattern="^[0-9]{4}$"
+          maxlength="4"
+          required
+        />
+      </label>
+    </div>
+  `;
+}
+function _$PreviewSlide(memory: CreateCardMemory | undefined) {
+  const card = memory!.card;
+
+  return html`
+    ${until(
+      when(card.cardNumber, () =>
+        IranianBanks.getInfo(card.cardNumber!).then((bank) =>
+          $CardRenderer(card.cardNumber!, card.iban ?? '', card.ownerName ?? '', bank),
+        ),
+      ),
+    )}
+
+    <label class="px-4 flex gap-2">
+      <input type="checkbox" name="confirm" />
+
+      <span>اطلاعات فوق صحیح و آن را تایید میکنم.</span>
+    </label>
+  `;
+}
+function _$SlugSlide(memory: CreateCardMemory | undefined) {
+  const slugOptions = new GecutState<{
+    value: null | string;
+    isExists: boolean;
+    loading: boolean;
+  }>('slug.options', {
+    value: memory?.card?.slug || null,
+    isExists: false,
+    loading: false,
+  });
+
+  const onSlugInput = debounce((event: InputEvent) => {
+    const input = event.target as HTMLInputElement;
+
+    if (input.validity.patternMismatch === true) return;
+
+    slugOptions.value = {
+      loading: true,
+      value: input.value,
+      isExists: slugOptions.value?.isExists ?? false,
+    };
+
+    client.card.slugExist.mutate({slug: input.value}).then((exist) => {
+      slugOptions.value = {
+        loading: false,
+        isExists: exist,
+        value: slugOptions.value?.value ?? null,
+      };
+
+      if (exist) {
+        return input.setCustomValidity('Slug is exists');
+      }
+
+      return input.setCustomValidity('');
+    });
+  }, 1024);
+
+  return html`
+    <div class="flex flex-col gap-4 items-center justify-center">
+      <div class="text-primary [&>.gecut-icon]:text-[6rem]">${icon({svg: SolarEarthLineDuotone})}</div>
+    </div>
+
+    <div class="flex flex-col w-full">
+      <div class="w-full text-center text-bodyMedium text-onSurfaceVariant">دامنه مورد نظر خود را وارد نمایید.</div>
+      <div class="w-full text-center text-bodySmall text-onSurfaceVariant">
+        از دامنه جهت اشتراک گذاری کارت آنلاین استفاده خواهد شد.
+      </div>
+    </div>
+
+    <label class="gecut-input">
+      <input
+        type="text"
+        .value=${memory?.card?.slug ?? ''}
+        name="slug"
+        pattern="^[a-z][a-z0-9]{3,16}$"
+        @input=${onSlugInput}
+        required
+      />
+
+      ${slugOptions.hydrate(
+        ({loading}) => html`
+          <div class="loading ${loading ? 'opacity-1' : 'opacity-0'}">
+            ${icon({
+              svg: SvgSpinnersRingResize,
+            })}
+          </div>
+        `,
+      )}
+    </label>
+
+    ${slugOptions.hydrate(({isExists, value}) =>
+      when(
+        isExists,
+        () => html`<span class="text-error">دامنه فوق موجود نمی باشد، دامنه دیگری انتخاب نمایید</span>`,
+        () => html`<span class="text-primary" dir="ltr">k32.ir/${value}</span>`,
+      ),
+    )}
+  `;
+}
+
+function _$PlansList(plans: PlanData[], planChangeEvent: (plan: CardData['subscription']) => void) {
+  return html`
+    <h1 class="text-bodyLarge text-center">پلن اشتراک خود را انتخاب کنید</h1>
+    <div class="flex flex-col gap-4">
+      ${map(
+        null,
+        plans,
+        (plan) => html`
+          <label
+            class="w-full h-24 group rounded-lg ring ring-transparent has-[:checked]:ring-primary
+                   relative overflow-hidden bg-surface"
+          >
+            <div class="absolute z-[1] inset-0 opacity-20 bg-surfaceVariant"></div>
+
+            ${when(
+              plan.patternUrl,
+              () => html`
+                <div
+                  class="absolute z-[2] inset-0 opacity-10 bg-cover"
+                  style="background-image:url('${plan.patternUrl ?? ''}');"
+                ></div>
+              `,
+            )}
+
+            <div class="w-full h-full flex gap-4 p-4 items-center absolute z-[3] inset-0">
+              <input
+                type="radio"
+                name="plan"
+                .value=${plan.name}
+                class="hidden"
+                @change=${() => planChangeEvent(plan)}
+              />
+
+              <div class="size-5 rounded-full bg-surfaceVariant flex items-center justify-center">
+                <div class="size-3 rounded-full bg-transparent group-has-[:checked]:bg-primary"></div>
+              </div>
+
+              <div class="text-onSurface text-labelMedium grow">${unsafeHTML(plan.htmlTitle || plan.name)}</div>
+
+              ${when(
+                plan.isPremium,
+                () => html`
+                  <span class="text-onSurfaceVariant text-labelSmall group-has-[:checked]:text-primary">
+                    کد اختصاصی
+                  </span>
+                `,
+                () => html`
+                  <span class="text-onSurfaceVariant text-labelSmall group-has-[:checked]:text-primary">
+                    ${plan.price.toLocaleString('fa-IR')} ریال
+                  </span>
+                `,
+              )}
+            </div>
+          </label>
+        `,
+      )}
+    </div>
+  `;
+}
+function _$PremiumOrder(memory: CreateCardMemory | undefined) {
+  return html`
+    <div class="flex w-full gap-4 [&>*:first-child]:grow [&>*:last-child]:px-3">
+      <label class="gecut-input">
+        <input type="text" name="discount" pattern="^[A-Z0-9]{6}$" maxlength="6" placeholder="کد اختصاصی" />
+      </label>
+      ${gecutButton({
+        type: 'filled',
+        htmlType: 'button',
+        label: 'فعال سازی',
+      })}
+    </div>
+    <div class="flex w-full justify-between items-center">
+      <span>هزینه اشتراک</span>
+      <span>${(0).toLocaleString('fa-IR')} ریال</span>
+    </div>
+    <div class="flex w-full justify-between items-center">
+      <span>تخفیف</span>
+      <span>${(0).toLocaleString('fa-IR')} ریال</span>
+    </div>
+    <div class="flex w-full justify-between items-center text-onSurface">
+      <span>جمع کل</span>
+      <span>${(0).toLocaleString('fa-IR')} ریال</span>
+    </div>
+  `;
+}
+function _$NormalOrder(
+  memory: CreateCardMemory | undefined,
+  discountChangeEvent: (discount: DiscountData | null) => void,
+) {
+  const subscriptionPrice = memory?.card?.subscription?.price || 0;
+  const discountPercentage = Math.min(
+    memory?.discount?.discountType === 'percentage' ? memory?.discount?.discount : -1,
+    100,
+  );
+  const discountDecimal =
+    discountPercentage > 0 ? subscriptionPrice * (discountPercentage / 100) : memory?.discount?.discount || 0;
+
+  const total = subscriptionPrice - discountDecimal;
+
+  return html`
+    <div class="flex w-full gap-4 [&>*:first-child]:grow [&>.gecut-button]:px-2">
+      <label class="gecut-input">
+        <input
+          type="text"
+          name="discount"
+          pattern="^[A-Z0-9]{6}$"
+          maxlength="6"
+          placeholder="کد تخفیف"
+          id="discountInput"
+          .value=${memory?.discount?.code || ''}
+          ?disabled=${memory?.card.subscription == null}
+        />
+      </label>
+
+      ${when(memory?.discount != null, () =>
+        gecutButton({
+          type: 'outlined',
+          htmlType: 'button',
+          label: 'حذف',
+          events: {
+            click: () => {
+              discountChangeEvent(null);
+            },
+          },
+        }),
+      )}
+      ${when(memory?.discount == null, () =>
+        gecutButton({
+          type: 'filledTonal',
+          htmlType: 'button',
+          label: 'اعمال',
+          disabled: memory?.card.subscription == null,
+          events: {
+            click: async () => {
+              const input = document.querySelector<HTMLInputElement>('#discountInput');
+              if (input == null) return;
+
+              const planId = memory?.card?.subscription?._id;
+              if (planId == null) return;
+
+              const discount = await client.order.discount.get.mutate({
+                discountCode: input.value,
+                planId,
+              });
+
+              if (discount) {
+                discountChangeEvent(discount);
+              }
+            },
+          },
+        }),
+      )}
+    </div>
+
+    <div class="flex w-full justify-between items-center">
+      <span>هزینه اشتراک</span>
+      <span>${subscriptionPrice.toLocaleString('fa-IR')} ریال</span>
+    </div>
+    <div class="flex w-full justify-between items-center">
+      <span>تخفیف</span>
+      <div>
+        ${when(discountPercentage > 0, () => html`<span>(${discountPercentage.toLocaleString('fa-IR')}%)</span>`)}
+
+        <span>${discountDecimal.toLocaleString('fa-IR')} ریال</span>
+      </div>
+    </div>
+
+    <div class="flex w-full justify-between items-center text-onSurface">
+      <span>جمع کل</span>
+      <span>${total.toLocaleString('fa-IR')} ریال</span>
+    </div>
   `;
 }

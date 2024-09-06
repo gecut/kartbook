@@ -11,7 +11,7 @@ import {resolvePath} from '../router/resolver.js';
 import SolarCheckCircleLineDuotone from '~icons/solar/check-circle-line-duotone';
 import SolarCloseCircleLineDuotone from '~icons/solar/close-circle-line-duotone';
 
-import type {CardData} from '@gecut/kartbook-types';
+import type {OrderData} from '@gecut/kartbook-types';
 
 export function $CreateCardCallbackPage() {
   const {trackId, orderId} = router.context.query as {trackId: number; orderId: string};
@@ -20,10 +20,10 @@ export function $CreateCardCallbackPage() {
 
   client.order.verify
     .mutate({trackId: Number(trackId), orderId})
-    .then((card: CardData) => {
+    .then((order: OrderData) => {
       state.value = 'success';
 
-      cardSlug = card.slug;
+      cardSlug = order.card.slug;
 
       loadUser();
     })

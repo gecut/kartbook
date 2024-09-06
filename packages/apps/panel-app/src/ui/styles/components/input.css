@@ -22,7 +22,7 @@ label.gecut-input {
   }
 
   .loading {
-    @apply opacity-0 !text-onSurfaceVariant transition;
+    @apply !text-onSurfaceVariant transition;
   }
 
   .gecut-icon {
