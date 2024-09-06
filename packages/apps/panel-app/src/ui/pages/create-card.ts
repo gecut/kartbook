@@ -234,7 +234,7 @@ function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
           type="text"
           inputmode="numeric"
           class="card-number"
-          .value=${memory?.card.cardNumber?.[0] ?? '5022'}
+          .value=${memory?.card.cardNumber?.[0] ?? ''}
           name="cardNumber1"
           pattern="^[0-9]{4}$"
           maxlength="4"
@@ -246,7 +246,7 @@ function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
           type="text"
           inputmode="numeric"
           class="card-number"
-          .value=${memory?.card.cardNumber?.[1] ?? '2915'}
+          .value=${memory?.card.cardNumber?.[1] ?? ''}
           name="cardNumber2"
           pattern="^[0-9]{4}$"
           maxlength="4"
@@ -258,7 +258,7 @@ function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
           type="text"
           inputmode="numeric"
           class="card-number"
-          .value=${memory?.card.cardNumber?.[2] ?? '3497'}
+          .value=${memory?.card.cardNumber?.[2] ?? ''}
           name="cardNumber3"
           pattern="^[0-9]{4}$"
           maxlength="4"
@@ -270,7 +270,7 @@ function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
           type="text"
           inputmode="numeric"
           class="card-number"
-          .value=${memory?.card.cardNumber?.[3] ?? '8703'}
+          .value=${memory?.card.cardNumber?.[3] ?? ''}
           name="cardNumber4"
           pattern="^[0-9]{4}$"
           maxlength="4"
