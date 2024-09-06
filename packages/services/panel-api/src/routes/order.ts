@@ -1,9 +1,10 @@
 import {TRPCError} from '@trpc/server';
 import {z} from 'zod';
 
+import {verifyDiscount} from '../controllers/verify-discount.js';
 import {db, router, $UserProcedure, zibalGateway} from '../core.js';
 
-import type {CardData, OrderData} from '@gecut/kartbook-types';
+import type {DiscountData, DiscountInterface, OrderData} from '@gecut/kartbook-types';
 
 const order = router({
   create: $UserProcedure
@@ -15,12 +16,11 @@ const order = router({
         slug: z.string(),
         planId: z.string(),
 
-        discountCode: z.string().length(6).optional(),
-        premiumCode: z.string().length(5).startsWith('P').optional(),
+        discountCode: z.string().optional(),
       }),
     )
     .mutation(async (opts) => {
-      const {cardNumber, iban, ownerName, planId, slug} = opts.input;
+      const {cardNumber, iban, ownerName, planId, slug, discountCode} = opts.input;
 
       const plan = await db.$Plan.findById(planId);
 
@@ -29,7 +29,26 @@ const order = router({
           code: 'NOT_FOUND',
         });
 
-      const amount = plan.price;
+      let discount: DiscountInterface | null = null;
+
+      if (discountCode) {
+        discount = verifyDiscount(
+          await db.$Discount
+            .findOne({
+              code: discountCode,
+              disabled: false,
+            })
+            .populate(['filters.targetPlans']),
+          planId,
+        );
+      }
+
+      const subscriptionPrice = plan.price;
+      const discountPercentage = Math.min(discount?.discountType === 'percentage' ? discount?.discount : -1, 100);
+      const discountDecimal =
+        discountPercentage > 0 ? subscriptionPrice * (discountPercentage / 100) : discount?.discount || 0;
+
+      const amount = subscriptionPrice - discountDecimal;
 
       const order = new db.$Order({
         card: {
@@ -58,6 +77,24 @@ const order = router({
         throw new TRPCError({code: 'INTERNAL_SERVER_ERROR', cause: error});
       }
 
+      if (order.amount === 0) {
+        const card = new db.$Card({
+          cardNumber: order.card.cardNumber,
+          iban: order.card.iban,
+          ownerName: order.card.ownerName,
+          slug: order.card.slug,
+          subscription: plan,
+          owner: order.customer,
+        });
+
+        order.status = 1;
+        order.trackId = Date.now();
+
+        const [_order, _card] = await Promise.all([order.save(), card.save()]);
+
+        return order as unknown as OrderData;
+      }
+
       const zibal = await zibalGateway.request(amount, order._id.toString(), opts.ctx.user.phoneNumber);
 
       if (zibal == null || zibal.result != 100) {
@@ -65,6 +102,7 @@ const order = router({
 
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
+          message: 'payment-gateway-error',
         });
       }
 
@@ -79,6 +117,8 @@ const order = router({
     const order = await db.$Order.findById(orderId);
 
     if (order == null || order.trackId != trackId || order.result != null) throw new TRPCError({code: 'NOT_FOUND'});
+
+    if (order.status === 1) return order as unknown as OrderData;
 
     const verifiedData = await zibalGateway.verify(order.trackId);
 
@@ -116,7 +156,29 @@ const order = router({
 
     // TODO: Send a SMS to message of created card
 
-    return _card as unknown as CardData;
+    return _order as unknown as OrderData;
+  }),
+
+  discount: router({
+    get: $UserProcedure
+      .input(
+        z.object({
+          discountCode: z.string(),
+          planId: z.string(),
+        }),
+      )
+      .mutation(async (opts) => {
+        const {discountCode, planId} = opts.input;
+
+        const discount = await db.$Discount
+          .findOne({
+            code: discountCode,
+            disabled: false,
+          })
+          .populate(['filters.targetPlans']);
+
+        return verifyDiscount(discount, planId) as unknown as DiscountData;
+      }),
   }),
 });
 
