@@ -89,6 +89,7 @@ export function $CardDetail(selectedCard: SelectedCardType) {
           type: 'filledTonal',
           name: 'edit',
           svg: SolarPenNewRoundLineDuotone,
+          disabled: true,
         })}
 
         <span class="text-labelMedium text-onSurfaceVariant">ویرایش</span>
