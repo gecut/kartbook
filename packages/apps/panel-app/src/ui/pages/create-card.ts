@@ -1,6 +1,7 @@
 import {gecutButton, icon} from '@gecut/components';
 import IranianBanks from '@gecut/kartbook-banks-data';
-import {GecutState, gecutContext, map} from '@gecut/lit-helper';
+import {GecutState, map} from '@gecut/lit-helper';
+import {arrayUtils} from '@gecut/utilities/data-types/array.js';
 import debounce from '@gecut/utilities/debounce.js';
 import {stateManager} from '@gecut/utilities/state-manager.js';
 import {unsafeHTML} from 'lit/directives/unsafe-html.js';
@@ -223,60 +224,48 @@ export function $CreateCardPage() {
 }
 
 function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
+  const inputsAutoFocus = (index: number) => (event: InputEvent) => {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
+
+    if (value.length >= 4) {
+      const nextInput = document.querySelector<HTMLInputElement>(`#card-number-input-${index + 1}`);
+
+      if (nextInput) nextInput.focus();
+    }
+    else if (value.length <= 0) {
+      const previousInput = document.querySelector<HTMLInputElement>(`#card-number-input-${index - 1}`);
+
+      if (previousInput) previousInput.focus();
+    }
+  };
+
   return html`
     <div class="flex flex-col gap-4 items-center justify-center">
       <div class="text-primary [&>.gecut-icon]:text-[6rem]">${icon({svg: SolarCard2LineDuotone})}</div>
     </div>
     <div class="w-full text-center text-bodyMedium text-onSurfaceVariant">شماره کارت 16 رقمی خود را وارد کنید.</div>
     <div class="flex w-full gap-4" dir="ltr">
-      <label class="gecut-input">
-        <input
-          type="text"
-          inputmode="numeric"
-          class="card-number"
-          .value=${memory?.card.cardNumber?.[0] ?? ''}
-          name="cardNumber1"
-          pattern="^[0-9]{4}$"
-          maxlength="4"
-          required
-        />
-      </label>
-      <label class="gecut-input">
-        <input
-          type="text"
-          inputmode="numeric"
-          class="card-number"
-          .value=${memory?.card.cardNumber?.[1] ?? ''}
-          name="cardNumber2"
-          pattern="^[0-9]{4}$"
-          maxlength="4"
-          required
-        />
-      </label>
-      <label class="gecut-input">
-        <input
-          type="text"
-          inputmode="numeric"
-          class="card-number"
-          .value=${memory?.card.cardNumber?.[2] ?? ''}
-          name="cardNumber3"
-          pattern="^[0-9]{4}$"
-          maxlength="4"
-          required
-        />
-      </label>
-      <label class="gecut-input">
-        <input
-          type="text"
-          inputmode="numeric"
-          class="card-number"
-          .value=${memory?.card.cardNumber?.[3] ?? ''}
-          name="cardNumber4"
-          pattern="^[0-9]{4}$"
-          maxlength="4"
-          required
-        />
-      </label>
+      ${map(
+        null,
+        arrayUtils.range(4),
+        (i) => html`
+          <label class="gecut-input">
+            <input
+              id="card-number-input-${i}"
+              type="text"
+              inputmode="numeric"
+              class="card-number"
+              name="cardNumber${i + 1}"
+              pattern="^[0-9]{4}$"
+              maxlength="4"
+              required
+              .value=${memory?.card.cardNumber?.[i] ?? ''}
+              @keyup=${inputsAutoFocus(i)}
+            />
+          </label>
+        `,
+      )}
     </div>
   `;
 }
@@ -438,7 +427,7 @@ function _$PlansList(plans: PlanData[], planChangeEvent: (plan: CardData['subscr
     </div>
   `;
 }
-function _$PremiumOrder(memory: CreateCardMemory | undefined) {
+function _$PremiumOrder(_memory: CreateCardMemory | undefined) {
   return html`
     <div class="flex w-full gap-4 [&>*:first-child]:grow [&>*:last-child]:px-3">
       <label class="gecut-input">
