@@ -53,7 +53,7 @@
     ]
   },
   "[nginx]": {
-    "editor.defaultFormatter": "raynigon.nginx-formatter"
+    "editor.defaultFormatter": "AaaaronZhou.nginx-config-formatter-vscode-extension"
   },
   "eslint.experimental.useFlatConfig": true,
   "eslint.format.enable": true,
