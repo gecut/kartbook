@@ -1,6 +1,7 @@
 import requireAuthenticated from './plugins/require-authenticated.js';
 import requireNotAuthenticated from './plugins/require-not-authenticated.js';
 import {$404Page} from '../pages/404.js';
+import {$AgentRequestPage} from '../pages/agent-request.js';
 import {$CardsPage} from '../pages/cards.js';
 import {$CreateCardCallbackPage} from '../pages/create-card-callback.js';
 import {$CreateCardPage} from '../pages/create-card.js';
@@ -23,6 +24,7 @@ export type Routes<
   | 'cards'
   | 'cards/create'
   | 'cards/create/callback'
+  | 'user/agent/request'
   | 'user'
   | 'sign-in'
   | 'support'
@@ -76,6 +78,11 @@ export const routes: Routes = {
       unselectedIcon: SolarUserLineDuotone,
       selectedIcon: SolarUserBoldDuotone,
     },
+  },
+  'user/agent/request': {
+    title: 'درخواست نمایندگی فروش',
+    render: $AgentRequestPage,
+    plugins: [requireAuthenticated('/sign-in')],
   },
 
   'sign-in': {

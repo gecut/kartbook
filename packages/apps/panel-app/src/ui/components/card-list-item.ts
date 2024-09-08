@@ -1,6 +1,10 @@
+import IranianBanks from '@gecut/kartbook-banks-data';
 import {nextAnimationFrame} from '@gecut/utilities/wait/polyfill.js';
+import {cache} from 'lit/directives/cache.js';
+import {until} from 'lit/directives/until.js';
 import {html} from 'lit/html.js';
 
+import kartbookLogo from '../../../public/logo.png';
 import {setSelectedCard} from '../../contexts/cards.js';
 
 import type {SelectedCardType} from '../../contexts/cards.js';
@@ -35,6 +39,14 @@ export function $CardListItem(card: CardData, index: number, selectedCard: Selec
       <div class="text-labelLarge">
         <span class="text-onSurfaceVariant">k32.ir/</span>
         <span class="text-onSurface font-bold">${card.slug}</span>
+      </div>
+      <div class="size-6">
+        ${cache(
+          until(
+            IranianBanks.getInfo(card.cardNumber).then((info) => info.image?.cloneNode(true)),
+            html`<img src=${kartbookLogo} alt="logo" />`,
+          ),
+        )}
       </div>
     </div>
   `;

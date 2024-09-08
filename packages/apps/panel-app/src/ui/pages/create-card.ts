@@ -256,7 +256,7 @@ function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
               type="text"
               inputmode="numeric"
               class="card-number"
-              name="cardNumber${i + 1}"
+              name="cardNumber${i}"
               pattern="^[0-9]{4}$"
               maxlength="4"
               required

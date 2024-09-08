@@ -39,10 +39,12 @@ cardsContext.subscribe(
 selectedCardContext.subscribe(cardDialogSetter('default'), {priority: -1000, receivePrevious: true});
 
 export async function setSelectedCard(selectedCard: CardData) {
+  const [bank] = await Promise.all([IranianBanks.getInfo(selectedCard.cardNumber)]);
+
   selectedCardContext.value = {
     card: selectedCard,
     owner_name: selectedCard.ownerName || selectedCard.owner.firstName + ' ' + selectedCard.owner.lastName,
-    bank: await IranianBanks.getInfo(selectedCard.cardNumber),
+    bank,
   };
 }
 
