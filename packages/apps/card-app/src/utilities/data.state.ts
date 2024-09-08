@@ -26,6 +26,7 @@ export async function load(): Promise<DataContextType> {
 
   const username = slug[1] ?? '';
   const amount = amountSanitizer(slug[2] ?? '');
+  let isDisabled = false;
 
   if (username != '') {
     return await api
@@ -33,7 +34,9 @@ export async function load(): Promise<DataContextType> {
       .then((response) => {
         if (!response.ok) {
           if (response.status === 403) {
-            dataState.value = 'disabled';
+            isDisabled = true;
+
+            throw new Error('fetch failed: card disabled');
           }
 
           throw new Error('fetch failed: ' + response.statusText);
@@ -66,14 +69,16 @@ export async function load(): Promise<DataContextType> {
       .catch((error) => {
         console.error(error);
 
-        if (dataState.value !== 'disabled') {
+        if (!isDisabled) {
           pushNotification({
             type: 'error',
             msg: 'مشکلی در دریافت داده به وجود آمده، دوباره تلاش کنید.',
           });
+
+          return 'error';
         }
 
-        return 'error';
+        return 'disabled';
       });
   }
 
