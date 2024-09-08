@@ -29,7 +29,6 @@ export async function loadUser() {
           window.location.reload();
         }
 
-
         return false;
       });
   }

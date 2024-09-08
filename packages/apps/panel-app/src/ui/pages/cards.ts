@@ -26,9 +26,7 @@ export function $CardsPage() {
     when(
       cards.length > 0,
       () => html`
-        <div class="flex flex-col py-4 gap-4">
-          ${gecutContext(selectedCardContext, $CardDetail)}
-        </div>
+        <div class="flex flex-col py-4 gap-4">${gecutContext(selectedCardContext, $CardDetail)}</div>
 
         <div class="flex flex-col gap-2 py-4">
           <h2 class="text-titleMedium text-onSurfaceVariant mb-2">کارت های شما</h2>
