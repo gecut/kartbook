@@ -180,10 +180,10 @@ export default class IranianBanks {
   }
 
   static async getInfo(cardNumber: [string, string, string, string]): Promise<Info> {
-    const cacheId = cardNumber.join('|');
+    const cacheId = cardNumber.join('');
     const cache = this.infoCache.get(cacheId);
 
-    if (cache) return cache;
+    if (cache != null) return cache;
 
     const bank = new IranianBanks(cardNumber);
 
