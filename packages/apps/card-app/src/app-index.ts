@@ -30,7 +30,7 @@ export async function startApp() {
           class="absolute inset-0 flex flex-col gap-3 justify-center items-center text-bodySmall
                  lg:text-bodyMedium text-onSurfaceVariant"
         >
-          <img class="h-6 md:h-8 lg:h-10" src="/icon.png" />
+          <img class="h-6 md:h-8 lg:h-10" alt="KartBook LOGO" src="/icon.png" />
 
           <span>پلتفرم شمـاره کـارت آنـلایـــن, کـــارت بـوک</span>
 
