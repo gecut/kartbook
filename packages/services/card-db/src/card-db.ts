@@ -29,6 +29,8 @@ const server = http.createServer(async (request, response) => {
     })
     .populate('owner');
 
+  logger.methodArgs?.('request', {slug, card});
+
   if (!card) {
     response.writeHead(404, {'Content-Type': 'application/json'});
 
