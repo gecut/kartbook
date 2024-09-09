@@ -6,11 +6,13 @@ import {
   $ValidatedCardSchema,
   $OrderSchema,
   $DiscountSchema,
+  $AgentRequestSchema,
 } from '@gecut/kartbook-types';
 import {GecutLogger} from '@gecut/logger';
 import mongoose from 'mongoose';
 
 import type {
+  AgentRequestInterface,
   CardInterface,
   DiscountInterface,
   OrderInterface,
@@ -40,6 +42,7 @@ export class KartbookDbConnector {
   $User = mongoose.model<UserInterface>('User', $UserSchema);
   $ValidatedCard = mongoose.model<ValidatedCardInterface>('ValidatedCard', $ValidatedCardSchema);
   $Wallet = mongoose.model<WalletInterface>('Wallet', $WalletSchema);
+  $AgentRequest = mongoose.model<AgentRequestInterface>('AgentRequest', $AgentRequestSchema);
 
   connector?: typeof mongoose;
 
@@ -73,6 +76,7 @@ export class KartbookDbConnector {
     const orderCount = await this.$Order.countDocuments();
     const validatedCardCount = await this.$ValidatedCard.countDocuments();
     const discountCount = await this.$Discount.countDocuments();
+    const agentRequestCount = await this.$AgentRequest.countDocuments();
 
     this.logger.methodArgs?.('init', {
       userCount,
@@ -82,6 +86,7 @@ export class KartbookDbConnector {
       orderCount,
       validatedCardCount,
       discountCount,
+      agentRequestCount
     });
 
     if (userCount + walletCount + planCount + cardCount < 5) {
@@ -101,44 +106,31 @@ export class KartbookDbConnector {
         wallet,
       });
 
-      this.logger.property?.('user', await user.populate(['wallet', 'caller']));
+      this.logger.property?.('user', await user.populate('wallet'));
 
       const plan1 = await this.$Plan.create({
-        duration: 365,
-        name: 'پلن سالانه',
+        duration: 31,
+        name: 'پلن ماهانه',
         htmlTitle: '',
         isPremium: false,
-        price: 2_990_000,
+        price: 490_000,
       });
 
       this.logger.property?.('plan1', plan1);
 
       const plan2 = await this.$Plan.create({
-        duration: 30,
-        name: 'پلن ماهانه',
+        duration: 366,
+        name: 'پلن سالانه',
         htmlTitle:
           '<span>اشتراک ویژه <span style="font-size:28px;color:#fcc200;font-weight:bolder;">12</span> ماه</span>',
         isPremium: false,
-        price: 2_000,
+        price: 2_990_000,
       });
 
       this.logger.property?.('plan2', plan2);
 
-      const card = await this.$Card.create({
-        cardNumber: ['6219', '8619', '6850', '8969'],
-        iban: '440560611828005683666001',
-        expireAt: new Date(+new Date().setHours(0, 0, 0, 0) + 86400000),
-        owner: user,
-        subscription: plan1,
-        slug: 'zamanian',
-      });
-
-      this.logger.property?.('card', await card.populate(['owner', 'subscription']));
-    }
-
-    if (discountCount == 0) {
-      const discount = new this.$Discount({
-        code: 'KROOT',
+      const discount = await this.$Discount.create({
+        code: 'KBROOT',
         discount: 100,
         discountType: 'percentage',
         name: 'Root',
@@ -147,7 +139,7 @@ export class KartbookDbConnector {
         },
       });
 
-      await discount.save();
+      this.logger.property?.('discount', discount);
     }
   }
 }
