@@ -157,11 +157,9 @@ const order = router({
     const [_order, _card] = await Promise.all([
       order.save(),
       card.save(),
-      (async () => {
-        if (order.discount) {
-          await db.$Discount.findByIdAndUpdate(order.discount._id, {usageCount: order.discount.usageCount + 1});
-        }
-      })(),
+      order.discount
+        ? db.$Discount.findByIdAndUpdate(order.discount._id, {usageCount: order.discount.usageCount + 1})
+        : Promise.resolve(),
     ]);
 
     // TODO: Send a SMS to message of created card
