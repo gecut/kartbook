@@ -1,4 +1,17 @@
+import {arrayUtils} from '@gecut/utilities/data-types/array.js';
+import {numberUtils} from '@gecut/utilities/data-types/number.js';
+
 import type mongoose from 'mongoose';
+
+const digits = ['A', 'B', 'C', 'X', 'Y', 'Z'];
+export const generateDiscountCode = () => {
+  return (
+    arrayUtils.random.choice(digits) +
+    numberUtils.random.number(99, 11) +
+    arrayUtils.random.choice(digits) +
+    numberUtils.random.number(99, 11)
+  );
+};
 
 export interface Entity {
   _id: mongoose.Types.ObjectId;
