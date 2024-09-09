@@ -29,8 +29,8 @@
   "devDependencies": {
     "@gecut/kartbook-db-connector": "workspace:^",
     "@gecut/kartbook-types": "workspace:^",
-    "@gecut/logger": "^1.4.6",
-    "@gecut/utilities": "^5.4.0",
+    "@gecut/logger": "^1.4.7",
+    "@gecut/utilities": "^5.4.1",
     "@types/cors": "^2.8.17",
     "@types/node": "^20.13.0",
     "cors": "^2.8.5",

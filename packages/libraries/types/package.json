@@ -32,8 +32,8 @@
     "**/*.{js,mjs,cjs,map,d.ts,html,md,css}"
   ],
   "dependencies": {
-    "@gecut/types": "^2.2.1",
-    "@gecut/utilities": "^5.4.0",
+    "@gecut/types": "^2.2.2",
+    "@gecut/utilities": "^5.4.1",
     "@types/node": "^20.13.0",
     "mongoose": "^8.4.1"
   }
