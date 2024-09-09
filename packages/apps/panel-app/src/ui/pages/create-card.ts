@@ -11,6 +11,7 @@ import {html} from 'lit/html.js';
 
 import {client} from '../../client/index.js';
 import {plansContext} from '../../contexts/plans.js';
+import {lower, upper} from '../../utilities/input.js';
 import {sbm} from '../../utilities/sbm.js';
 import {$CardRenderer} from '../components/card.js';
 import {router} from '../router/index.js';
@@ -224,21 +225,24 @@ export function $CreateCardPage() {
 }
 
 function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
-  const inputsAutoFocus = (index: number) => (event: InputEvent) => {
-    const target = event.target as HTMLInputElement;
-    const value = target.value;
+  const inputsAutoFocus = (index: number) =>
+    debounce((event: InputEvent) => {
+      const target = event.target as HTMLInputElement;
+      const value = target.value;
 
-    if (value.length >= 4) {
-      const nextInput = document.querySelector<HTMLInputElement>(`#card-number-input-${index + 1}`);
+      if (value.length >= 4) {
+        const nextInput = document.querySelector<HTMLInputElement>(`#card-number-input-${index + 1}`);
 
-      if (nextInput) nextInput.focus();
-    }
-    else if (value.length <= 0) {
-      const previousInput = document.querySelector<HTMLInputElement>(`#card-number-input-${index - 1}`);
+        if (nextInput) nextInput.focus();
+      }
+      else if (value.length <= 0) {
+        const previousInput = document.querySelector<HTMLInputElement>(`#card-number-input-${index - 1}`);
 
-      if (previousInput) previousInput.focus();
-    }
-  };
+        if (previousInput) previousInput.focus();
+      }
+    }, 'AnimationFrame');
+
+  // const x = ['', '', '', ''];
 
   return html`
     <div class="flex flex-col gap-4 items-center justify-center">
@@ -292,21 +296,36 @@ function _$SlugSlide(memory: CreateCardMemory | undefined) {
   const slugOptions = new GecutState<{
     value: null | string;
     isExists: boolean;
+    patternMismatch: boolean;
     loading: boolean;
   }>('slug.options', {
     value: memory?.card?.slug || null,
     isExists: false,
+    patternMismatch: false,
     loading: false,
   });
 
   const onSlugInput = debounce((event: InputEvent) => {
+    lower(event);
+
     const input = event.target as HTMLInputElement;
 
-    if (input.validity.patternMismatch === true) return;
+    if (input.validity.patternMismatch === true) {
+      slugOptions.value = {
+        value: memory?.card?.slug || null,
+        isExists: slugOptions.value?.isExists ?? false,
+
+        loading: false,
+        patternMismatch: true,
+      };
+
+      return;
+    }
 
     slugOptions.value = {
       loading: true,
       value: input.value,
+      patternMismatch: false,
       isExists: slugOptions.value?.isExists ?? false,
     };
 
@@ -314,6 +333,7 @@ function _$SlugSlide(memory: CreateCardMemory | undefined) {
       slugOptions.value = {
         loading: false,
         isExists: exist,
+        patternMismatch: false,
         value: slugOptions.value?.value ?? null,
       };
 
@@ -323,7 +343,7 @@ function _$SlugSlide(memory: CreateCardMemory | undefined) {
 
       return input.setCustomValidity('');
     });
-  }, 1024);
+  }, 'IdleCallback');
 
   return html`
     <div class="flex flex-col gap-4 items-center justify-center">
@@ -358,13 +378,28 @@ function _$SlugSlide(memory: CreateCardMemory | undefined) {
       )}
     </label>
 
-    ${slugOptions.hydrate(({isExists, value}) =>
+    ${slugOptions.hydrate(({patternMismatch, loading, isExists, value}) => [
+      when(patternMismatch || (value?.trim().length ?? 0) == 0, () => [
+        html`
+          <ul class="*:text-error">
+            <li>لطفا حداقل ۳ کاراکتر وارد کنید.</li>
+            <li>تنها حروف کوچک انگلیسی و اعداد مجاز هستند.</li>
+            <li>حداکثر طول نام کاربری ۱۶ کاراکتر است.</li>
+          </ul>
+        `,
+      ]),
+      when(isExists, () => html`<span class="text-error">دامنه فوق موجود نمی باشد، دامنه دیگری انتخاب نمایید</span>`),
+      when(loading, () => html`<span class="text-surfaceVariant">در حال بررسی ..</span>`),
       when(
-        isExists,
-        () => html`<span class="text-error">دامنه فوق موجود نمی باشد، دامنه دیگری انتخاب نمایید</span>`,
-        () => html`<span class="text-primary" dir="ltr">k32.ir/${value}</span>`,
+        !isExists && !patternMismatch && !loading && (value?.trim().length ?? 0) > 0,
+        () => html`
+          <div class="w-full flex justify-between">
+            <span class="text-primary" dir="ltr">:دامنه شما</span>
+            <span class="text-primary" dir="ltr">k32.ir/${value}</span>
+          </div>
+        `,
       ),
-    )}
+    ])}
   `;
 }
 
@@ -468,7 +503,7 @@ function _$NormalOrder(
   const total = subscriptionPrice - discountDecimal;
 
   return html`
-    <div class="flex w-full gap-4 [&>*:first-child]:grow [&>.gecut-button]:px-2">
+    <div class="flex w-full gap-4 [&>*:first-child]:grow [&>.gecut-button]:px-3">
       <label class="gecut-input">
         <input
           type="text"
@@ -479,6 +514,7 @@ function _$NormalOrder(
           id="discountInput"
           .value=${memory?.discount?.code || ''}
           ?disabled=${memory?.card.subscription == null}
+          @input=${upper}
         />
       </label>
 
@@ -498,7 +534,7 @@ function _$NormalOrder(
         gecutButton({
           type: 'filledTonal',
           htmlType: 'button',
-          label: 'اعمال',
+          label: 'اعمال تخفیف',
           disabled: memory?.card.subscription == null,
           events: {
             click: async () => {
