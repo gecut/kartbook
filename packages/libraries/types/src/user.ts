@@ -28,17 +28,10 @@ export interface UserInterface extends Entity {
    */
   phoneNumber: string;
 
-  phoneNumberVerified: boolean;
-
   /**
    * The user's email address (optional).
    */
   email?: string;
-
-  /**
-   * The user who made the call (optional).
-   */
-  caller?: UserInterface;
 
   isAdmin: boolean;
 
@@ -49,27 +42,35 @@ export interface UserInterface extends Entity {
   otp?: OTPInterface;
 
   wallet: WalletInterface;
+
+  sellerCode?: string;
+
+  nationalCode?: string;
+  birthday?: Date;
 }
 
 export type UserData = Jsonify<UserInterface>;
 
 export const $UserSchema = new Schema<UserInterface>(
   {
-    firstName: {type: String, required: true},
-    lastName: {type: String, required: true},
-    phoneNumber: {type: String, required: true, unique: true},
-    phoneNumberVerified: {type: Boolean, default: true},
-    email: {type: String, required: false},
-    caller: {type: Schema.ObjectId, ref: 'User', required: false},
+    firstName: {type: String, required: true, trim: true},
+    lastName: {type: String, required: true, trim: true},
+    phoneNumber: {type: String, required: true, unique: true, trim: true},
+    email: {type: String, required: false, trim: true},
     isAdmin: {type: Boolean, default: false},
     isSeller: {type: Boolean, default: false},
     disabled: {type: Boolean, default: false},
-    token: {type: String, default: uid, unique: true},
+    token: {type: String, default: uid, unique: true, trim: true},
     wallet: {type: Schema.ObjectId, ref: 'Wallet'},
     otp: new Schema<OTPInterface>({
       code: {type: String},
       expiredAt: {type: Number},
     }),
+
+    sellerCode: {type: String, required: false, unique: true},
+
+    nationalCode: {type: String, required: false, unique: true, trim: true},
+    birthday: {type: Date, required: false},
   },
   {
     timestamps: true,

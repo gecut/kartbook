@@ -29,8 +29,8 @@ export type ValidatedCardData = Jsonify<ValidatedCardInterface>;
 export const $ValidatedCardSchema = new Schema<ValidatedCardInterface>(
   {
     cardNumber: [{type: String, minlength: 4, maxlength: 4, match: /^[0-9]{4}$/, required: true}],
-    iban: {type: String, required: true},
-    ownerName: {type: String, required: true},
+    iban: {type: String, required: true, trim: true},
+    ownerName: {type: String, required: true, trim: true},
     disabled: {type: Boolean, default: false},
   },
   {

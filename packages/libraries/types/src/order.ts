@@ -4,6 +4,7 @@ import {type CardInterface} from './card.js';
 import {type PlanInterface} from './plan.js';
 
 import type {Entity, ZibalResults, ZibalStatus} from './_base.js';
+import type {DiscountInterface} from './discount.js';
 import type {UserInterface} from './user.js';
 import type {Jsonify} from '@gecut/types';
 
@@ -11,6 +12,7 @@ export interface OrderInterface extends Entity {
   card: Pick<CardInterface, 'cardNumber' | 'iban' | 'ownerName' | 'slug' | 'isPremium'>;
   plan: Pick<PlanInterface, 'name' | 'duration' | 'price' | 'isPremium'>;
 
+  discount?: DiscountInterface;
   customer: UserInterface;
 
   trackId?: number;
@@ -44,6 +46,7 @@ export const $OrderSchema = new Schema<OrderInterface>(
     result: {type: Number, required: false},
     status: {type: Number, required: false},
 
+    discount: {type: Schema.ObjectId, ref: 'Discount'},
     customer: {type: Schema.ObjectId, ref: 'User'},
   },
   {

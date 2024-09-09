@@ -24,12 +24,12 @@ export type PlanData = Jsonify<PlanInterface>;
 
 export const $PlanSchema = new Schema<PlanInterface>(
   {
-    name: {type: String},
-    htmlTitle: {type: String},
+    name: {type: String, trim: true},
+    htmlTitle: {type: String, trim: true},
     duration: {type: Number},
     price: {type: Number},
     isPremium: {type: Boolean, default: false},
-    patternUrl: {type: String, required: false},
+    patternUrl: {type: String, required: false, trim: true},
     disabled: {type: Boolean, default: false},
   },
   {
