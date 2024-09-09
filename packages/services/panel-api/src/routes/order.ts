@@ -117,7 +117,12 @@ const order = router({
     const {trackId, orderId} = opts.input;
     const order = await db.$Order.findById(orderId).populate(['customer', 'discount']);
 
-    if (order == null || order.trackId != trackId || order.result != null || order.customer._id != opts.ctx.user._id)
+    if (
+      order == null ||
+      order.trackId != trackId ||
+      order.result != null ||
+      order.customer._id.toString() != opts.ctx.user._id.toString()
+    )
       throw new TRPCError({code: 'NOT_FOUND'});
 
     if (order.status === 1) return order as unknown as OrderData;
