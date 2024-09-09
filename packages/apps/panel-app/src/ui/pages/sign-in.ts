@@ -131,6 +131,7 @@ export function $SignPage() {
                   <input
                     type="tel"
                     name="tel"
+                    inputmode="tel"
                     placeholder="شمـاره همراه"
                     pattern="^[09]{2}[0-9]{9}$"
                     .value=${phoneNumber ?? ''}
@@ -146,8 +147,9 @@ export function $SignPage() {
                   ${icon({svg: SolarNotificationUnreadLinesLineDuotone})}
 
                   <input
-                    type="tel"
+                    type="text"
                     name="otp"
+                    inputmode="numeric"
                     placeholder="کـد اعتبارسنجـــی"
                     pattern="^[0-9]{6}$"
                     maxlength="6"
@@ -166,12 +168,26 @@ export function $SignPage() {
                 <label class="gecut-input">
                   ${icon({svg: SolarNotificationUnreadLinesLineDuotone})}
 
-                  <input type="text" name="first-name" placeholder="نام" minlength="4" required />
+                  <input
+                    type="text"
+                    name="first-name"
+                    placeholder="نام"
+                    pattern="^[U+0020 U+2002ء-بت-غف-قل-وَ-ّٕپچژکگھی]{3,19}$"
+                    minlength="4"
+                    required
+                  />
                 </label>
                 <label class="gecut-input">
                   ${icon({svg: SolarNotificationUnreadLinesLineDuotone})}
 
-                  <input type="text" name="last-name" placeholder="نام خانوادگـی" minlength="4" required />
+                  <input
+                    type="text"
+                    name="last-name"
+                    placeholder="نام خانوادگـی"
+                    pattern="^[U+0020 U+2002ء-بت-غف-قل-وَ-ّٕپچژکگھی]{3,19}$"
+                    minlength="4"
+                    required
+                  />
                 </label>
               `,
             },
