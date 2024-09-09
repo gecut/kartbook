@@ -12,7 +12,6 @@ import {router} from '../router/index.js';
 
 import FluentEmojiRevolvingHearts from '~icons/fluent-emoji/revolving-hearts';
 import LineMdAccount from '~icons/line-md/account';
-import LineMdAccountAlertLoop from '~icons/line-md/account-alert-loop';
 import LineMdEmail from '~icons/line-md/email';
 import LineMdLightbulbTwotone from '~icons/line-md/lightbulb-twotone';
 import LineMdLogOut from '~icons/line-md/log-out';
@@ -89,19 +88,6 @@ export function $UserPage() {
                         })}
                       </i>
                       <span class="text-onSurfaceVariant">${user.email}</span>
-                    </div>
-                  `,
-                )}
-                ${when(
-                  user.caller,
-                  () => html`
-                    <div class="flex items-center justify-start gap-4 w-full">
-                      <i class="text-primary">
-                        ${icon({
-                          svg: LineMdAccountAlertLoop,
-                        })}
-                      </i>
-                      <span class="text-onSurfaceVariant">${user.caller?.firstName} ${user.caller?.lastName}</span>
                     </div>
                   `,
                 )}
