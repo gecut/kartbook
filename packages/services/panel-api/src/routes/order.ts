@@ -67,6 +67,7 @@ const order = router({
 
         amount,
         customer: opts.ctx.user,
+        discount,
       });
 
       try {
@@ -114,9 +115,10 @@ const order = router({
     }),
   verify: $UserProcedure.input(z.object({trackId: z.number(), orderId: z.string()})).mutation(async (opts) => {
     const {trackId, orderId} = opts.input;
-    const order = await db.$Order.findById(orderId);
+    const order = await db.$Order.findById(orderId).populate(['customer', 'discount']);
 
-    if (order == null || order.trackId != trackId || order.result != null) throw new TRPCError({code: 'NOT_FOUND'});
+    if (order == null || order.trackId != trackId || order.result != null || order.customer._id != opts.ctx.user._id)
+      throw new TRPCError({code: 'NOT_FOUND'});
 
     if (order.status === 1) return order as unknown as OrderData;
 
@@ -152,7 +154,15 @@ const order = router({
       owner: order.customer,
     });
 
-    const [_order, _card] = await Promise.all([order.save(), card.save()]);
+    const [_order, _card] = await Promise.all([
+      order.save(),
+      card.save(),
+      (async () => {
+        if (order.discount) {
+          await db.$Discount.findByIdAndUpdate(order.discount._id, {usageCount: order.discount.usageCount + 1});
+        }
+      })(),
+    ]);
 
     // TODO: Send a SMS to message of created card
 
