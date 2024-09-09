@@ -11,7 +11,7 @@ async function getUserFromHeader(request: CreateNextContextOptions['req']) {
     const token = String(authorization).replace('Bearer ', '');
 
     try {
-      const user = await db.$User.findOne({token}).populate(['wallet', 'caller']);
+      const user = await db.$User.findOne({token, disabled: false}).populate('wallet');
 
       if (user?.disabled != true) return user as UserInterface;
     }
