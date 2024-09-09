@@ -27,12 +27,10 @@ const user = router({
         lastName: z.string(),
 
         phoneNumber: z.string(),
-
-        callerId: z.string().optional(),
       }),
     )
     .mutation(async (opts) => {
-      const {firstName, lastName, phoneNumber, callerId} = opts.input;
+      const {firstName, lastName, phoneNumber} = opts.input;
 
       const user = await db.$User.create({
         firstName,
@@ -45,14 +43,6 @@ const user = router({
           })
         )._id,
       });
-
-      if (callerId) {
-        const caller = await db.$User.findById(callerId);
-
-        if (caller) {
-          user.caller = caller;
-        }
-      }
 
       return user as unknown as UserData;
     }),
@@ -108,14 +98,14 @@ const user = router({
         const user = await db.$User.findById(opts.input.userId).orFail(() => {
           throw new TRPCError({
             code: 'NOT_FOUND',
-            message: 'user not found',
+            message: 'user-not-found',
           });
         });
 
         if (user.otp?.code !== opts.input.otpCode)
           throw new TRPCError({
             code: 'UNAUTHORIZED',
-            message: 'otp code not invalid',
+            message: 'otp-code-not-invalid',
           });
 
         if (Date.now() > user.otp.expiredAt) {
@@ -125,7 +115,7 @@ const user = router({
 
           throw new TRPCError({
             code: 'BAD_REQUEST',
-            message: 'otp code expired',
+            message: 'otp-code-expired',
           });
         }
 
