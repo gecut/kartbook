@@ -1,7 +1,10 @@
 import {Schema} from 'mongoose';
 
 import type {Entity} from './_base.js';
-import type {Jsonify} from '@gecut/types';
+import type {ArrayValues, Jsonify} from '@gecut/types';
+
+const TransactionTypes = ['withdrawal', 'deposit'] as const;
+const TransactionStatuses = ['in-progress', 'done', 'rejected'] as const;
 
 /**
  * Represents a transaction.
@@ -10,7 +13,9 @@ export interface TransactionInterface {
   /**
    * Type of transaction. Can be either 'withdrawal' (send money to user) or 'deposit' (receive money from user).
    */
-  type: 'withdrawal' | 'deposit';
+  type: ArrayValues<typeof TransactionTypes>;
+  status: ArrayValues<typeof TransactionStatuses>;
+  message?: string;
 
   /**
    * Amount of money involved in the transaction.
@@ -39,10 +44,12 @@ export const $WalletSchema = new Schema<WalletInterface>(
   {
     balance: Number,
     transactions: [
-      {
-        type: String,
-        amount: Number,
-      },
+      new Schema<TransactionInterface>({
+        type: {type: String, required: true, enum: TransactionTypes},
+        status: {type: String, required: true, enum: TransactionStatuses},
+        message: String,
+        amount: {type: Number, required: true},
+      }),
     ],
     disabled: {type: Boolean, default: false},
   },
@@ -50,3 +57,16 @@ export const $WalletSchema = new Schema<WalletInterface>(
     timestamps: true,
   },
 );
+
+$WalletSchema.pre('save', async function (next) {
+  this.balance = this.transactions
+    .map((transaction) => {
+      if (transaction.type === 'withdrawal' && transaction.status === 'rejected') return -transaction.amount;
+      if (transaction.type === 'deposit') return transaction.amount;
+
+      return 0;
+    })
+    .reduce((p, c) => p + c, 0);
+
+  next();
+});
