@@ -25,8 +25,7 @@ export function card(data: DataContextType) {
         type: 'success',
         msg: 'شماره کارت کپی شد',
       });
-    }
-    catch {
+    } catch {
       return await pushNotification({
         type: 'error',
         msg: 'مشکلی در کپی کردن شماره کارت ایجاد شد، دوباره امتحان کنید',
@@ -41,8 +40,7 @@ export function card(data: DataContextType) {
         type: 'success',
         msg: 'شماره شبا کپی شد',
       });
-    }
-    catch {
+    } catch {
       return await pushNotification({
         type: 'error',
         msg: 'مشکلی در کپی کردن شماره شبا ایجاد شد، دوباره امتحان کنید',

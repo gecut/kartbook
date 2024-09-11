@@ -9,11 +9,11 @@ import type {CardData} from '@gecut/kartbook-types';
 
 export type DataContextType =
   | {
-    card: CardData;
-    bank: Bank;
-    primaryColor: string | null;
-    amount?: number;
-  }
+      card: CardData;
+      bank: Bank;
+      primaryColor: string | null;
+      amount?: number;
+    }
   | 'disabled'
   | 'error'
   | 'no-username'
