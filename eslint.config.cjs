@@ -74,7 +74,7 @@ module.exports = [
           prefer: 'type-imports',
         },
       ],
-      'indent': [
+      indent: [
         'error',
         2,
         {
