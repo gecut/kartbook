@@ -32,7 +32,12 @@ export function $CreateCardPage() {
   const createCardSlides = new GecutState<ArrayValues<typeof slides>>('create-card.slides', 'cardNumber');
   const createCardLoading = new GecutState<boolean>('create-card.loading', false);
 
-  const createCardMemory = new GecutState<CreateCardMemory>('create-card.memory', {card: {}, discount: null});
+  const createCardMemory = new GecutState<CreateCardMemory>('create-card.memory', {
+    card: {
+      cardNumber: ['6104', '3386', '0702', '1942'],
+    },
+    discount: null,
+  });
 
   const $OnFormSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
@@ -115,8 +120,7 @@ export function $CreateCardPage() {
                 orderId: order._id,
               }),
             );
-          }
-          else if (order.trackId) {
+          } else if (order.trackId) {
             window.open('https://gateway.zibal.ir/start/' + order.trackId, '_self');
           }
         }
@@ -127,8 +131,7 @@ export function $CreateCardPage() {
 
         if (confirm) {
           createCardSlides.value = 'slug';
-        }
-        else {
+        } else {
           sbm.notify({
             message: ' لطفا اطلاعات کارت را با دقت بررسی کرده و در صورت تایید، عملیات را ادامه دهید.',
             close: true,
@@ -209,8 +212,7 @@ export function $CreateCardPage() {
 
                     if (currentIndex > 0) {
                       createCardSlides.value = slides[currentIndex - 1];
-                    }
- else {
+                    } else {
                       router.navigate(resolvePath('cards'));
                     }
                   },
@@ -234,8 +236,7 @@ function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
         const nextInput = document.querySelector<HTMLInputElement>(`#card-number-input-${index + 1}`);
 
         if (nextInput) nextInput.focus();
-      }
-      else if (value.length <= 0) {
+      } else if (value.length <= 0) {
         const previousInput = document.querySelector<HTMLInputElement>(`#card-number-input-${index - 1}`);
 
         if (previousInput) previousInput.focus();
@@ -264,7 +265,7 @@ function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
               pattern="^[0-9]{4}$"
               maxlength="4"
               required
-              .value=${memory?.card.cardNumber?.[i] ?? ''}
+              .value=${memory?.card.cardNumber?.[i - 1] ?? ''}
               @keyup=${inputsAutoFocus(i)}
             />
           </label>
@@ -280,7 +281,17 @@ function _$PreviewSlide(memory: CreateCardMemory | undefined) {
     ${until(
       when(card.cardNumber, () =>
         IranianBanks.getInfo(card.cardNumber!).then((bank) =>
-          $CardRenderer(card.cardNumber!, card.iban ?? '', card.ownerName ?? '', bank),
+          $CardRenderer(
+            card.cardNumber!,
+            card.iban ?? '',
+            card.ownerName ?? '',
+            bank,
+            () =>
+              html`<img
+                src="https://cdn.k32.ir/mask.pattern.webp"
+                class="absolute inset-0 w-full h-full z-above object-cover opacity-50"
+              />`,
+          ),
         ),
       ),
     )}

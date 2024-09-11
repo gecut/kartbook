@@ -28,8 +28,7 @@ export function $UserPage() {
 
     if (currentPath != router.route.path) {
       clearInterval(timer);
-    }
-    else {
+    } else {
       timerState.value = timerState.value || 0;
     }
   }, 1000);

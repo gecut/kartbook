@@ -44,9 +44,9 @@ export function $CardDetail(selectedCard: SelectedCardType) {
 
       <div class="flex flex-col gap-2 justify-center items-center kb-icon-buttons min-w-20">
         ${gecutIconButton({
-          type: selectedCard.card.disabled ?? false ? 'filled' : 'filledTonal',
+          type: (selectedCard.card.disabled ?? false) ? 'filled' : 'filledTonal',
           name: 'enable',
-          svg: selectedCard.card.disabled ?? false ? SolarEyeClosedLineDuotone : SolarEyeLineDuotone,
+          svg: (selectedCard.card.disabled ?? false) ? SolarEyeClosedLineDuotone : SolarEyeLineDuotone,
 
           events: {
             click: async (event) => {

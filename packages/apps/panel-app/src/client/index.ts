@@ -19,7 +19,7 @@ const errors: Record<string, string> = {
 export const client = createTRPCProxyClient<AppRouter>({
   links: [
     httpLink({
-      url: import.meta.env.API_URL ?? 'https://api.panel.kartbook.ir',
+      url: import.meta.env.API_URL ?? 'http://localhost:8081',
       headers: () => ({
         Authorization: `Bearer ${envvm.get('user-token')}`,
       }),
@@ -39,6 +39,7 @@ export const client = createTRPCProxyClient<AppRouter>({
             if (typeof result.error.message === 'string') {
               sbm.notify({
                 message: errors[String(result.error.message)] || result.error.message,
+                textMultiLine: true,
                 close: true,
               });
             }

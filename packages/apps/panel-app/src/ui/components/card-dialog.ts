@@ -119,8 +119,7 @@ export const cardDialogStates: StateManager<CardDialogStates, TemplateResult | t
                       close: true,
                     }),
                   );
-                }
- else {
+                } else {
                   sbm.notify({
                     message: 'دستگاه شما فعلاً قادر به اشتراک‌گذاری نیست.',
                     close: true,

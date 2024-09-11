@@ -109,6 +109,7 @@ export default defineConfig(() => {
           globDirectory: DIST_PATH,
           globPatterns: ['**/*.{html,js,css,woff,png,ico,svg,webp}'],
         },
+        injectRegister: 'script-defer',
         manifest: manifestJson,
         mode: 'production',
         outDir: DIST_PATH,

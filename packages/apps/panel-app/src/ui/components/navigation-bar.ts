@@ -35,7 +35,7 @@ const navigationItem = (unselectedIcon: string, selectedIcon: string, link: stri
       class="size-12 text-onSurface rounded-xl flex items-center justify-center relative
              transition-colors duration-300 overflow-hidden
              hover:bg-primaryContainer hover:text-onPrimaryContainer
-             group [&.active]:!bg-primary [&.active]:!text-onPrimary ${active ? 'active' : ''} "
+             group [&.active]:!bg-primary [&.active]:!text-onPrimary ${active ? 'active pointer-events-none' : ''}"
     >
       <span
         class="absolute inset-0 z-above transition-[opacity] group-hover:opacity-0 duration-300
