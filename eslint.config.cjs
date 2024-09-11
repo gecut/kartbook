@@ -67,7 +67,6 @@ module.exports = [
       'space-infix-ops': 'error',
       'new-cap': ['error', {capIsNewExceptionPattern: 'Mixin$'}],
       'brace-style': ['error', 'stroustrup', {allowSingleLine: true}],
-      indent: 'off',
       '@typescript-eslint/consistent-type-imports': [
         'error',
         {
@@ -75,7 +74,7 @@ module.exports = [
           prefer: 'type-imports',
         },
       ],
-      '@typescript-eslint/indent': [
+      'indent': [
         'error',
         2,
         {

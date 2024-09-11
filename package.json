@@ -1,6 +1,6 @@
 {
   "name": "kartbook",
-  "packageManager": "yarn@4.2.2",
+  "packageManager": "yarn@4.4.1",
   "author": {
     "name": "S. MohammadMahdi Zamanian",
     "email": "dev@mm25zamanain.ir",
@@ -28,7 +28,7 @@
     "rl": "run-s pull clean build release",
     "upd": "yarn set version latest; yarn up '*' -i; yarn up '*' -R; yarn dlx @yarnpkg/sdks vscode;",
     "lint": "run-s 'lint:*'",
-    "lint:ts": "eslint --debug --stats -c ./eslint.config.cjs '.'",
+    "lint:ts": "eslint --stats -c ./eslint.config.cjs '.'",
     "build": "lerna run build",
     "format": "run-s format:prettier format:eslint",
     "format:eslint": "yarn run lint:ts --fix",
@@ -45,21 +45,21 @@
     "panel-api:run": "yarn workspace @gecut/kartbook-panel-api watch"
   },
   "devDependencies": {
-    "@lerna-lite/changed": "^3.4.0",
-    "@lerna-lite/cli": "^3.4.0",
-    "@lerna-lite/diff": "^3.4.0",
-    "@lerna-lite/exec": "^3.4.0",
-    "@lerna-lite/publish": "^3.4.0",
-    "@lerna-lite/run": "^3.4.0",
-    "@lerna-lite/version": "^3.4.0",
-    "@types/node": "^20.13.0",
+    "@lerna-lite/changed": "^3.9.1",
+    "@lerna-lite/cli": "^3.9.1",
+    "@lerna-lite/diff": "^3.9.1",
+    "@lerna-lite/exec": "^3.9.1",
+    "@lerna-lite/publish": "^3.9.1",
+    "@lerna-lite/run": "^3.9.1",
+    "@lerna-lite/version": "^3.9.1",
+    "@types/node": "^22.5.4",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.9.0",
     "eslint": "^9.1.1",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.2.5",
-    "typescript": "^5.4.5"
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2"
   }
 }
