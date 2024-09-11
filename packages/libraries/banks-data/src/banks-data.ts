@@ -94,8 +94,7 @@ export default class IranianBanks {
 
     if (this.id) {
       this.logo = cdnConfig.base + cdnConfig.path + this.id + '.png';
-    }
-    else {
+    } else {
       this.logo = cdnConfig.base + 'logo.png';
     }
   }
@@ -148,8 +147,7 @@ export default class IranianBanks {
             resolve({red: avgR, green: avgG, blue: avgB});
 
             canvas.remove();
-          }
-          else {
+          } else {
             resolve(null);
           }
         });
@@ -157,8 +155,7 @@ export default class IranianBanks {
         this.image.addEventListener('error', () => {
           throw new Error('load image failed');
         });
-      }
-      catch (error) {
+      } catch (error) {
         console.error('IranianBanks.color', error);
 
         resolve(null);

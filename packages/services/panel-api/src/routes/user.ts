@@ -77,8 +77,7 @@ const user = router({
             receptor: user.phoneNumber,
             token: user.otp.code ?? '000000',
           });
-        }
-        else {
+        } else {
           throw new TRPCError({
             code: 'INTERNAL_SERVER_ERROR',
           });

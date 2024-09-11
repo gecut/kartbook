@@ -6,6 +6,7 @@ import {db, logger, $PublicProcedure, router} from './core.js';
 import card from './routes/card.js';
 import order from './routes/order.js';
 import plan from './routes/plan.js';
+import seller from './routes/seller.js';
 import user from './routes/user.js';
 import {createContext} from './utilities/trpc.context.js';
 
@@ -15,6 +16,7 @@ const appRouter = router({
   card,
   plan,
   order,
+  seller,
 });
 // Export type router type signature,
 // NOT the router itself.

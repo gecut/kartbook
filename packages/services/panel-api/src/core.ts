@@ -14,6 +14,15 @@ import type {Context} from './utilities/trpc.context.js';
  * Should be done only once per backend!
  */
 export const trpc = initTRPC.context<Context>().create();
+
+export const loggerMiddleware = trpc.middleware((options) => {
+  return options.next({
+    ctx: {
+      log: logger.sub(`[${options.path}: {${options.type.toUpperCase()}}]`),
+    },
+  });
+});
+
 export const authorizeMiddleware = trpc.middleware((options) => {
   if (options.ctx.user == null) {
     throw new TRPCError({code: 'UNAUTHORIZED', message: 'unauthorized'});
@@ -44,15 +53,18 @@ export const adminMiddleware = trpc.middleware((options) => {
  */
 export const router = trpc.router;
 
-export const $PublicProcedure = trpc.procedure.use(async (opts) => {
+export const $PublicProcedure = trpc.procedure.use(loggerMiddleware).use(async (opts) => {
   return opts
     .next()
     .then((v) => {
-      logger.methodArgs?.(opts.path, {
-        context: opts.ctx,
-        input: opts.input,
-        type: opts.type,
+      opts.ctx.log.methodArgs?.('request', {
         ok: v.ok,
+        user: opts.ctx.user
+          ? {
+              id: opts.ctx.user._id.toString(),
+              name: opts.ctx.user.firstName + ' ' + opts.ctx.user.lastName,
+            }
+          : null,
       });
 
       return v;

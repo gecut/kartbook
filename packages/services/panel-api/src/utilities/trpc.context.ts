@@ -2,9 +2,9 @@ import {db} from '../core.js';
 
 import type {UserInterface} from '@gecut/kartbook-types/user.js';
 import type {inferAsyncReturnType} from '@trpc/server';
-import type {CreateNextContextOptions} from '@trpc/server/adapters/next';
+import type {CreateHTTPContextOptions} from '@trpc/server/adapters/standalone';
 
-async function getUserFromHeader(request: CreateNextContextOptions['req']) {
+async function getUserFromHeader(request: CreateHTTPContextOptions['req']) {
   const authorization = request.headers['authorization'];
 
   if (authorization != null) {
@@ -14,8 +14,7 @@ async function getUserFromHeader(request: CreateNextContextOptions['req']) {
       const user = await db.$User.findOne({token, disabled: false}).populate('wallet');
 
       if (user?.disabled != true) return user as UserInterface;
-    }
-    catch (error) {
+    } catch (error) {
       return null;
     }
   }
@@ -23,7 +22,7 @@ async function getUserFromHeader(request: CreateNextContextOptions['req']) {
   return null;
 }
 
-export async function createContext({req}: CreateNextContextOptions) {
+export async function createContext({req}: CreateHTTPContextOptions) {
   const user = await getUserFromHeader(req);
 
   return {

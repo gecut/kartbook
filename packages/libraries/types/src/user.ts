@@ -5,6 +5,16 @@ import type {Entity} from './_base.js';
 import type {WalletInterface} from './wallet.js';
 import type {Jsonify} from '@gecut/types';
 
+export interface SellerInterface {
+  isSeller: boolean;
+  salesBonus: number;
+  salesDiscount: number;
+
+  sellerCode?: string;
+  nationalCode?: string;
+  birthday?: Date;
+}
+
 export interface OTPInterface {
   code: string;
   expiredAt: number;
@@ -35,18 +45,13 @@ export interface UserInterface extends Entity {
 
   isAdmin: boolean;
 
-  isSeller: boolean;
-
   token: string;
 
   otp?: OTPInterface;
 
   wallet: WalletInterface;
 
-  sellerCode?: string;
-
-  nationalCode?: string;
-  birthday?: Date;
+  seller: SellerInterface;
 }
 
 export type UserData = Jsonify<UserInterface>;
@@ -58,19 +63,24 @@ export const $UserSchema = new Schema<UserInterface>(
     phoneNumber: {type: String, required: true, unique: true, trim: true},
     email: {type: String, required: false, trim: true},
     isAdmin: {type: Boolean, default: false},
-    isSeller: {type: Boolean, default: false},
     disabled: {type: Boolean, default: false},
     token: {type: String, default: uid, unique: true, trim: true},
     wallet: {type: Schema.ObjectId, ref: 'Wallet'},
+
     otp: new Schema<OTPInterface>({
       code: {type: String},
       expiredAt: {type: Number},
     }),
 
-    sellerCode: {type: String, required: false, unique: true},
+    seller: new Schema<SellerInterface>({
+      isSeller: {type: Boolean, default: false},
+      salesBonus: {type: Number, default: 0},
+      salesDiscount: {type: Number, default: 0},
 
-    nationalCode: {type: String, required: false, unique: true, trim: true},
-    birthday: {type: Date, required: false},
+      sellerCode: {type: String, required: false, unique: true},
+      nationalCode: {type: String, required: false, unique: true, trim: true},
+      birthday: {type: Date, required: false},
+    }),
   },
   {
     timestamps: true,

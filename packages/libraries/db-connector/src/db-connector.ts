@@ -55,8 +55,7 @@ export class KartbookDbConnector {
       this.logger.method?.('connect');
       try {
         return (this.connector = await mongoose.connect(this.uri, this.options));
-      }
-      catch (error) {
+      } catch (error) {
         return this.logger.error('connect', 'connect_failed', error);
       }
     }
@@ -86,10 +85,10 @@ export class KartbookDbConnector {
       orderCount,
       validatedCardCount,
       discountCount,
-      agentRequestCount
+      agentRequestCount,
     });
 
-    if (userCount + walletCount + planCount + cardCount < 5) {
+    if (userCount + walletCount + planCount + discountCount < 5) {
       await this.connector?.connection?.db?.dropDatabase();
 
       const wallet = await this.$Wallet.create({
@@ -104,6 +103,15 @@ export class KartbookDbConnector {
         phoneNumber: '09155595488',
         isAdmin: true,
         wallet,
+        seller: {
+          isSeller: true,
+          salesBonus: 800_000,
+          salesDiscount: 400_000,
+
+          birthday: new Date(2005, 11, 15),
+          nationalCode: '0927865041',
+          sellerCode: 'U00S00',
+        },
       });
 
       this.logger.property?.('user', await user.populate('wallet'));
@@ -125,6 +133,7 @@ export class KartbookDbConnector {
           '<span>اشتراک ویژه <span style="font-size:28px;color:#fcc200;font-weight:bolder;">12</span> ماه</span>',
         isPremium: false,
         price: 2_990_000,
+        patternUrl: 'https://cdn.k32.ir/card.pattern.webp',
       });
 
       this.logger.property?.('plan2', plan2);

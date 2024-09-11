@@ -12,6 +12,13 @@ export interface OrderInterface extends Entity {
   card: Pick<CardInterface, 'cardNumber' | 'iban' | 'ownerName' | 'slug' | 'isPremium'>;
   plan: Pick<PlanInterface, 'name' | 'duration' | 'price' | 'isPremium'>;
 
+  caller?: UserInterface;
+  callerSeller?: {
+    salesBonus: number;
+    salesDiscount: number;
+
+    sellerCode: string;
+  };
   discount?: DiscountInterface;
   customer: UserInterface;
 
@@ -46,8 +53,14 @@ export const $OrderSchema = new Schema<OrderInterface>(
     result: {type: Number, required: false},
     status: {type: Number, required: false},
 
-    discount: {type: Schema.ObjectId, ref: 'Discount'},
-    customer: {type: Schema.ObjectId, ref: 'User'},
+    caller: {type: Schema.ObjectId, ref: 'User', required: false},
+    callerSeller: new Schema({
+      salesBonus: Number,
+      salesDiscount: Number,
+      sellerCode: String,
+    }),
+    discount: {type: Schema.ObjectId, ref: 'Discount', required: false},
+    customer: {type: Schema.ObjectId, ref: 'User', required: true},
   },
   {
     timestamps: true,

@@ -4,7 +4,7 @@ import {z} from 'zod';
 import {verifyDiscount} from '../controllers/verify-discount.js';
 import {db, router, $UserProcedure, zibalGateway} from '../core.js';
 
-import type {DiscountData, DiscountInterface, OrderData} from '@gecut/kartbook-types';
+import type {DiscountData, DiscountInterface, OrderData, UserInterface} from '@gecut/kartbook-types';
 
 const order = router({
   create: $UserProcedure
@@ -30,17 +30,33 @@ const order = router({
         });
 
       let discount: DiscountInterface | null = null;
+      let caller: UserInterface | null = null;
 
       if (discountCode) {
-        discount = verifyDiscount(
-          await db.$Discount
-            .findOne({
-              code: discountCode,
-              disabled: false,
-            })
-            .populate(['filters.targetPlans']),
-          planId,
-        );
+        const _discount = await db.$Discount
+          .findOne({
+            code: discountCode,
+            disabled: false,
+          })
+          .populate(['filters.targetPlans']);
+
+        if (_discount == null) {
+          caller = await db.$User.findOne({
+            disabled: false,
+            'seller.sellerCode': discountCode,
+            'seller.isSeller': true,
+          });
+
+          if (caller != null) {
+            discount = new db.$Discount({
+              code: caller.seller.sellerCode,
+              discount: caller.seller.salesDiscount,
+              discountType: 'decimal',
+            });
+          }
+        } else if (caller) {
+          discount = verifyDiscount(_discount, planId);
+        }
       }
 
       const subscriptionPrice = plan.price;
@@ -67,13 +83,23 @@ const order = router({
 
         amount,
         customer: opts.ctx.user,
-        discount,
+        discount: caller == null ? discount : null,
+        caller,
+        callerSeller:
+          caller != null
+            ? {
+                salesBonus: caller.seller.salesBonus,
+                salesDiscount: caller.seller.salesDiscount,
+                sellerCode: caller.seller.sellerCode ?? 'unknown',
+              }
+            : undefined,
       });
+
+      discount = null;
 
       try {
         await order.save();
-      }
-      catch (error) {
+      } catch (error) {
         console.error(error);
         throw new TRPCError({code: 'INTERNAL_SERVER_ERROR', cause: error});
       }
@@ -91,7 +117,17 @@ const order = router({
         order.status = 1;
         order.trackId = Date.now();
 
-        const [_order, _card] = await Promise.all([order.save(), card.save()]);
+        const [_order, _card, _discount] = await Promise.all([
+          order.save(),
+          card.save(),
+          order.discount?._id?.toString() != null
+            ? db.$Discount.findByIdAndUpdate(order.discount._id, {$inc: {usageCount: 1}})
+            : Promise.resolve(null),
+        ]);
+
+        opts.ctx.log.property?.('order', _order);
+        opts.ctx.log.property?.('card', _card);
+        opts.ctx.log.property?.('discount', _discount);
 
         return order as unknown as OrderData;
       }
@@ -159,13 +195,17 @@ const order = router({
       owner: order.customer,
     });
 
-    const [_order, _card] = await Promise.all([
+    const [_order, _card, _discount] = await Promise.all([
       order.save(),
       card.save(),
-      order.discount
-        ? db.$Discount.findByIdAndUpdate(order.discount._id, {usageCount: order.discount.usageCount + 1})
-        : Promise.resolve(),
+      order.discount?._id?.toString() != null
+        ? db.$Discount.findByIdAndUpdate(order.discount._id, {$inc: {usageCount: 1}})
+        : Promise.resolve(null),
     ]);
+
+    opts.ctx.log.property?.('order', _order);
+    opts.ctx.log.property?.('card', _card);
+    opts.ctx.log.property?.('discount', _discount);
 
     // TODO: Send a SMS to message of created card
 
@@ -183,12 +223,33 @@ const order = router({
       .mutation(async (opts) => {
         const {discountCode, planId} = opts.input;
 
+        opts.ctx.log.property?.('discountCode', discountCode);
+        opts.ctx.log.property?.('planId', planId);
+
         const discount = await db.$Discount
           .findOne({
             code: discountCode,
             disabled: false,
           })
           .populate(['filters.targetPlans']);
+
+        if (discount == null) {
+          const caller = await db.$User.findOne({
+            disabled: false,
+            'seller.sellerCode': discountCode,
+            'seller.isSeller': true,
+          });
+
+          opts.ctx.log.property?.('caller', caller);
+
+          if (caller != null) {
+            return {
+              code: caller.seller.sellerCode,
+              discount: caller.seller.salesDiscount,
+              discountType: 'decimal',
+            } as DiscountData;
+          }
+        }
 
         return verifyDiscount(discount, planId) as unknown as DiscountData;
       }),
