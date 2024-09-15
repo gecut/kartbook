@@ -2,6 +2,10 @@ label.gecut-input {
   input {
     direction: rtl;
 
+    &[dir='ltr'] {
+      direction: ltr;
+    }
+
     &::placeholder {
       @apply text-onSurfaceVariant font-normal tracking-normal;
     }
@@ -51,5 +55,5 @@ label.gecut-input {
     @apply border-error;
   }
 
-  @apply bg-surfaceContainerLowest h-12 rounded-xl overflow-hidden flex items-center gap-2 px-2 text-bodyMedium text-onSurface border border-transparent transition-colors;
+  @apply bg-surfaceContainerLowest h-12 rounded-xl overflow-hidden flex items-center gap-2 px-2 text-bodyMedium text-onSurface border border-transparent transition-colors shrink-0 text-start;
 }

@@ -9,6 +9,7 @@ import {userContext} from '../../contexts/user.js';
 import {envvm} from '../../utilities/envvm.js';
 import {i18n} from '../../utilities/i18n.js';
 import {router} from '../router/index.js';
+import {resolvePath} from '../router/resolver.js';
 
 import FluentEmojiRevolvingHearts from '~icons/fluent-emoji/revolving-hearts';
 import LineMdAccount from '~icons/line-md/account';
@@ -28,7 +29,8 @@ export function $UserPage() {
 
     if (currentPath != router.route.path) {
       clearInterval(timer);
-    } else {
+    }
+    else {
       timerState.value = timerState.value || 0;
     }
   }, 1000);
@@ -42,7 +44,8 @@ export function $UserPage() {
             ${when(
               user.email == null,
               () => html`
-                <button
+                <a
+                  href=${resolvePath('user/edit')}
                   class="gecut-card-filled w-full flex gap-2 p-4 bg-secondaryContainer text-onSecondaryContainer
                      text-bodyMedium focus-ring"
                 >
@@ -55,7 +58,7 @@ export function $UserPage() {
                     <span class="text-error text-labelLarge !font-black">کلـــــیـک</span>
                     کنید.
                   </p>
-                </button>
+                </a>
               `,
             )}
 
@@ -109,6 +112,7 @@ export function $UserPage() {
                 ${gecutButton({
                   type: 'filled',
                   icon: {svg: LineMdPencil},
+                  href: resolvePath('user/edit'),
                   label: 'ویرایش اطلاعات',
                 })}
                 ${gecutButton({
@@ -147,12 +151,3 @@ export function $UserPage() {
     </main>
   `;
 }
-
-/*
-            <div
-              class="bg-surfaceContainer text-onSurface flex rounded-xl items-center justify-between
-                   overflow-hidden w-full p-4"
-            >
-              <span>${dateState.hydrate(() => i18n.rtf(user.createdAt))}</span>
-            </div>
-             */

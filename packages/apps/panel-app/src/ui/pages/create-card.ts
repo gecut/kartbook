@@ -120,7 +120,8 @@ export function $CreateCardPage() {
                 orderId: order._id,
               }),
             );
-          } else if (order.trackId) {
+          }
+          else if (order.trackId) {
             window.open('https://gateway.zibal.ir/start/' + order.trackId, '_self');
           }
         }
@@ -131,7 +132,8 @@ export function $CreateCardPage() {
 
         if (confirm) {
           createCardSlides.value = 'slug';
-        } else {
+        }
+        else {
           sbm.notify({
             message: ' لطفا اطلاعات کارت را با دقت بررسی کرده و در صورت تایید، عملیات را ادامه دهید.',
             close: true,
@@ -212,7 +214,8 @@ export function $CreateCardPage() {
 
                     if (currentIndex > 0) {
                       createCardSlides.value = slides[currentIndex - 1];
-                    } else {
+                    }
+ else {
                       router.navigate(resolvePath('cards'));
                     }
                   },
@@ -236,7 +239,8 @@ function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
         const nextInput = document.querySelector<HTMLInputElement>(`#card-number-input-${index + 1}`);
 
         if (nextInput) nextInput.focus();
-      } else if (value.length <= 0) {
+      }
+      else if (value.length <= 0) {
         const previousInput = document.querySelector<HTMLInputElement>(`#card-number-input-${index - 1}`);
 
         if (previousInput) previousInput.focus();
@@ -255,7 +259,7 @@ function _$CardNumberSlide(memory: CreateCardMemory | undefined) {
         null,
         arrayUtils.range(4),
         (i) => html`
-          <label class="gecut-input">
+          <label class="gecut-input !shrink">
             <input
               id="card-number-input-${i}"
               type="text"

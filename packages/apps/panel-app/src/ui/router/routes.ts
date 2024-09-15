@@ -7,6 +7,7 @@ import {$CreateCardPage} from '../pages/create-card.js';
 import {$SellerPanelPage} from '../pages/seller-panel.js';
 import {$SignPage} from '../pages/sign-in.js';
 import {$SupportPage} from '../pages/support.js';
+import {$UserEditPage} from '../pages/user-edit.js';
 import {$UserPage} from '../pages/user.js';
 import {$WalletPage} from '../pages/wallet.js';
 
@@ -30,6 +31,7 @@ export type Routes<
     | 'cards/create'
     | 'cards/create/callback'
     | 'user'
+    | 'user/edit'
     | 'wallet'
     | 'seller'
     | 'sign-in'
@@ -43,6 +45,7 @@ export type Routes<
     render?: RouteDefinition['render'];
     plugins?: RouteDefinition['plugins'];
     nav?: {selectedIcon: string; unselectedIcon: string};
+    forSeller?: true;
   }
 >;
 export type RoutesPaths = StringKeyOf<Routes>;
@@ -78,6 +81,12 @@ export const routes: Routes = {
     },
   },
 
+  'user/edit': {
+    title: 'ویرایش حساب',
+    render: $UserEditPage,
+    plugins: [requireAuthenticated('/sign-in')],
+  },
+
   wallet: {
     title: 'کیف پول',
     render: $WalletPage,
@@ -86,6 +95,7 @@ export const routes: Routes = {
       unselectedIcon: SolarWalletLineDuotone,
       selectedIcon: SolarWalletMoneyBoldDuotone,
     },
+    forSeller: true,
   },
 
   seller: {
@@ -96,6 +106,7 @@ export const routes: Routes = {
       unselectedIcon: SolarUserHeartRoundedLineDuotone,
       selectedIcon: SolarUserHeartRoundedBoldDuotone,
     },
+    forSeller: true,
   },
 
   'sign-in': {

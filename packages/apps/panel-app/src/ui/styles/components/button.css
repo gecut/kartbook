@@ -5,5 +5,5 @@
     }
   }
 
-  @apply h-12 rounded-xl;
+  @apply h-12 rounded-xl shrink-0;
 }
