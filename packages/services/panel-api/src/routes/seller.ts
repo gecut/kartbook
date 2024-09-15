@@ -12,7 +12,7 @@ const seller = router({
         },
         null,
       )
-      .populate('customer')) as unknown as OrderData[];
+      .populate(['customer', 'caller'])) as unknown as OrderData[];
   }),
 });
 
