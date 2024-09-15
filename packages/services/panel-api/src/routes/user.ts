@@ -77,7 +77,8 @@ const user = router({
             receptor: user.phoneNumber,
             token: user.otp.code ?? '000000',
           });
-        } else {
+        }
+        else {
           throw new TRPCError({
             code: 'INTERNAL_SERVER_ERROR',
           });
@@ -125,6 +126,37 @@ const user = router({
         return user.token;
       }),
   }),
+  edit: $UserProcedure
+    .input(
+      z.object({
+        firstName: z.string().optional(),
+        lastName: z.string().optional(),
+        email: z.string().optional(),
+        nationalCode: z.string().optional(),
+        birthday: z.date().optional(),
+      }),
+    )
+    .mutation(async (opts) => {
+      const _user = opts.ctx.user;
+      const user = await db.$User.findById(_user._id);
+
+      if (user == null)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+        });
+
+      const {firstName, lastName, email, nationalCode, birthday} = opts.input;
+
+      if (firstName != null) user.firstName = firstName;
+      if (lastName != null) user.lastName = lastName;
+      if (email != null) user.email = email;
+      if (nationalCode != null) user.seller.nationalCode = nationalCode;
+      if (birthday != null) user.seller.birthday = birthday;
+
+      await user.save();
+
+      return user.toJSON<UserData>() as UserData;
+    }),
 });
 
 export default user;

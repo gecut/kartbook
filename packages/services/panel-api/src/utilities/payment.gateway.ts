@@ -36,7 +36,7 @@ export class ZibalGateWay {
       amount,
       orderId,
       mobile,
-      callbackUrl: 'http://localhost:3001/cards/create/callback',
+      callbackUrl: 'https://panel.kartbook.ir/cards/create/callback',
     });
   }
   verify(trackId: number) {
