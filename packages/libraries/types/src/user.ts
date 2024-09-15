@@ -77,8 +77,8 @@ export const $UserSchema = new Schema<UserInterface>(
       salesBonus: {type: Number, default: 0},
       salesDiscount: {type: Number, default: 0},
 
-      sellerCode: {type: String, required: false, unique: true},
-      nationalCode: {type: String, required: false, unique: true, trim: true},
+      sellerCode: {type: String, required: false},
+      nationalCode: {type: String, required: false, trim: true},
       birthday: {type: Date, required: false},
     }),
   },

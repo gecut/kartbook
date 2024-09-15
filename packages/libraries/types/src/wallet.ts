@@ -3,8 +3,8 @@ import {Schema} from 'mongoose';
 import type {Entity} from './_base.js';
 import type {ArrayValues, Jsonify} from '@gecut/types';
 
-const TransactionTypes = ['withdrawal', 'deposit'] as const;
-const TransactionStatuses = ['in-progress', 'done', 'rejected'] as const;
+export const TransactionTypes = ['withdrawal', 'deposit'] as const;
+export const TransactionStatuses = ['in-progress', 'done', 'rejected'] as const;
 
 /**
  * Represents a transaction.
