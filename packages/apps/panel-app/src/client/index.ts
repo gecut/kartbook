@@ -19,7 +19,7 @@ const errors: Record<string, string> = {
 export const client = createTRPCProxyClient<AppRouter>({
   links: [
     httpLink({
-      url: import.meta.env.API_URL ?? 'http://localhost:8081',
+      url: import.meta.env.API_URL ?? 'https://api.panel.kartbook.ir/',
       headers: () => ({
         Authorization: `Bearer ${envvm.get('user-token')}`,
       }),
