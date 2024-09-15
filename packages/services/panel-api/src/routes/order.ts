@@ -4,7 +4,13 @@ import {z} from 'zod';
 import {verifyDiscount} from '../controllers/verify-discount.js';
 import {db, router, $UserProcedure, zibalGateway} from '../core.js';
 
-import type {DiscountData, DiscountInterface, OrderData, UserInterface} from '@gecut/kartbook-types';
+import type {
+  DiscountData,
+  DiscountInterface,
+  OrderData,
+  TransactionInterface,
+  UserInterface,
+} from '@gecut/kartbook-types';
 
 const order = router({
   create: $UserProcedure
@@ -54,7 +60,8 @@ const order = router({
               discountType: 'decimal',
             });
           }
-        } else if (caller) {
+        }
+        else if (caller) {
           discount = verifyDiscount(_discount, planId);
         }
       }
@@ -88,10 +95,10 @@ const order = router({
         callerSeller:
           caller != null
             ? {
-                salesBonus: caller.seller.salesBonus,
-                salesDiscount: caller.seller.salesDiscount,
-                sellerCode: caller.seller.sellerCode ?? 'unknown',
-              }
+              salesBonus: caller.seller.salesBonus,
+              salesDiscount: caller.seller.salesDiscount,
+              sellerCode: caller.seller.sellerCode ?? 'unknown',
+            }
             : undefined,
       });
 
@@ -99,7 +106,8 @@ const order = router({
 
       try {
         await order.save();
-      } catch (error) {
+      }
+      catch (error) {
         console.error(error);
         throw new TRPCError({code: 'INTERNAL_SERVER_ERROR', cause: error});
       }
@@ -151,7 +159,7 @@ const order = router({
     }),
   verify: $UserProcedure.input(z.object({trackId: z.number(), orderId: z.string()})).mutation(async (opts) => {
     const {trackId, orderId} = opts.input;
-    const order = await db.$Order.findById(orderId).populate(['customer', 'discount']);
+    const order = await db.$Order.findById(orderId).populate(['customer', 'discount', 'caller']);
 
     if (
       order == null ||
@@ -201,6 +209,17 @@ const order = router({
       order.discount?._id?.toString() != null
         ? db.$Discount.findByIdAndUpdate(order.discount._id, {$inc: {usageCount: 1}})
         : Promise.resolve(null),
+      order.caller?.wallet != null
+        ? db.$Wallet.findByIdAndUpdate(order.caller.wallet, {
+          $push: {
+            transactions: <TransactionInterface>{
+              amount: order.callerSeller?.salesBonus ?? 0,
+              type: 'deposit',
+              status: 'done',
+            },
+          },
+        })
+        : Promise.resolve(null),
     ]);
 
     opts.ctx.log.property?.('order', _order);
@@ -243,11 +262,21 @@ const order = router({
           opts.ctx.log.property?.('caller', caller);
 
           if (caller != null) {
-            return {
-              code: caller.seller.sellerCode,
-              discount: caller.seller.salesDiscount,
-              discountType: 'decimal',
-            } as DiscountData;
+            const plan = await db.$Plan.findOne({
+              patternUrl: 'https://cdn.k32.ir/card.pattern.webp',
+            });
+
+            return verifyDiscount(
+              {
+                filters: {
+                  targetPlans: [plan],
+                },
+                code: caller.seller.sellerCode ?? '',
+                discount: caller.seller.salesDiscount,
+                discountType: 'decimal',
+              } as unknown as DiscountInterface,
+              planId,
+            ) as unknown as DiscountData;
           }
         }
 
