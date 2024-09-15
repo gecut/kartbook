@@ -1,27 +1,20 @@
 import {gecutList, type ItemContent} from '@gecut/components';
-import {gecutContext, GecutState} from '@gecut/lit-helper';
+import {gecutContext} from '@gecut/lit-helper';
 import clipboard from '@gecut/utilities/clipboard.js';
 import {when} from 'lit/directives/when.js';
 import {html} from 'lit/html.js';
 
-import {client} from '../../client/index.js';
+import {invitesState} from '../../contexts/seller-invites.state.js';
 import {userContext} from '../../contexts/user.js';
 import {i18n} from '../../utilities/i18n.js';
 import {sbm} from '../../utilities/sbm.js';
 
 import SolarCopyLineDuotone from '~icons/solar/copy-line-duotone';
 import SolarHandMoneyLineDuotone from '~icons/solar/hand-money-line-duotone';
-import SolarStarLineDuotone from '~icons/solar/star-line-duotone';
 import SolarStarShineLineDuotone from '~icons/solar/star-shine-line-duotone';
 import SolarTicketSaleLineDuotone from '~icons/solar/ticket-sale-line-duotone';
 
-import type {OrderData} from '@gecut/kartbook-types';
-
 export function $SellerPanelPage() {
-  const invitesState = new GecutState<OrderData[]>('invites');
-
-  client.seller.invites.query().then((invites) => (invitesState.value = invites));
-
   return html`
     <main class="flex flex-1 flex-col max-w-md mx-auto page-modal has-top-bar pb-20 px-4 !z-sticky">
       <div class="w-full h-full flex flex-col justify-center py-4 gap-4 *:animate-fadeInSlide">
@@ -51,13 +44,13 @@ export function $SellerPanelPage() {
                           .write(user.seller.sellerCode ?? '')
                           .then(() =>
                             sbm.notify({
-                              message: 'لینک کارت با موفقیت کپی شد.',
+                              message: 'کد دعوت با موفقیت کپی شد.',
                               close: true,
                             }),
                           )
                           .catch(() =>
                             sbm.notify({
-                              message: 'متأسفانه در کپی کردن لینک کارت با مشکل مواجه شدیم. لطفاً مجدد تلاش کنید.',
+                              message: 'متأسفانه در کپی کردن کد دعوت با مشکل مواجه شدیم. لطفاً مجدد تلاش کنید.',
                               close: true,
                             }),
                           );
@@ -101,20 +94,21 @@ export function $SellerPanelPage() {
                     box: 'elevated',
                     scrollable: true,
                   },
-                  invites,
-                  (invite) => ({
+                  invites.reverse(),
+                  (order, index) => ({
                     divider: true,
                     headline: html`
                       <span class="text-onSurfaceVariant">دعوت</span>
-                      <span>${invite.customer.firstName} ${invite.customer.lastName}</span>
+                      <span>${order.customer.firstName} ${order.customer.lastName}</span>
                     `,
-                    supportingText: html`
-                      <span>${i18n.n(invite.caller?.seller.salesBonus || 0)}</span>
-                      <span class="text-onSurfaceVariant">﷼ پاداش دعوت</span>
-                    `,
+                    supportingText: i18n.dt(order.createdAt, {timeStyle: 'short', dateStyle: 'long'}),
+                    trailingSupportingText: {
+                      type: 'string',
+                      value: 'پاداش ' + i18n.n(order.caller?.seller.salesBonus || 0) + ' ﷼',
+                    },
                     leading: {
-                      element: 'icon',
-                      svg: SolarStarLineDuotone,
+                      element: 'avatar:character',
+                      character: i18n.n(invites.length - index),
                     },
                   }),
                 ),
