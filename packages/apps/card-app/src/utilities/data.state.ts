@@ -82,6 +82,8 @@ export async function load(): Promise<DataContextType> {
       });
   }
 
+  window.location.replace('https://kartbook.ir/');
+
   return 'no-username';
 }
 

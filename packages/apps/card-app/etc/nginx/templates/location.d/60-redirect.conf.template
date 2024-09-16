@@ -1,3 +1,0 @@
-location = / {
-  return 308 https://kartbook.ir/;
-}
