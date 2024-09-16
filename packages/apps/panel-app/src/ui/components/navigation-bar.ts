@@ -13,6 +13,8 @@ import {routes} from '../router/routes.js';
 import type {UserData} from '@gecut/kartbook-types';
 
 const _$NavBar = () => {
+  const sortedRoutes = Object.fromEntries(Object.entries(routes).sort(([_1, a], [_2, b]) => a.index - b.index));
+
   return html`
     <footer class="fixed bottom-0 inset-x-0 bg-surfaceContainer translucent flex flex-col h-20">
       <div class="max-w-md mx-auto flex items-center justify-center gap-4 w-full h-full relative px-4">
@@ -23,7 +25,7 @@ const _$NavBar = () => {
               new Promise<UserData>(async (resolve) => {
                 resolve(await userContext.requireValue());
               }).then((_user) =>
-                mapObject(null, routes, (route, path) =>
+                mapObject(null, sortedRoutes, (route, path) =>
                   when(
                     route.nav != null &&
                       (route.forSeller === true ? _user.seller != null && _user.seller.isSeller === true : true),

@@ -45,6 +45,7 @@ export type Routes<
     render?: RouteDefinition['render'];
     plugins?: RouteDefinition['plugins'];
     nav?: {selectedIcon: string; unselectedIcon: string};
+    index: number;
     forSeller?: true;
   }
 >;
@@ -52,16 +53,19 @@ export type RoutesPaths = StringKeyOf<Routes>;
 
 export const routes: Routes = {
   'cards/create': {
+    index: 0,
     title: 'ایجاد کارت',
     render: $CreateCardPage,
     plugins: [requireAuthenticated('/sign-in')],
   },
   'cards/create/callback': {
+    index: 1,
     title: 'ایجاد کارت',
     render: $CreateCardCallbackPage,
     plugins: [requireAuthenticated('/sign-in')],
   },
   cards: {
+    index: 10,
     title: 'کارت ها',
     render: $CardsPage,
     plugins: [requireAuthenticated('/sign-in')],
@@ -72,6 +76,7 @@ export const routes: Routes = {
   },
 
   user: {
+    index: 100,
     title: 'حساب کاربری',
     render: $UserPage,
     plugins: [requireAuthenticated('/sign-in')],
@@ -82,12 +87,14 @@ export const routes: Routes = {
   },
 
   'user/edit': {
+    index: 4,
     title: 'ویرایش حساب',
     render: $UserEditPage,
     plugins: [requireAuthenticated('/sign-in')],
   },
 
   wallet: {
+    index: 1000,
     title: 'کیف پول',
     render: $WalletPage,
     plugins: [requireAuthenticated('/sign-in')],
@@ -95,10 +102,10 @@ export const routes: Routes = {
       unselectedIcon: SolarWalletLineDuotone,
       selectedIcon: SolarWalletMoneyBoldDuotone,
     },
-    forSeller: true,
   },
 
   seller: {
+    index: 101,
     title: 'پنل فروش',
     render: $SellerPanelPage,
     plugins: [requireAuthenticated('/sign-in')],
@@ -110,12 +117,14 @@ export const routes: Routes = {
   },
 
   'sign-in': {
+    index: 7,
     title: 'ورود به سیستم',
     render: $SignPage,
     plugins: [requireNotAuthenticated('/cards')],
   },
 
   support: {
+    index: 10000,
     title: 'پشتیبانی',
     render: $SupportPage,
     plugins: [requireAuthenticated('/sign-in')],
@@ -126,10 +135,12 @@ export const routes: Routes = {
   },
 
   offline: {
+    index: 9,
     title: 'آفلاین',
     render: $404Page,
   },
   '404': {
+    index: 10,
     title: 'یافت نشد',
     render: $404Page,
   },
