@@ -5,10 +5,5 @@ import path from 'path';
 export default {
   ...tailwindConfig,
 
-  content: [
-    'index.html',
-    '**/*.ts',
-    './node_modules/.vite/deps/**/*.js',
-    path.dirname(require.resolve('@gecut/components')) + '/**/*.ts',
-  ],
+  content: ['index.html', 'src/**/*.ts', path.dirname(require.resolve('@gecut/components')) + '/**/*.js'],
 };
