@@ -1,10 +1,11 @@
 import {gecutButton, icon} from '@gecut/components';
 import {html} from 'lit/html.js';
 
+import LineMdInstagram from '~icons/line-md/instagram';
+import LineMdLinkedin from '~icons/line-md/linkedin';
 import LineMdPhoneCallLoop from '~icons/line-md/phone-call-loop';
-import LogosInstagramIcon from '~icons/logos/instagram-icon';
-import LogosLitIcon from '~icons/logos/lit-icon';
-import LogosTelegram from '~icons/logos/telegram';
+import LineMdTelegram from '~icons/line-md/telegram';
+import LineMdTwitterX from '~icons/line-md/twitter-x';
 import SolarCallChatRoundedLineDuotone from '~icons/solar/call-chat-rounded-line-duotone';
 
 export function $SupportPage() {
@@ -30,15 +31,28 @@ export function $SupportPage() {
       <div class="flex gap-4 w-full *:flex-1">
         ${gecutButton({
           type: 'filledTonal',
-          icon: {svg: LogosInstagramIcon},
+          icon: {svg: LineMdTwitterX},
+          href: 'https://x.com/kartbook_ir',
+          target: '_blank',
         })}
         ${gecutButton({
           type: 'filledTonal',
-          icon: {svg: LogosTelegram},
+          icon: {svg: LineMdTelegram},
+          href: 'https://t.me/kartbook_ir',
+          target: '_blank',
         })}
         ${gecutButton({
           type: 'filledTonal',
-          icon: {svg: LogosLitIcon},
+          icon: {svg: LineMdInstagram},
+          href: 'https://instagram.com/kartbook.ir',
+          target: '_blank',
+        })}
+        ${gecutButton({
+          type: 'filledTonal',
+          icon: {svg: LineMdLinkedin},
+          // eslint-disable-next-line max-len
+          href: 'https://www.linkedin.com/company/kartbook-%DA%A9%D8%A7%D8%B1%D8%AA%D8%A8%D9%88%DA%A9?trk=similar-pages',
+          target: '_blank',
         })}
       </div>
     </div>
