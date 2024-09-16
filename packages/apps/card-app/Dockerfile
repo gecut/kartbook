@@ -15,6 +15,8 @@ RUN set -eux; \
 
 FROM ghcr.io/alwatr/nginx-pwa:2.5.0 as nginx
 
+COPY etc/nginx/ /etc/nginx/
+
 COPY --from=builder /app/packages/apps/card-app/dist/ .
 
 RUN pwd; ls -lAhF;
