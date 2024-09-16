@@ -519,7 +519,7 @@ function _$NormalOrder(
 
   return html`
     <div class="flex w-full gap-4 [&>*:first-child]:grow [&>.gecut-button]:px-3">
-      <label class="gecut-input">
+      <label class="gecut-input !shrink">
         <input
           type="text"
           name="discount"
