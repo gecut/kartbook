@@ -1,4 +1,4 @@
-FROM ghcr.io/alwatr/node:21.7.1 as builder
+FROM ghcr.io/alwatr/node:21.7.1 AS builder
 
 RUN apk add --no-cache git;
 RUN set -ex; corepack enable;
@@ -13,7 +13,7 @@ RUN set -eux; \
 
 # ---
 
-FROM ghcr.io/alwatr/nginx-pwa:2.5.0 as nginx
+FROM ghcr.io/alwatr/nginx-pwa:2.5.0
 
 COPY etc/nginx/ /etc/nginx/
 
