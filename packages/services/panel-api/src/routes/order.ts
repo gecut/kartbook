@@ -179,6 +179,16 @@ const order = router({
     order.result = verifiedData.result;
     order.status = verifiedData.status;
 
+    await db.$Wallet.findByIdAndUpdate(order.customer.wallet, {
+      $push: {
+        transactions: <TransactionInterface>{
+          amount: order.amount,
+          type: 'deposit',
+          status: order.status != 1 && order.status != 2 ? 'rejected' : 'done',
+        },
+      },
+    });
+
     if (order.status != 1 && order.status != 2) {
       await order.save();
 
@@ -206,9 +216,21 @@ const order = router({
     const [_order, _card, _discount] = await Promise.all([
       order.save(),
       card.save(),
+
+      db.$Wallet.findByIdAndUpdate(order.customer.wallet, {
+        $push: {
+          transactions: <TransactionInterface>{
+            amount: order.amount,
+            type: 'withdrawal',
+            status: 'done',
+          },
+        },
+      }),
+
       order.discount?._id?.toString() != null
         ? db.$Discount.findByIdAndUpdate(order.discount._id, {$inc: {usageCount: 1}})
         : Promise.resolve(null),
+
       order.caller?.wallet != null
         ? db.$Wallet.findByIdAndUpdate(order.caller.wallet, {
           $push: {
