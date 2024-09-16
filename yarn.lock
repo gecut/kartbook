@@ -2335,6 +2335,7 @@ __metadata:
     "@iconify-json/fluent-emoji": "npm:^1.2.0"
     "@iconify-json/fluent-emoji-flat": "npm:^1.2.0"
     "@iconify-json/line-md": "npm:^1.2.1"
+    "@iconify-json/logos": "npm:^1.2.0"
     "@iconify-json/solar": "npm:^1.2.0"
     "@iconify-json/svg-spinners": "npm:^1.2.0"
     "@tailwindcss/forms": "npm:^0.5.9"
@@ -2556,6 +2557,15 @@ __metadata:
   dependencies:
     "@iconify/types": "npm:*"
   checksum: 10c0/2bfbf14bbeebbd1c34440ae08d54b473d92be876f7304513262e6004553241aeccae7c8c88567dc3c540823d1d8e9b034d5a53392ed2a95da4bce758f948b0f3
+  languageName: node
+  linkType: hard
+
+"@iconify-json/logos@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@iconify-json/logos@npm:1.2.0"
+  dependencies:
+    "@iconify/types": "npm:*"
+  checksum: 10c0/971b3fd39a43e1d2f99b502f7ed85a6d1bb3c0a8e9a543af009245a063aa97a99798d0ebd41458b09513ed118463a8888aa29c53864d7ccc488244ae98772342
   languageName: node
   linkType: hard
 
