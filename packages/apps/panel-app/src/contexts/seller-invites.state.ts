@@ -8,7 +8,7 @@ import type {OrderData} from '@gecut/kartbook-types';
 export const invitesState = new GecutState<OrderData[]>('invites');
 
 userContext.subscribe((user) => {
-  if (user.seller.isSeller === true) {
+  if (user?.seller?.isSeller === true) {
     client.seller.invites.query().then((invites) => (invitesState.value = invites));
   }
 });
