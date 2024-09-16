@@ -29,7 +29,7 @@ export function $SellerPanelPage() {
                 {
                   headline: html`
                     <span>کد دعوت شما:</span>
-                    <span class="text-primary">${user.seller.sellerCode}</span>
+                    <span class="text-primary">${user?.seller.sellerCode}</span>
                   `,
                   leading: {
                     element: 'icon',
@@ -41,7 +41,7 @@ export function $SellerPanelPage() {
                     events: {
                       click: () => {
                         clipboard
-                          .write(user.seller.sellerCode ?? '')
+                          .write(user?.seller.sellerCode ?? '')
                           .then(() =>
                             sbm.notify({
                               message: 'کد دعوت با موفقیت کپی شد.',
@@ -61,7 +61,7 @@ export function $SellerPanelPage() {
                 {
                   headline: html`
                     <span>پاداش فروش:</span>
-                    <span class="text-primary">${i18n.n(user.seller.salesBonus || 0)}</span>
+                    <span class="text-primary">${i18n.n(user?.seller.salesBonus || 0)}</span>
                     <span>ریال</span>
                   `,
                   supportingTextTwoLine: true,
@@ -74,7 +74,7 @@ export function $SellerPanelPage() {
                 {
                   headline: html`
                     <span>تخفیف مشتری شما:</span>
-                    <span class="text-primary">${i18n.n(user.seller.salesDiscount || 0)}</span>
+                    <span class="text-primary">${i18n.n(user?.seller.salesDiscount || 0)}</span>
                     <span>ریال</span>
                   `,
                   supportingTextTwoLine: true,

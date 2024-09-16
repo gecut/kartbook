@@ -93,7 +93,7 @@ export function $UserEditPage() {
                   dir="ltr"
                   placeholder="کد ملی"
                   pattern="^[09]{2}[0-9]{8}$"
-                  .value=${user.seller.nationalCode ?? ''}
+                  .value=${user?.seller?.nationalCode ?? ''}
                 />
               </label>
               ${loadingState.hydrate((loading) =>

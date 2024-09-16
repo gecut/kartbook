@@ -28,7 +28,7 @@ const _$NavBar = () => {
                 mapObject(null, sortedRoutes, (route, path) =>
                   when(
                     route.nav != null &&
-                      (route.forSeller === true ? _user.seller != null && _user.seller.isSeller === true : true),
+                      (route.forSeller === true ? _user?.seller != null && _user?.seller?.isSeller === true : true),
                     () =>
                       navigationItem(
                         route.nav!.unselectedIcon,
