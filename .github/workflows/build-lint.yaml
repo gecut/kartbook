@@ -82,4 +82,4 @@ jobs:
           commit_user_email: ${{ steps.import-gpg.outputs.email }}
           commit_message: 'style(*): prettier & eslint auto format'
           commit_options: '--amend --no-edit'
-          file_pattern: '*.js,*.ts,*.json'
+          file_pattern: '**/**'
