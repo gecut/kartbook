@@ -113,9 +113,15 @@ export function $WalletPage() {
               (transaction) => ({
                 divider: true,
                 headline: transactionHeadline(transaction),
-                trailingSupportingText: {
-                  type: 'string',
-                  value: i18n.n(transaction.amount) + ' ﷼',
+                supportingText: transaction.message,
+                supportingTextTwoLine: true,
+                trailing: {
+                  element: 'template',
+                  template: html`
+                    <div class="flex flex-col">
+                      <span class="text-bodySmall text-onSurface">${i18n.n(transaction.amount)} ﷼</span>
+                    </div>
+                  `,
                 },
                 leading: {
                   element: 'template',
