@@ -29,7 +29,7 @@ const card = router({
   cardNumberExist: $UserProcedure
     .input(
       z.object({
-        cardNumber: z.string().array().length(4),
+        cardNumber: z.string(),
       }),
     )
     .mutation(async (opts) => {
@@ -40,7 +40,7 @@ const card = router({
   authorize: $UserProcedure
     .input(
       z.object({
-        cardNumber: z.string().array().length(4),
+        cardNumber: z.string(),
       }),
     )
     .mutation(async (opts): Promise<ValidatedCardData> => {
@@ -50,13 +50,13 @@ const card = router({
       if (validatedCard != null) return validatedCard as unknown as ValidatedCardData;
 
       const ownerName = await zibalAPI
-        .post('cardInquiry/', {json: {cardNumber: cardNumber.join('')}})
+        .post('cardInquiry/', {json: {cardNumber}})
         .json<{data: {name: string}}>()
         .then((response) => response.data.name)
         .catch(() => null);
 
       const iban = await zibalAPI
-        .post('cardToIban/', {json: {cardNumber: cardNumber.join('')}})
+        .post('cardToIban/', {json: {cardNumber}})
         .json<{data: {IBAN: string}}>()
         .then((response) => response.data.IBAN.replace('IR', ''))
         .catch(() => null);

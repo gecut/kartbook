@@ -16,7 +16,7 @@ const order = router({
   create: $UserProcedure
     .input(
       z.object({
-        cardNumber: z.string().array().length(4),
+        cardNumber: z.string(),
         iban: z.string(),
         ownerName: z.string(),
         slug: z.string(),
