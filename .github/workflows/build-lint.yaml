@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: ⤵️ Checkout repository
         uses: actions/checkout@v4.1.2
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: 🏗 Setup nodejs
         uses: actions/setup-node@v4.0.2
@@ -76,4 +78,5 @@ jobs:
           commit_user_name: ${{ steps.import-gpg.outputs.name }}
           commit_user_email: ${{ steps.import-gpg.outputs.email }}
           commit_message: 'style(*): prettier & eslint auto format'
+          commit_options: '--amend --no-edit'
           file_pattern: '*.js,*.ts,*.json'
