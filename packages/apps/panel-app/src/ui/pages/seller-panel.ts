@@ -97,10 +97,7 @@ export function $SellerPanelPage() {
                   invites.reverse(),
                   (order, index) => ({
                     divider: true,
-                    headline: html`
-                      <span class="text-onSurfaceVariant">دعوت</span>
-                      <span>${order.customer.firstName} ${order.customer.lastName}</span>
-                    `,
+                    headline: `${order.customer.firstName} ${order.customer.lastName}`,
                     supportingText: i18n.dt(order.createdAt, {timeStyle: 'short', dateStyle: 'long'}),
                     trailingSupportingText: {
                       type: 'string',
