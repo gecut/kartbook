@@ -33,9 +33,7 @@ export function $CreateCardPage() {
   const createCardLoading = new GecutState<boolean>('create-card.loading', false);
 
   const createCardMemory = new GecutState<CreateCardMemory>('create-card.memory', {
-    card: {
-      cardNumber: ['6104', '3386', '0702', '1942'],
-    },
+    card: {},
     discount: null,
   });
 
@@ -298,6 +296,7 @@ function _$PreviewSlide(memory: CreateCardMemory | undefined) {
           ),
         ),
       ),
+      html`<h2 class="text-onSurfaceVariant text-titleLarge text-center mb-4">در حال دانلود...</h2>`,
     )}
 
     <label class="px-4 flex gap-2">
