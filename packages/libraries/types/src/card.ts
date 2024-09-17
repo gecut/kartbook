@@ -12,10 +12,10 @@ import type {Jsonify} from '@gecut/types';
 export interface CardInterface extends Entity {
   /**
    * The card number, divided into four groups of four digits each.
-   * @example ['6037', '7015', '0673', '9424']
-   * @type {string[]}
+   * @example '6037701506739424'
+   * @type {string}
    */
-  cardNumber: [string, string, string, string];
+  cardNumber: string;
 
   /**
    * The IBAN (International Bank Account Number) without the first 'IR' prefix.
@@ -56,8 +56,8 @@ export type CardData = Jsonify<CardInterface>;
 
 export const $CardSchema = new Schema<CardInterface>(
   {
-    cardNumber: [{type: String, minlength: 4, maxlength: 4, match: /^[0-9]{4}$/, required: true}],
-    iban: {type: String, unique: true, trim: true},
+    cardNumber: {type: String, minlength: 15, maxlength: 16, unique: true, required: true},
+    iban: {type: String, trim: true},
     ownerName: {type: String, trim: true},
     slug: {type: String, required: true, unique: true, trim: true},
     isPremium: {type: Boolean, default: false},

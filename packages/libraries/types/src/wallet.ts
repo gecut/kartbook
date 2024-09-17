@@ -21,6 +21,8 @@ export interface TransactionInterface {
    * Amount of money involved in the transaction.
    */
   amount: number;
+
+  iban?: string;
 }
 
 /**
@@ -44,12 +46,18 @@ export const $WalletSchema = new Schema<WalletInterface>(
   {
     balance: Number,
     transactions: [
-      new Schema<TransactionInterface>({
-        type: {type: String, required: true, enum: TransactionTypes},
-        status: {type: String, required: true, enum: TransactionStatuses},
-        message: String,
-        amount: {type: Number, required: true},
-      }),
+      new Schema<TransactionInterface>(
+        {
+          type: {type: String, required: true, enum: TransactionTypes},
+          status: {type: String, required: true, enum: TransactionStatuses},
+          message: String,
+          amount: {type: Number, required: true},
+          iban: {type: String, trim: true},
+        },
+        {
+          timestamps: true,
+        },
+      ),
     ],
     disabled: {type: Boolean, default: false},
   },
