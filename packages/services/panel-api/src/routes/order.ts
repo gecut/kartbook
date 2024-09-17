@@ -185,6 +185,7 @@ const order = router({
           amount: order.amount,
           type: 'deposit',
           status: order.status != 1 && order.status != 2 ? 'rejected' : 'done',
+          message: 'افزایش اعتبار جهت خرید کارت',
         },
       },
     });
@@ -223,6 +224,7 @@ const order = router({
             amount: order.amount,
             type: 'withdrawal',
             status: 'done',
+            message: 'برداشت از کیف پول جهت خرید اشتراک کارت',
           },
         },
       }),
@@ -238,6 +240,8 @@ const order = router({
               amount: order.callerSeller?.salesBonus ?? 0,
               type: 'deposit',
               status: 'done',
+              message:
+                  'افزایش اعتبار به عنوان پاداش دعوت: ' + order.customer.firstName + ' ' + order.customer.lastName,
             },
           },
         })
