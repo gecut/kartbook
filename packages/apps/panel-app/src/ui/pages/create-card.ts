@@ -52,7 +52,7 @@ export function $CreateCardPage() {
         const cardNumber4 = data.get('cardNumber4')?.toString();
 
         if (cardNumber1 && cardNumber2 && cardNumber3 && cardNumber4) {
-          const cardNumber = [cardNumber1, cardNumber2, cardNumber3, cardNumber4];
+          const cardNumber = [cardNumber1, cardNumber2, cardNumber3, cardNumber4].join('');
 
           createCardLoading.value = true;
 
@@ -376,7 +376,7 @@ function _$SlugSlide(memory: CreateCardMemory | undefined) {
         type="text"
         .value=${memory?.card?.slug ?? ''}
         name="slug"
-        pattern="^[a-z][a-z0-9]{3,16}$"
+        pattern="^[a-z0-9]{3,16}$"
         @input=${onSlugInput}
         required
       />
@@ -396,8 +396,8 @@ function _$SlugSlide(memory: CreateCardMemory | undefined) {
       when(patternMismatch || (value?.trim().length ?? 0) == 0, () => [
         html`
           <ul class="*:text-error">
-            <li>لطفا حداقل ۳ کاراکتر وارد کنید.</li>
-            <li>تنها حروف کوچک انگلیسی و اعداد مجاز هستند.</li>
+            <li>لطفا حداقل ۴ کاراکتر وارد کنید.</li>
+            <li>تنها حروف انگلیسی یا اعداد مجاز هستند.</li>
             <li>حداکثر طول نام کاربری ۱۶ کاراکتر است.</li>
           </ul>
         `,

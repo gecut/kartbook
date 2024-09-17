@@ -28,7 +28,8 @@ cardsContext.subscribe(
       if (selectedCard) {
         setSelectedCard(selectedCard);
       }
-    } else if (newSelectedCard) {
+    }
+    else if (newSelectedCard) {
       setSelectedCard(newSelectedCard);
     }
   },

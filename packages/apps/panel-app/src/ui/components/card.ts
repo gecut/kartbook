@@ -8,7 +8,7 @@ import type {Info as BankInfo} from '@gecut/kartbook-banks-data';
 import type {TemplateResult} from 'lit/html.js';
 
 export function $CardRenderer(
-  cardNumber: [string, string, string, string],
+  cardNumber: string,
   iban: string,
   ownerName: string,
   bank: BankInfo,
@@ -66,7 +66,7 @@ export function $CardRenderer(
         <div class="grow"></div>
 
         <div class="flex justify-between text-titleLarge text-[20px] text-darkOnSurface cursor-pointer" dir="ltr">
-          ${map(null, cardNumber, (str) => html`<span>${str}</span>`)}
+          ${map(null, cardNumber.match(/.{4}/g), (str) => html`<span>${str}</span>`)}
         </div>
 
         <div class="flex justify-between items-center text-bodyMedium text-outline pt-1 mt-1" dir="ltr">

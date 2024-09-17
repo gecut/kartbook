@@ -19,13 +19,14 @@ export function card(data: DataContextType) {
 
   const copyCardNumber = async () => {
     try {
-      await clipboard.write(data.card.cardNumber.join(''));
+      await clipboard.write(data.card.cardNumber);
 
       return await pushNotification({
         type: 'success',
         msg: 'شماره کارت کپی شد',
       });
-    } catch {
+    }
+    catch {
       return await pushNotification({
         type: 'error',
         msg: 'مشکلی در کپی کردن شماره کارت ایجاد شد، دوباره امتحان کنید',
@@ -40,7 +41,8 @@ export function card(data: DataContextType) {
         type: 'success',
         msg: 'شماره شبا کپی شد',
       });
-    } catch {
+    }
+    catch {
       return await pushNotification({
         type: 'error',
         msg: 'مشکلی در کپی کردن شماره شبا ایجاد شد، دوباره امتحان کنید',
@@ -99,7 +101,7 @@ export function card(data: DataContextType) {
           dir="ltr"
           @click=${copyCardNumber}
         >
-          ${map(null, data.card.cardNumber, (str) => html`<span>${str}</span>`)}
+          ${map(null, data.card.cardNumber.match(/.{4}/g), (str) => html`<span>${str}</span>`)}
         </div>
 
         <div class="flex justify-between items-center text-bodyMedium text-outline pt-1 mt-1" dir="ltr">
