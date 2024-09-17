@@ -88,13 +88,14 @@ export const cdnConfig = {
 };
 
 export default class IranianBanks {
-  constructor(cardNumber: [string, string, string, string]) {
+  constructor(cardNumber: string) {
     this.number = cardNumber;
     this.id = IranianBanks._$getIdByCardNumber(cardNumber);
 
     if (this.id) {
       this.logo = cdnConfig.base + cdnConfig.path + this.id + '.png';
-    } else {
+    }
+    else {
       this.logo = cdnConfig.base + 'logo.png';
     }
   }
@@ -102,7 +103,7 @@ export default class IranianBanks {
   private static infoCache = new Map<string, Info>();
 
   readonly id: (typeof banksIdList)[number] | null;
-  readonly number: [string, string, string, string];
+  readonly number: string;
   readonly logo: string;
 
   image?: HTMLImageElement;
@@ -147,7 +148,8 @@ export default class IranianBanks {
             resolve({red: avgR, green: avgG, blue: avgB});
 
             canvas.remove();
-          } else {
+          }
+          else {
             resolve(null);
           }
         });
@@ -155,7 +157,8 @@ export default class IranianBanks {
         this.image.addEventListener('error', () => {
           throw new Error('load image failed');
         });
-      } catch (error) {
+      }
+      catch (error) {
         console.error('IranianBanks.color', error);
 
         resolve(null);
@@ -164,20 +167,20 @@ export default class IranianBanks {
   }
 
   private static _$getIdByCardNumber(
-    cardNumber: [string, string, string, string],
+    cardNumber: string,
   ): (typeof banksIdList)[number] | null {
-    const bin: `${number}` = (cardNumber[0].toString() + cardNumber[1].toString().slice(0, 2)) as `${number}`;
+    const bin: `${number}` = (cardNumber.slice(0, 6)) as `${number}`;
     const result = banksBinList[bin];
 
     if (typeof result === 'string') return result;
 
-    const subBin: `${number}` = cardNumber[1].toString().slice(2, 4) as `${number}`;
+    const subBin: `${number}` = cardNumber.slice(6, 8) as `${number}`;
 
     return result[subBin] ?? null;
   }
 
-  static async getInfo(cardNumber: [string, string, string, string]): Promise<Info> {
-    const cacheId = cardNumber.join('');
+  static async getInfo(cardNumber: string): Promise<Info> {
+    const cacheId = cardNumber;
     const cache = this.infoCache.get(cacheId);
 
     if (cache != null) return cache;
