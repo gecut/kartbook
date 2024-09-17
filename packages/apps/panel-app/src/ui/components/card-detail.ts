@@ -7,6 +7,7 @@ import {cardDialogContext, cardDialogStates, cardDialogSetter} from './card-dial
 import {$CardRenderer} from './card.js';
 import {client} from '../../client/index.js';
 import {loadCards, selectedCardContext} from '../../contexts/cards.js';
+import {sbm} from '../../utilities/sbm.js';
 
 import SolarEyeClosedLineDuotone from '~icons/solar/eye-closed-line-duotone';
 import SolarEyeLineDuotone from '~icons/solar/eye-line-duotone';
@@ -59,6 +60,12 @@ export function $CardDetail(selectedCard: SelectedCardType) {
                 await client.card.toggleDisabled.mutate({id});
               }
               await loadCards();
+
+              sbm.notify({
+                message: 'درخواست شما ثبت شد٬ فعال سازی/غیر فعال سازی ممکن است تا ۲ دقیقه زمان ببرد',
+                textMultiLine: true,
+                close: true,
+              });
 
               target.removeAttribute('loading');
             },
