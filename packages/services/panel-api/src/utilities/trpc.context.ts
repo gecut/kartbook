@@ -14,7 +14,8 @@ async function getUserFromHeader(request: CreateHTTPContextOptions['req']) {
       const user = await db.$User.findOne({token, disabled: false}).populate('wallet');
 
       if (user?.disabled != true) return user as UserInterface;
-    } catch (error) {
+    }
+    catch (error) {
       return null;
     }
   }

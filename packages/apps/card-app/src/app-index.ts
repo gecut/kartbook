@@ -66,9 +66,5 @@ export async function startApp() {
 
   setTimeout(() => {
     document.querySelector('#invite-button')?.classList.add('show');
-
-
-
-
   }, 1024);
 }

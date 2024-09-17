@@ -61,9 +61,9 @@ export const $PublicProcedure = trpc.procedure.use(loggerMiddleware).use(async (
         ok: v.ok,
         user: opts.ctx.user
           ? {
-              id: opts.ctx.user._id.toString(),
-              name: opts.ctx.user.firstName + ' ' + opts.ctx.user.lastName,
-            }
+            id: opts.ctx.user._id.toString(),
+            name: opts.ctx.user.firstName + ' ' + opts.ctx.user.lastName,
+          }
           : null,
       });
 

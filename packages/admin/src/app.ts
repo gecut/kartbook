@@ -18,7 +18,8 @@ const start = async () => {
 
   if (process.env.NODE_ENV === 'production') {
     await admin.initialize();
-  } else {
+  }
+  else {
     admin.watch();
   }
 

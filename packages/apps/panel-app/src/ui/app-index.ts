@@ -9,7 +9,6 @@ import {routerContext} from '../contexts/router.js';
 import {loadUser} from '../contexts/user.js';
 import '../utilities/pwa.js';
 import {sbm} from '../utilities/sbm.js';
-// eslint-disable-next-line import/order
 import navigationBar from './components/navigation-bar.js';
 
 export async function startApp() {

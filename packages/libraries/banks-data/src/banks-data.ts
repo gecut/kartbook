@@ -166,10 +166,8 @@ export default class IranianBanks {
     });
   }
 
-  private static _$getIdByCardNumber(
-    cardNumber: string,
-  ): (typeof banksIdList)[number] | null {
-    const bin: `${number}` = (cardNumber.slice(0, 6)) as `${number}`;
+  private static _$getIdByCardNumber(cardNumber: string): (typeof banksIdList)[number] | null {
+    const bin: `${number}` = cardNumber.slice(0, 6) as `${number}`;
     const result = banksBinList[bin];
 
     if (typeof result === 'string') return result;
