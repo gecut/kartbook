@@ -23,12 +23,12 @@ export function $SupportPage() {
       ${gecutButton({
         type: 'filled',
         label: 'تماس با پشتیبانی',
-        href: 'tel:+989999969776',
+        href: 'tel:+989355990669',
         trailingIcon: {
           svg: LineMdPhoneCallLoop,
         },
       })}
-      <div class="flex gap-4 w-full *:flex-1">
+      <div class="flex gap-4 w-full *:flex-1 *:px-2">
         ${gecutButton({
           type: 'filledTonal',
           icon: {svg: LineMdTwitterX},
