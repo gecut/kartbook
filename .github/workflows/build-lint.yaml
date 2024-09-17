@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - name: ⤵️ Checkout repository
@@ -54,5 +54,19 @@ jobs:
       - name: 🚀 Build Typescript
         run: yarn build
 
+      - name: 🚀 Format Typescript
+        run: yarn format
+
       - name: 🚀 Run ESLint
         run: yarn lint
+
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'style(*): prettier & eslint auto format'
+          file_pattern: '*.js,*.ts,*.json'
+
+      - name: Push Changes
+        uses: ad-m/github-push@v5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
