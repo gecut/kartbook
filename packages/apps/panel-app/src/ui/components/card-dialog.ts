@@ -108,23 +108,21 @@ export const cardDialogStates: StateManager<CardDialogStates, TemplateResult | t
                   title: 'پلتفرم شمـاره کـارت آنـلایـــن, کـــارت بـوک',
                 };
 
-                if (
-                  typeof navigator.canShare === 'function' &&
-                  typeof navigator.share === 'function' &&
-                  navigator.canShare(shareData)
-                ) {
-                  navigator.share(shareData).catch(() =>
+                if (typeof navigator.share === 'function') {
+                  return navigator.share(shareData).catch(() =>
                     sbm.notify({
+                      textMultiLine: true,
                       message: 'متاسفانه در حال حاضر امکان اشتراک‌گذاری وجود ندارد. لطفاً دوباره تلاش کنید.',
                       close: true,
                     }),
                   );
-                } else {
-                  sbm.notify({
-                    message: 'دستگاه شما فعلاً قادر به اشتراک‌گذاری نیست.',
-                    close: true,
-                  });
                 }
+
+                return sbm.notify({
+                  textMultiLine: true,
+                  message: 'دستگاه شما فعلاً قادر به اشتراک‌گذاری نیست.',
+                  close: true,
+                });
               },
             },
           })}
