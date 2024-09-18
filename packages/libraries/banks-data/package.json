@@ -29,6 +29,6 @@
     "**/*.{js,mjs,cjs,map,d.ts,html,md,css}"
   ],
   "dependencies": {
-    "@types/node": "^22.5.4"
+    "@types/node": "^22.5.5"
   }
 }

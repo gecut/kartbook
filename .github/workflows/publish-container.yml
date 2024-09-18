@@ -44,11 +44,6 @@ jobs:
             path: ./packages/apps/panel-app
             context: .
 
-          # Admin Panel
-          - name: kartbook/admin
-            path: ./packages/admin
-            context: .
-
     permissions:
       contents: read
       packages: write
@@ -129,7 +124,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: ADMIN
           - name: CARD_API
           - name: CARD_APP
           - name: CARD_DB

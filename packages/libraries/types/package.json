@@ -34,7 +34,7 @@
   "dependencies": {
     "@gecut/types": "^2.2.2",
     "@gecut/utilities": "^5.4.1",
-    "@types/node": "^22.5.4",
-    "mongoose": "^8.6.1"
+    "@types/node": "^22.5.5",
+    "mongoose": "^8.6.3"
   }
 }

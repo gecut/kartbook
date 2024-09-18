@@ -1,6 +1,6 @@
 {
   "name": "kartbook",
-  "packageManager": "yarn@4.4.1",
+  "packageManager": "yarn@4.5.0",
   "author": {
     "name": "S. MohammadMahdi Zamanian",
     "email": "dev@mm25zamanain.ir",
@@ -52,7 +52,7 @@
     "@lerna-lite/publish": "^3.9.1",
     "@lerna-lite/run": "^3.9.1",
     "@lerna-lite/version": "^3.9.1",
-    "@types/node": "^22.5.4",
+    "@types/node": "^22.5.5",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.9.0",
     "eslint": "^9.1.1",
@@ -61,38 +61,5 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "typescript": "^5.6.2"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "parserPreset": "conventional-changelog-conventionalcommits",
-    "rules": {
-      "scope-enum": [
-        1,
-        "always",
-        [
-          "admin",
-          "apps/panel-app",
-          "apps/card-app",
-          "services/panel-api",
-          "services/card-db",
-          "services/card-api",
-          "services/cdn",
-          "libraries/types",
-          "libraries/db-connector",
-          "libraries/banks-data",
-          ".vscode",
-          "github/workflows",
-          "load-test",
-          "yarn",
-          "spell",
-          "eslint",
-          "prettier",
-          "design",
-          "*"
-        ]
-      ]
-    }
   }
 }

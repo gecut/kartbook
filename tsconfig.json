@@ -10,8 +10,6 @@
   "exclude": [],
   "references": [
     // apps
-    {"path": "./packages/admin"},
-
     {"path": "./packages/libraries/types"},
     {"path": "./packages/libraries/db-connector"},
     {"path": "./packages/libraries/banks-data"},
