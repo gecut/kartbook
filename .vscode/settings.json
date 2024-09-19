@@ -20,7 +20,9 @@
     "*.njk": "html",
     "ssh-config": "ssh_config"
   },
-  "markdownlint.ignore": ["**/CHANGELOG.md"],
+  "markdownlint.ignore": [
+    "**/CHANGELOG.md"
+  ],
   "cSpell.language": "en,fa,fa-IR",
   "cSpell.words": [
     "adminjs",
@@ -38,13 +40,18 @@
     "zibal"
   ],
   "git.autoStash": true,
-  "git.branchProtection": ["main", "next"],
-  "githubPullRequests.ignoredPullRequestBranches": ["main", "next"],
+  "git.branchProtection": [
+    "main",
+    "next"
+  ],
+  "githubPullRequests.ignoredPullRequestBranches": [
+    "main",
+    "next"
+  ],
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "typescript.enablePromptUseWorkspaceTsdk": false,
   "yaml.schemas": {
     "https://www.artillery.io/schema.json": [
       "file:///home/mm25zamanian/Codes/kartbook/packages/card-app/test.artillery.yml",
@@ -63,7 +70,6 @@
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  "typescript.tsdk": "node_modules/typescript/lib",
   "[NGINX]": {
     "editor.defaultFormatter": "hangxingliu.vscode-nginx-conf-hint"
   }
