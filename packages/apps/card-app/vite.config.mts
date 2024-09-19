@@ -75,12 +75,12 @@ export default defineConfig(() => {
             {
               name: 'Roboto',
               styles: 'wght@300',
-              defer: true,
+              defer: false,
             },
           ],
-          display: 'swap',
-          injectTo: 'head-prepend',
-          preconnect: false,
+          display: 'optional',
+          injectTo: 'body',
+          preconnect: true,
         },
         fontsource: {
           families: ['Vazirmatn'],
