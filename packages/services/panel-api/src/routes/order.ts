@@ -53,7 +53,7 @@ const order = router({
             'seller.isSeller': true,
           });
 
-          if (caller != null) {
+          if (caller != null && caller._id.toString() != opts.ctx.user._id.toString()) {
             discount = new db.$Discount({
               code: caller.seller.sellerCode,
               discount: caller.seller.salesDiscount,
@@ -61,7 +61,7 @@ const order = router({
             });
           }
         }
-        else if (caller) {
+        else {
           discount = verifyDiscount(_discount, planId);
         }
       }
@@ -287,7 +287,7 @@ const order = router({
 
           opts.ctx.log.property?.('caller', caller);
 
-          if (caller != null) {
+          if (caller != null && caller._id.toString() != opts.ctx.user._id.toString()) {
             const plan = await db.$Plan.findOne({
               patternUrl: 'https://cdn.k32.ir/card.pattern.webp',
             });
