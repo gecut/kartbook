@@ -34,7 +34,7 @@ export type OrderData = Jsonify<OrderInterface>;
 export const $OrderSchema = new Schema<OrderInterface>(
   {
     card: {
-      cardNumber: [{type: String, minlength: 4, maxlength: 4, match: /^[0-9]{4}$/, required: true}],
+      cardNumber: {type: String, required: true},
       iban: {type: String},
       ownerName: {type: String},
       slug: {type: String, required: true},
