@@ -56,7 +56,7 @@ export type CardData = Jsonify<CardInterface>;
 
 export const $CardSchema = new Schema<CardInterface>(
   {
-    cardNumber: {type: String, minlength: 15, maxlength: 16, unique: true, required: true},
+    cardNumber: {type: String, unique: true, required: true},
     iban: {type: String, trim: true},
     ownerName: {type: String, trim: true},
     slug: {type: String, required: true, unique: true, trim: true},
