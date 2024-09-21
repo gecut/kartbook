@@ -23,6 +23,8 @@ export interface TransactionInterface {
   amount: number;
 
   iban?: string;
+
+  createdAt: Date;
 }
 
 /**
