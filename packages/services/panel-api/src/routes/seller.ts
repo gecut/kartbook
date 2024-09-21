@@ -1,6 +1,9 @@
+import {TRPCError} from '@trpc/server';
+import {z} from 'zod';
+
 import {db, router, $UserProcedure} from '../core.js';
 
-import type {OrderData} from '@gecut/kartbook-types';
+import type {OrderData, TransactionInterface} from '@gecut/kartbook-types';
 
 const seller = router({
   invites: $UserProcedure.query(async (opts) => {
@@ -14,6 +17,28 @@ const seller = router({
       )
       .populate(['customer', 'caller'])) as unknown as OrderData[];
   }),
+  withdrawal: $UserProcedure
+    .input(
+      z.object({
+        amount: z.number(),
+        iban: z.string(),
+      }),
+    )
+    .mutation((opts) => {
+      return db.$Wallet
+        .findByIdAndUpdate(opts.ctx.user.wallet._id, {
+          $push: {
+            transactions: <TransactionInterface>{
+              amount: opts.input.amount,
+              type: 'withdrawal',
+              status: 'in-progress',
+              message: 'برداشت از کیف پول',
+              iban: opts.input.iban,
+            },
+          },
+        })
+        .orFail(() => new TRPCError({code: 'NOT_FOUND'}));
+    }),
 });
 
 export default seller;
