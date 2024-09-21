@@ -1,9 +1,11 @@
 import {gecutButton, gecutList, icon} from '@gecut/components';
 import {gecutContext} from '@gecut/lit-helper';
+import {when} from 'lit/directives/when.js';
 import {html} from 'lit/html.js';
 
 import {userContext} from '../../contexts/user.js';
 import {i18n} from '../../utilities/i18n.js';
+import {resolvePath} from '../router/resolver.js';
 
 import SolarAddCircleBoldDuotone from '~icons/solar/add-circle-bold-duotone';
 import SolarAddCircleLineDuotone from '~icons/solar/add-circle-line-duotone';
@@ -14,7 +16,7 @@ import SolarMinusCircleLineDuotone from '~icons/solar/minus-circle-line-duotone'
 import SolarMinusCircleLinear from '~icons/solar/minus-circle-linear';
 import SolarUserHeartRoundedLineDuotone from '~icons/solar/user-heart-rounded-line-duotone';
 
-import type {TransactionTypes, TransactionStatuses, TransactionInterface} from '@gecut/kartbook-types/wallet.js';
+import type {TransactionTypes, TransactionStatuses, WalletData} from '@gecut/kartbook-types/wallet.js';
 import type {ArrayValues} from '@gecut/types';
 
 const transactionIcon = (
@@ -50,7 +52,7 @@ const transactionType = (type: ArrayValues<typeof TransactionTypes>) => {
     case 'withdrawal':
       return 'برداشت';
     case 'deposit':
-      return 'واریز';
+      return 'افزایش اعتبار';
   }
 };
 const transactionStatus = (status: ArrayValues<typeof TransactionStatuses>) => {
@@ -63,7 +65,7 @@ const transactionStatus = (status: ArrayValues<typeof TransactionStatuses>) => {
       return 'رد شده';
   }
 };
-const transactionHeadline = (transaction: TransactionInterface) =>
+const transactionHeadline = (transaction: WalletData['transactions'][number]) =>
   transactionType(transaction.type) + ' ' + transactionStatus(transaction.status);
 
 export function $WalletPage() {
@@ -85,31 +87,38 @@ export function $WalletPage() {
             .reduce((p, c) => p + c, 0);
 
           return html`
-            <div class="gecut-card-elevated flex flex-col items-center justify-center p-4 gap-4">
-              <div class="text-labelLarge text-onSurface">موجودی کیف پول شما</div>
-              <div class="text-displayMedium text-primary">
-                ${i18n.n(balance)}
-                <span class="text-labelLarge">﷼</span>
-              </div>
-              <div class="flex flex-col gap-2 w-full">
-                ${gecutButton({
-                  type: 'filledTonal',
-                  label: 'دعوت دوستان',
-                  icon: {svg: SolarUserHeartRoundedLineDuotone},
-                })}
-                ${gecutButton({
-                  type: 'filled',
-                  label: 'بـرداشت وجـه',
-                  icon: {svg: SolarDownloadMinimalisticLineDuotone},
-                })}
-              </div>
-            </div>
+            ${when(
+              user?.seller?.isSeller === true,
+              () => html`
+                <div class="gecut-card-elevated flex flex-col items-center justify-center p-4 gap-4">
+                  <div class="text-labelLarge text-onSurface">موجودی کیف پول شما</div>
+                  <div class="text-displayMedium text-primary">
+                    ${i18n.n(balance)}
+                    <span class="text-labelLarge">﷼</span>
+                  </div>
+                  <div class="flex flex-col gap-2 w-full">
+                    ${gecutButton({
+                      type: 'filledTonal',
+                      label: 'دعوت دوستان',
+                      icon: {svg: SolarUserHeartRoundedLineDuotone},
+                      href: resolvePath('seller'),
+                    })}
+                    ${gecutButton({
+                      type: 'filled',
+                      label: 'بـرداشت وجـه',
+                      icon: {svg: SolarDownloadMinimalisticLineDuotone},
+                      href: resolvePath('wallet/withdrawal'),
+                    })}
+                  </div>
+                </div>
+              `,
+            )}
             ${gecutList(
               {
                 box: 'elevated',
                 scrollable: true,
               },
-              user.wallet.transactions,
+              user.wallet.transactions.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)),
               (transaction) => ({
                 divider: true,
                 headline: transactionHeadline(transaction),
@@ -118,8 +127,19 @@ export function $WalletPage() {
                 trailing: {
                   element: 'template',
                   template: html`
-                    <div class="flex flex-col">
+                    <div class="flex flex-col items-end gap-2">
                       <span class="text-bodySmall text-onSurface">${i18n.n(transaction.amount)} ﷼</span>
+                      <span class="text-bodySmall text-onSurfaceVariant">
+                        ${i18n.d(transaction.createdAt, {
+                          hourCycle: 'h24',
+                          dateStyle: 'short',
+                        })}
+                        -
+                        ${i18n.t(transaction.createdAt, {
+                          hourCycle: 'h24',
+                          timeStyle: 'short',
+                        })}
+                      </span>
                     </div>
                   `,
                 },
