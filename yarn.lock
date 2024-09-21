@@ -1755,6 +1755,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/roboto@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@fontsource/roboto@npm:5.1.0"
+  checksum: 10c0/e424fec92e5cb89a466f271d4a1cd335b4fd8406411a7eaad5b79e9eb4cc61f6258000b1d24444cadbf1f8a06e9ddcdd30a2990b61874978e34fc357d003cba5
+  languageName: node
+  linkType: hard
+
 "@fontsource/vazirmatn@npm:^5.1.0":
   version: 5.1.0
   resolution: "@fontsource/vazirmatn@npm:5.1.0"
@@ -1890,6 +1897,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@gecut/kartbook-panel-app@workspace:packages/apps/panel-app"
   dependencies:
+    "@fontsource/roboto": "npm:^5.1.0"
     "@fontsource/vazirmatn": "npm:^5.1.0"
     "@gecut/components": "npm:^2.8.1"
     "@gecut/i18n": "npm:^2.2.0"
