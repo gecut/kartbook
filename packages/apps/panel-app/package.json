@@ -19,6 +19,7 @@
     "build": "vite build --clearScreen"
   },
   "devDependencies": {
+    "@fontsource/roboto": "^5.1.0",
     "@fontsource/vazirmatn": "^5.1.0",
     "@gecut/components": "^2.8.1",
     "@gecut/i18n": "^2.2.0",

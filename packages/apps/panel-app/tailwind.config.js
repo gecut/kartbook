@@ -37,6 +37,12 @@ export default {
           fontFeatureSettings: '"calt" 1, "tnum" 0',
         },
       ],
+      roboto: [
+        ['Roboto', 'sans-serif', ...systemFont],
+        {
+          fontFeatureSettings: '"calt" 1, "tnum" 0',
+        },
+      ],
       system: systemFont,
       sans: systemFont,
     },

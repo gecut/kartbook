@@ -1,4 +1,24 @@
 label.gecut-input {
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+
+    direction: ltr;
+
+    &::placeholder {
+      direction: rtl;
+
+      @apply text-onSurfaceVariant font-normal tracking-normal font-vazirmatn text-start;
+    }
+
+    @apply font-roboto;
+  }
+
   input {
     direction: rtl;
 

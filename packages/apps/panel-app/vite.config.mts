@@ -86,20 +86,8 @@ export default defineConfig(() => {
         autoInstall: true,
       }),
       Unfonts({
-        google: {
-          families: [
-            {
-              name: 'Roboto',
-              styles: 'wght@300',
-              defer: true,
-            },
-          ],
-          display: 'swap',
-          injectTo: 'head-prepend',
-          preconnect: false,
-        },
         fontsource: {
-          families: ['Vazirmatn'],
+          families: ['Vazirmatn', 'Roboto'],
         },
       }),
       vitePWA({
