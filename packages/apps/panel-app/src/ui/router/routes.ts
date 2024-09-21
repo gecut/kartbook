@@ -10,7 +10,7 @@ import {$SupportPage} from '../pages/support.js';
 import {$UserEditPage} from '../pages/user-edit.js';
 import {$UserPage} from '../pages/user.js';
 import {$WalletPage} from '../pages/wallet.js';
-import { $WithdrawalPage } from '../pages/withdrawal.js';
+import {$WithdrawalPage} from '../pages/withdrawal.js';
 
 import SolarHelpBoldDuotone from '~icons/solar/help-bold-duotone';
 import SolarHelpLineDuotone from '~icons/solar/help-line-duotone';
