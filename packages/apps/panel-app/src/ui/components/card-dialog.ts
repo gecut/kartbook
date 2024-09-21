@@ -109,13 +109,7 @@ export const cardDialogStates: StateManager<CardDialogStates, TemplateResult | t
                 };
 
                 if (typeof navigator.share === 'function') {
-                  return navigator.share(shareData).catch(() =>
-                    sbm.notify({
-                      textMultiLine: true,
-                      message: 'متاسفانه در حال حاضر امکان اشتراک‌گذاری وجود ندارد. لطفاً دوباره تلاش کنید.',
-                      close: true,
-                    }),
-                  );
+                  return navigator.share(shareData);
                 }
 
                 return sbm.notify({
