@@ -98,6 +98,7 @@ export function $SellerPanelPage() {
                   (order, index) => ({
                     divider: true,
                     headline: `${order.customer.firstName} ${order.customer.lastName}`,
+                    supportingTextTwoLine: true,
                     supportingText: i18n.dt(order.createdAt, {timeStyle: 'short', dateStyle: 'long'}),
                     trailingSupportingText: {
                       type: 'string',
