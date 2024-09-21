@@ -10,6 +10,7 @@ import {$SupportPage} from '../pages/support.js';
 import {$UserEditPage} from '../pages/user-edit.js';
 import {$UserPage} from '../pages/user.js';
 import {$WalletPage} from '../pages/wallet.js';
+import { $WithdrawalPage } from '../pages/withdrawal.js';
 
 import SolarHelpBoldDuotone from '~icons/solar/help-bold-duotone';
 import SolarHelpLineDuotone from '~icons/solar/help-line-duotone';
@@ -33,6 +34,7 @@ export type Routes<
     | 'user'
     | 'user/edit'
     | 'wallet'
+    | 'wallet/withdrawal'
     | 'seller'
     | 'sign-in'
     | 'support'
@@ -102,6 +104,13 @@ export const routes: Routes = {
       unselectedIcon: SolarWalletLineDuotone,
       selectedIcon: SolarWalletMoneyBoldDuotone,
     },
+  },
+
+  'wallet/withdrawal': {
+    index: 1000,
+    title: 'برداشت از کیف پول',
+    render: $WithdrawalPage,
+    plugins: [requireAuthenticated('/sign-in')],
   },
 
   seller: {
