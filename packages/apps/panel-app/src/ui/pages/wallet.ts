@@ -122,7 +122,9 @@ export function $WalletPage() {
               (transaction) => ({
                 divider: true,
                 headline: transactionHeadline(transaction),
-                supportingText: transaction.message,
+                supportingText:
+                  transaction.message +
+                  ((transaction.iban?.trim().length ?? 0) > 0 ? `به شماره شبا IR${transaction.iban}` : ''),
                 supportingTextTwoLine: true,
                 trailing: {
                   element: 'template',
