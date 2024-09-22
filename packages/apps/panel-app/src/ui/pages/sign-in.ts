@@ -157,7 +157,12 @@ export function $SignPage() {
                   />
                 </label>
                 <div class="flex justify-between">
-                  <span class="text-bodySmall font-bold text-primary cursor-pointer"> ویرایش شماره تلفن </span>
+                  <span
+                    class="text-bodySmall font-bold text-primary cursor-pointer"
+                    @click=${() => (signInSlides.value = 'tel')}
+                  >
+                    ویرایش شماره تلفن
+                  </span>
                   <span class="text-bodySmall text-onSurfaceVariant"> ${otpTimer()} تا ارسال مجدد </span>
                 </div>
               `,
