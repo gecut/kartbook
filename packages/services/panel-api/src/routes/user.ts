@@ -42,6 +42,12 @@ const user = router({
             transactions: [],
           })
         )._id,
+        otp: {},
+        seller: {
+          isSeller: false,
+          salesBonus: 800_000,
+          salesDiscount: 400_000,
+        },
       });
 
       return user as unknown as UserData;
@@ -150,6 +156,7 @@ const user = router({
       if (firstName != null) user.firstName = firstName;
       if (lastName != null) user.lastName = lastName;
       if (email != null) user.email = email;
+
       if (nationalCode != null) user.seller.nationalCode = nationalCode;
       if (birthday != null) user.seller.birthday = birthday;
 
