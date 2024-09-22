@@ -45,7 +45,7 @@ const user = router({
         otp: {},
         seller: {
           isSeller: false,
-          salesBonus: 800_000,
+          salesBonus: 750_000,
           salesDiscount: 400_000,
         },
       });
