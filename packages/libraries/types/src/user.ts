@@ -67,12 +67,12 @@ export const $UserSchema = new Schema<UserInterface>(
     token: {type: String, default: uid, unique: true, trim: true},
     wallet: {type: Schema.ObjectId, ref: 'Wallet'},
 
-    otp: new Schema<OTPInterface>({
-      code: {type: String},
-      expiredAt: {type: Number},
-    }),
+    otp: {
+      code: String,
+      expiredAt: Number,
+    },
 
-    seller: new Schema<SellerInterface>({
+    seller: {
       isSeller: {type: Boolean, default: false},
       salesBonus: {type: Number, default: 0},
       salesDiscount: {type: Number, default: 0},
@@ -80,7 +80,7 @@ export const $UserSchema = new Schema<UserInterface>(
       sellerCode: {type: String, required: false},
       nationalCode: {type: String, required: false, trim: true},
       birthday: {type: Date, required: false},
-    }),
+    },
   },
   {
     timestamps: true,
