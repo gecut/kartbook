@@ -44,7 +44,7 @@ export async function startApp() {
 
       <div
         id="invite-button"
-        class="absolute -bottom-16 inset-x-0 *:w-full *:h-14 duration-1000
+        class="absolute -bottom-16 flex inset-x-0 *:w-full *:h-14 duration-1000
                *:rounded-b-none [&.show]:bottom-0 transition-all"
       >
         ${gecutButton({
