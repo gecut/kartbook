@@ -376,7 +376,8 @@ function _$SlugSlide(memory: CreateCardMemory | undefined) {
         type="text"
         .value=${memory?.card?.slug ?? ''}
         name="slug"
-        pattern="^[a-z0-9]{3,16}$"
+        pattern="^[a-z0-9]{4,16}$"
+        minlength="4"
         @input=${onSlugInput}
         required
       />
