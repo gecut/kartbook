@@ -5,25 +5,27 @@ label.gecut-input {
     margin: 0;
   }
 
-  input[type='number'] {
-    -moz-appearance: textfield;
-
-    direction: ltr;
-
-    &::placeholder {
-      direction: rtl;
-
-      @apply text-onSurfaceVariant font-normal tracking-normal font-vazirmatn text-start;
-    }
-
-    @apply font-roboto;
-  }
-
   input {
     direction: rtl;
 
     &[dir='ltr'] {
       direction: ltr;
+    }
+
+    &[type='number'],
+    &[type='tel'],
+    &[name='otp'] {
+      -moz-appearance: textfield;
+
+      direction: ltr;
+
+      &::placeholder {
+        direction: rtl;
+
+        @apply text-onSurfaceVariant font-normal tracking-normal font-vazirmatn text-start;
+      }
+
+      @apply font-roboto;
     }
 
     &::placeholder {
