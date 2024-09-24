@@ -32,7 +32,6 @@ const seller = router({
               amount: opts.input.amount,
               type: 'withdrawal',
               status: 'in-progress',
-              message: 'برداشت از کیف پول',
               iban: opts.input.iban,
             },
           },

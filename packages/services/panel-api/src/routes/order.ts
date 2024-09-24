@@ -241,7 +241,7 @@ const order = router({
               type: 'deposit',
               status: 'done',
               message:
-                  'افزایش اعتبار به عنوان پاداش دعوت: ' + order.customer.firstName + ' ' + order.customer.lastName,
+                  'پاداش دعوت: ' + order.customer.firstName + ' ' + order.customer.lastName,
             },
           },
         })
