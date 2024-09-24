@@ -2,7 +2,7 @@ import {TRPCError} from '@trpc/server';
 import {z} from 'zod';
 
 import {verifyDiscount} from '../controllers/verify-discount.js';
-import {db, router, $UserProcedure, zibalGateway} from '../core.js';
+import {db, router, $UserProcedure, zibalGateway, microSMS} from '../core.js';
 
 import type {
   DiscountData,
@@ -251,7 +251,11 @@ const order = router({
     opts.ctx.log.property?.('card', _card);
     opts.ctx.log.property?.('discount', _discount);
 
-    // TODO: Send a SMS to message of created card
+    await microSMS.lookup({
+      template: 'k32-newcard',
+      receptor: _order.customer.phoneNumber,
+      token: 'k32.ir/' + _card.slug,
+    });
 
     return _order as unknown as OrderData;
   }),

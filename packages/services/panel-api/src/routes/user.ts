@@ -78,8 +78,8 @@ const user = router({
         }
 
         if (user.otp?.code) {
-          microSMS.lookup({
-            template: 'signin',
+          await microSMS.lookup({
+            template: 'k32-login',
             receptor: user.phoneNumber,
             token: user.otp.code ?? '000000',
           });
