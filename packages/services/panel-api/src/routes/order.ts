@@ -240,8 +240,7 @@ const order = router({
               amount: order.callerSeller?.salesBonus ?? 0,
               type: 'deposit',
               status: 'done',
-              message:
-                  'پاداش دعوت: ' + order.customer.firstName + ' ' + order.customer.lastName,
+              message: 'پاداش دعوت: ' + order.customer.firstName + ' ' + order.customer.lastName,
             },
           },
         })
