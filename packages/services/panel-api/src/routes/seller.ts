@@ -1,7 +1,7 @@
 import {TRPCError} from '@trpc/server';
 import {z} from 'zod';
 
-import {db, router, $UserProcedure} from '../core.js';
+import {db, router, $UserProcedure, $PublicProcedure} from '../core.js';
 
 import type {OrderData, TransactionInterface} from '@gecut/kartbook-types';
 
@@ -25,6 +25,11 @@ const seller = router({
       }),
     )
     .mutation((opts) => {
+      const now = new Date();
+      const dayOfMonth = now.getDate();
+
+      if (dayOfMonth > 5) throw new TRPCError({code: 'FORBIDDEN', message: 'date-expired-to-withdrawal'});
+
       return db.$Wallet
         .findByIdAndUpdate(opts.ctx.user.wallet._id, {
           $push: {
@@ -38,6 +43,14 @@ const seller = router({
         })
         .orFail(() => new TRPCError({code: 'NOT_FOUND'}));
     }),
+  canWithdrawal: $PublicProcedure.query(() => {
+    const now = new Date();
+    const dayOfMonth = now.getDate();
+
+    if (dayOfMonth > 5) return false;
+
+    return true;
+  }),
 });
 
 export default seller;
