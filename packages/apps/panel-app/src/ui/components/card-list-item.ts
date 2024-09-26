@@ -1,5 +1,4 @@
 import IranianBanks from '@gecut/kartbook-banks-data';
-import {nextAnimationFrame} from '@gecut/utilities/wait/polyfill.js';
 import {cache} from 'lit/directives/cache.js';
 import {until} from 'lit/directives/until.js';
 import {html} from 'lit/html.js';
@@ -11,12 +10,8 @@ import type {SelectedCardType} from '../../contexts/cards.js';
 import type {CardData} from '@gecut/kartbook-types';
 
 export function $CardListItem(card: CardData, index: number, selectedCard: SelectedCardType) {
-  const selectedCardChanged = (event: Event) => {
-    const target = event.target as HTMLElement;
-    const radio = target.querySelector<HTMLInputElement>('input#' + card.slug);
-
+  const selectedCardChanged = () => {
     setSelectedCard(card);
-    nextAnimationFrame(() => radio && (radio.checked = true));
   };
   const ring = selectedCard.card.slug === card.slug ? 'ring-primary' : 'ring-surfaceContainer';
 
