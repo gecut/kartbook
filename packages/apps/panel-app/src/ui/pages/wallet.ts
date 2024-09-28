@@ -1,5 +1,7 @@
 import {gecutButton, gecutList, icon} from '@gecut/components';
 import {gecutContext} from '@gecut/lit-helper';
+import {nextAnimationFrame} from '@gecut/utilities/wait/polyfill.js';
+import jalali from 'jalali-moment';
 import {when} from 'lit/directives/when.js';
 import {html} from 'lit/html.js';
 
@@ -91,6 +93,27 @@ export function $WalletPage() {
             (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt),
           );
 
+          nextAnimationFrame(() => {
+            const button = document.querySelector<HTMLLinkElement>(`a[href='${resolvePath('wallet/withdrawal')}']`);
+
+            if (button) {
+              fetch('http://worldtimeapi.org/api/timezone/Asia/Tehran')
+                .then((r) => r.json())
+                .then((d) => new Date(d.datetime))
+                .then((now) => jalali(now))
+                .then((now) => {
+                  const dayOfMonth = now.jDate();
+
+                  if (dayOfMonth > 5) return false;
+
+                  return true;
+                })
+                .then((canWithdrawal) => {
+                  button.removeAttribute('loading');
+                });
+            }
+          });
+
           return html`
             ${when(
               user?.seller?.isSeller === true,
@@ -114,6 +137,7 @@ export function $WalletPage() {
                       label: 'بـرداشت وجـه',
                       icon: {svg: SolarDownloadMinimalisticLineDuotone},
                       href: resolvePath('wallet/withdrawal'),
+                      loading: true,
                     })}
                   </div>
                 </div>
