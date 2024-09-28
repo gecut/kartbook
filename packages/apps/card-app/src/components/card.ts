@@ -1,5 +1,5 @@
 import {icon} from '@gecut/components';
-import {map} from '@gecut/lit-helper';
+import {GecutState, map} from '@gecut/lit-helper';
 import clipboard from '@gecut/utilities/clipboard.js';
 import {styleMap} from 'lit/directives/style-map.js';
 import {when} from 'lit/directives/when.js';
@@ -17,17 +17,15 @@ export function card(data: DataContextType) {
   if (data === 'error' || data === 'no-username') return errorCard;
   if (data === 'disabled') return disabledCard;
 
+  const copySuccessState = new GecutState<'cardNumber' | 'iban' | false>('copy-success', false);
   const copyCardNumber = async () => {
     try {
       await clipboard.write(data.card.cardNumber);
 
-      return await pushNotification({
-        type: 'success',
-        msg: 'شماره کارت کپی شد',
-      });
+      copySuccessState.value = 'cardNumber';
     }
     catch {
-      return await pushNotification({
+      pushNotification({
         type: 'error',
         msg: 'مشکلی در کپی کردن شماره کارت ایجاد شد، دوباره امتحان کنید',
       });
@@ -37,21 +35,45 @@ export function card(data: DataContextType) {
     try {
       await clipboard.write(data.card.iban ?? '');
 
-      return await pushNotification({
-        type: 'success',
-        msg: 'شماره شبا کپی شد',
-      });
+      copySuccessState.value = 'iban';
     }
     catch {
-      return await pushNotification({
+      pushNotification({
         type: 'error',
         msg: 'مشکلی در کپی کردن شماره شبا ایجاد شد، دوباره امتحان کنید',
       });
     }
   };
+  copySuccessState.subscribe(
+    (val) => {
+      if (val != false) setTimeout(() => (copySuccessState.value = false), 2048);
+    },
+    {
+      priority: 1000,
+      receivePrevious: true,
+    },
+  );
 
   return html`
     <div class="w-full h-56 bg-surface rounded-2xl shadow-2xl relative overflow-hidden">
+      ${copySuccessState.hydrate((val) =>
+        when(
+          val != false,
+          () => html`
+            <div
+              class="absolute inset-0 bg-primaryContainer/25 backdrop-blur-sm z-[6]
+                     flex items-center justify-center animate-[notification_2s_ease-in-out_infinite]"
+            >
+              ${when(
+                val === 'cardNumber',
+                () => html`<span class="text-labelLarge text-onPrimaryContainer">شماره کارت کپی شد !</span>`,
+                () => html`<span class="text-labelLarge text-onPrimaryContainer">شماره شبا کپی شد !</span>`,
+              )}
+            </div>
+          `,
+        ),
+      )}
+
       <span class="absolute inset-0 opacity-20 bg-surfaceVariant z-[2]"></span>
       ${when(
         data.primaryColor,

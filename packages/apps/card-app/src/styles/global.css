@@ -4,3 +4,15 @@
 * {
   user-select: none;
 }
+
+@keyframes notification {
+  0%,
+  100% {
+    opacity: 0%;
+  }
+
+  25%,
+  75% {
+    opacity: 100%;
+  }
+}
