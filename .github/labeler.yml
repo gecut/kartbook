@@ -1,0 +1,7 @@
+'refactor':
+  - changed-files:
+      - any-glob-to-any-file: 'packages/*'
+
+'documentation':
+  - changed-files:
+      - any-glob-to-any-file: '**/*.md'
