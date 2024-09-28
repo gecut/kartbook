@@ -70,18 +70,6 @@ export default defineConfig(() => {
     plugins: [
       tsconfigPaths(),
       Unfonts({
-        google: {
-          families: [
-            {
-              name: 'Roboto',
-              styles: 'wght@300',
-              defer: false,
-            },
-          ],
-          display: 'optional',
-          injectTo: 'body',
-          preconnect: true,
-        },
         fontsource: {
           families: ['Vazirmatn'],
         },
